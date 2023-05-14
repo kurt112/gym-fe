@@ -1,0 +1,17 @@
+user role
+
+// admin
+// customer
+// employee
+
+
+page to create (beta)
+- customer (crud)
+- employee (crud)
+- registration
+- login
+- profile
+    -attendance of (employee and customer) in profile for every in and out
+- membership
+- promo
+- card 
