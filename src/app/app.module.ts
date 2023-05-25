@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { ContentComponent } from './content/content.component';
 import { Routes, RouterModule } from '@angular/router';
 import { EmployeeComponent } from './employee/employee.component';
 import { CustomerComponent } from './customer/customer.component';
+import { AddComponent as CustomerAdd } from './customer/add/add.component';
+import { GymClassesComponent } from './gym-classes/gym-classes.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   { path: 'customer', component: CustomerComponent },
@@ -21,9 +23,10 @@ const routes: Routes = [
     AppComponent,
     NavbarComponent,
     SidebarComponent,
-    ContentComponent,
     EmployeeComponent,
-    CustomerComponent
+    CustomerComponent,
+    CustomerAdd,
+    GymClassesComponent,
   ],
   imports: [
     NgbModule,
@@ -32,6 +35,7 @@ const routes: Routes = [
     NgbPaginationModule,
     NgbAlertModule,
     RouterModule.forRoot(routes),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

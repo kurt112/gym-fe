@@ -1,2 +1,17 @@
 @import "bootstrap/scss/bootstrap";
 /* You can add global styles to this file, and also import other style files */
+
+.footer-card{
+    font-size: 13px;
+}
+
+#sidebar-nav .active { 
+    background-color:  map-get($theme-colors,"primary")!important;
+    color: white !important;
+}
+
+
+#sidebar-nav a:hover { 
+    background-color:  map-get($theme-colors,"light")!important;
+    color: black !important;
+}
