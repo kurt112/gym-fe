@@ -25,13 +25,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr scope="row" *ngFor="let content of table.content;">
-              <td>{{content.user.firstName}}</td>
-              <td>{{content.user.lastName}}</td>
-              <td>{{content.user.birthDate}}</td>
-              <td>{{content.user.gender}}</td>
-              <td>{{content.user.cellphone}}</td>
-              <td>{{content.user.email}}</td>
+            <tr scope="row" *ngFor="let customer of table.content;">
+              <td>{{customer.user.firstName}}</td>
+              <td>{{customer.user.lastName}}</td>
+              <td>{{customer.user.birthDate}}</td>
+              <td>{{customer.user.sex}}</td>
+              <td>{{customer.user.cellphone}}</td>
+              <td>{{customer.user.email}}</td>
+              <td>
+                <a type="button"  class="btn btn-success btn-sm"  [routerLink]="['/customers/'+customer.id]">View</a>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -41,15 +44,14 @@
       
       <div class="dropdown align-middle">
         <button class="btn btn-outline-primary btn-sm  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-          10
+          {{this.table.size}}
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="#">10</a></li>
-          <li><a class="dropdown-item" href="#">20</a></li> 
-          <li><a class="dropdown-item" href="#">30</a></li>
-          <li><a class="dropdown-item" href="#">40</a></li>
-          <li><a class="dropdown-item" href="#">50</a></li>
-          <li><a class="dropdown-item" href="#">{{table.totalPages}}</a></li>
+          <li><button class="dropdown-item"  (click)="changeTableSize(10)">10</button></li>
+          <li><button class="dropdown-item"  (click)="changeTableSize(20)">20</button></li> 
+          <li><button class="dropdown-item"  (click)="changeTableSize(30)">30</button></li>
+          <li><button class="dropdown-item"  (click)="changeTableSize(40)">40</button></li>
+          <li><button class="dropdown-item"  (click)="changeTableSize(50)">50</button></li>
         </ul>
       </div>
       <div >
@@ -63,6 +65,4 @@
       </div>
     </div>
   </div>
-
-
 </div>

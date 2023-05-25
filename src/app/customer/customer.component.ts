@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { CustomerTable, convertDataFromRequestToTable, customerTableUrl, next, previous} from 'global/utils/tableColumns';
+import { CustomerTable, changeTableSize, convertDataFromRequestToTable, customerTableUrl, next, previous} from 'global/utils/tableColumns';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { Customer } from './customer';
@@ -40,7 +40,8 @@ export class CustomerComponent {
   }
 
   changeTableSize (size: number) {
-
+    changeTableSize(this.table, size);
+    this.getData('', 1,this.table.size);
   }
 
 }

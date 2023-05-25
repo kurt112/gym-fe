@@ -1,13 +1,12 @@
-<nav id="sidebar" role="navigation" class="collapse collapse-horizontal show  bg-dark">
+<nav id="sidebar" role="navigation" class="collapse collapse-horizontal show  bg-dark sticky-top">
     <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100 bg-dark text-white">
         <div class="container text-center ">
             <a class="navbar-brand" href="#">
               <img src="https://rb.gy/qxhg5" alt="" width="56" height="56">
             </a>
         </div>
-        <a routerLink="customer" ariaCurrentWhenActive="page" [routerLink]="['/customer']" routerLinkActive="active" class="list-group-item border-end-0 d-inline-block text-truncate bg-transparent text-white" data-bs-parent="#sidebar"><i class="bi bi-bootstrap"></i> <span>Customer</span> </a>
-        <a routerLink="employee" ariaCurrentWhenActive="page" [routerLink]="['/employee']" routerLinkActive="active" class="list-group-item border-end-0 d-inline-block text-truncate bg-transparent text-white"><i class="bi bi-film"></i> <span>Employee</span></a>
+        <a routerLink="customer" ariaCurrentWhenActive="page" [routerLink]="['/customers']" routerLinkActive="active" class="list-group-item border-end-0 d-inline-block text-truncate bg-transparent text-white" data-bs-parent="#sidebar"><i class="bi bi-bootstrap"></i> <span>Customer</span> </a>
+        <a routerLink="employee" ariaCurrentWhenActive="page" [routerLink]="['/employees']" routerLinkActive="active" class="list-group-item border-end-0 d-inline-block text-truncate bg-transparent text-white"><i class="bi bi-film"></i> <span>Employee</span></a>
         <a routerLink="classes" ariaCurrentWhenActive="page" [routerLink]="['/classes']" routerLinkActive="active" class="list-group-item border-end-0 d-inline-block text-truncate bg-transparent text-white"><i class="bi bi-film"></i> <span>Gym Class</span></a>
-
     </div>
 </nav>

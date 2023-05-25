@@ -1,6 +1,6 @@
 import { User } from "global/utils/user";
 
 export interface Customer {
-    id: number;
+    id?: number;
     user: User
 }

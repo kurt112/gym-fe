@@ -21,7 +21,7 @@ export const CustomerTable: Table<Customer> = {
     name: `Customer's List`,
     columns: ['First Name','Last Name','Birthdate','Gender','Cellphone','Email','Action'],
     numberOfElements: 1,
-    size: 1,
+    size: 10,
     totalElements: 10,
     totalPages: 10,
     content: [],
@@ -49,6 +49,12 @@ export const next = (table: Table<any>):void => {
 export const previous = (table: Table<any>) => {
     if(table.currentPage - 1 === 0) return;
     table.currentPage = table.currentPage - 1;
+}
+
+export const changeTableSize = (table: Table<any>, size: number):void => {
+    if(size === table.size) return;
+
+    table.size = size;
 }
 
 
