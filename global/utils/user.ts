@@ -8,7 +8,7 @@ export interface User {
     password?: string,
     cellphone: string,
     sex: string,
-    birthDate: string,
+    birthDate: string | Date,
     rfID: string,
     bmi: string,
     bmiNumber: string,
@@ -19,4 +19,5 @@ export interface User {
     membershipDateEnd?: string,
     createdAt?: string,
     updatedAt?: string,
+    role: string
 }

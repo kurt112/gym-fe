@@ -13,7 +13,12 @@
     </div>
   </nav>
   <div class="card shadow-sm bg-body rounded">
-    <h5 class="card-header bg-white text-dark p-3 fw-bold">{{table.name}}</h5>
+    <div class="d-flex justify-content-start  bg-white card-header align-items-center p-3">
+      <h5 class="text-dark fw-bold align-items-center m-0 me-2">{{table.name}}</h5>
+      <div  *ngIf="isLoading" class="spinner-border text-primary"  role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
     <div class="card-body pb-0">
       <div class="table-responsive">
         <table class="table table-hover m-0">
@@ -56,11 +61,11 @@
       </div>
       <div >
         <ul class="pagination pagination-sm align-middle mb-0">
-          <li class="page-item" *ngIf="table.currentPage > 1" ><button class="page-link" (click)="previous()">Previous</button></li>
-          <li class="page-item"><button class="page-link" (click)="visitTable(table.currentPage)">{{table.currentPage}}</button></li>
-          <li class="page-item"*ngIf="table.currentPage+1 <= table.totalPages"><button class="page-link" (click)="visitTable(table.currentPage+1)">{{table.currentPage+1}}</button></li>
-          <li class="page-item" *ngIf="table.currentPage+2 <= table.totalPages"><button class="page-link" (click)="visitTable(table.currentPage+2)">{{table.currentPage+2}}</button></li>
-          <li class="page-item" *ngIf="table.currentPage+1 <= table.totalPages"><button class="page-link" (click)="next()">Next</button></li>
+          <li class="page-item" *ngIf="table.pointerPage > 1"><button class="page-link" (click)="previous()">Previous</button></li>
+          <li class="page-item"><button class="page-link" (click)="visitTable(table.pointerPage)">{{table.pointerPage}}</button></li>
+          <li class="page-item" *ngIf="table.pointerPage+1 <= table.totalPages"><button class="page-link" (click)="visitTable(table.pointerPage+1)">{{table.pointerPage+1}}</button></li>
+          <li class="page-item" *ngIf="table.pointerPage+2 <= table.totalPages"><button class="page-link" (click)="visitTable(table.pointerPage+2)">{{table.pointerPage+2}}</button></li>
+          <li class="page-item" *ngIf="table.pointerPage+1 <= table.totalPages"><button class="page-link" (click)="next()">Next</button></li>
         </ul>
       </div>
     </div>

@@ -1,21 +1,22 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { formateDateDDMMYY } from 'global/date';
-import { Customer } from '../customer';
+import { Employee } from 'src/app/employee/Employee';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
+
 @Component({
-  selector: 'customer-profile',
+  selector: 'employee-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
   id: string | null = '';
   isLoading = false;
-  customer: Customer = {
-    user: {
+  employee: Employee = {
+    user:{
       birthDate: new Date(Date.now()).toString(),
       firstName: '',
       lastName: '',
@@ -28,34 +29,34 @@ export class ProfileComponent implements OnInit {
       bmi: '',
       bmiNumber: '',
       weight: '',
-      height: '',
+      height: '', 
       middleName: '',
-      role: 'customer'
+      role: 'employee'
     }
   }
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private route: ActivatedRoute,private http:HttpClient) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
 
-    if (this.id !== 'add') {
-      const req = this.http.get<Customer>(`${environment.apiUrl}customers/${this.id}`);
+    if(this.id !== 'add'){
+      const req = this.http.get<Employee>(`${environment.apiUrl}employees/${this.id}`);
       this.isLoading = true;
       req.subscribe((data) => {
         this.isLoading = false;
-        this.customer = data;
-        this.customer.user.birthDate = formateDateDDMMYY(this.customer.user.birthDate);
-      })
+        this.employee = data;
+        this.employee.user.birthDate = formateDateDDMMYY(this.employee.user.birthDate);
+      }) 
     }
   }
 
   setSex(sex: string) {
-    this.customer.user.sex = sex;
+    this.employee.user.sex = sex;
   }
 
-  submit(customer: NgForm) {
-    const req = this.http.post<Customer>(`${environment.apiUrl}customers`, this.customer);
-    req.subscribe((data: any) => {
+  submit(customer: NgForm){
+    const req = this.http.post<Employee>(`${environment.apiUrl}employees`,this.employee);
+    req.subscribe((data:any) => {
       Swal.fire({
         title: 'Created',
         timer: 2000,
