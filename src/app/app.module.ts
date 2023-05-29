@@ -15,11 +15,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProfileComponent as CustomerProfile} from './customer/profile/profile.component';
 import { FormsModule } from '@angular/forms';
 import { ProfileComponent as EmployeeProfile} from './employee/profile/profile.component';
+import { AttendanceComponent } from './attendance/attendance.component';
+import { StoreComponent } from './store/store.component';
+import { MembershipComponent } from './membership/membership.component';
 const routes: Routes = [
   { path: 'customers', component: CustomerComponent },
   { path: 'customers/:id', component: CustomerProfile },
   { path: 'employees', component: EmployeeComponent},
-  { path: 'employees/:id', component: EmployeeProfile}
+  { path: 'employees/:id', component: EmployeeProfile},
+  {path: 'attendance', component: AttendanceComponent},
+  {path: 'classes', component: GymClassesComponent},
+  {path: 'membersips', component: MembershipComponent}
 ];
 
 @NgModule({
@@ -32,7 +38,10 @@ const routes: Routes = [
     CustomerAdd,
     GymClassesComponent,
     CustomerProfile,
-    EmployeeProfile
+    EmployeeProfile,
+    AttendanceComponent,
+    StoreComponent,
+    MembershipComponent
   ],
   imports: [
     FormsModule,

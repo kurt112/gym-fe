@@ -54,15 +54,17 @@ export class ProfileComponent {
     this.employee.user.sex = sex;
   }
 
-  submit(customer: NgForm){
-    const req = this.http.post<Employee>(`${environment.apiUrl}employees`,this.employee);
+  submit(employee: NgForm){
+    const req = this.http.post<Employee>(`${environment.apiUrl}employees`,employee.value);
     req.subscribe((data:any) => {
       Swal.fire({
         title: 'Created',
         timer: 2000,
         icon: 'success',
         text: data.message,
-      })
+      }).then(() => {
+        employee.resetForm();
+      });
     })
   }
 }

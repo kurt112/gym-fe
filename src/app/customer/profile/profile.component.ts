@@ -54,13 +54,15 @@ export class ProfileComponent implements OnInit {
   }
 
   submit(customer: NgForm) {
-    const req = this.http.post<Customer>(`${environment.apiUrl}customers`, this.customer);
+    const req = this.http.post<Customer>(`${environment.apiUrl}customers`, customer.value);
     req.subscribe((data: any) => {
       Swal.fire({
         title: 'Created',
         timer: 2000,
         icon: 'success',
         text: data.message,
+      }).then(() => {
+        customer.resetForm();
       })
     })
   }
