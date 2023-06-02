@@ -18,6 +18,8 @@ import { ProfileComponent as EmployeeProfile} from './employee/profile/profile.c
 import { AttendanceComponent } from './attendance/attendance.component';
 import { StoreComponent } from './store/store.component';
 import { MembershipComponent } from './membership/membership.component';
+import { TransferListComponent } from './utility/input/transfer-list/transfer-list.component';
+import { ProfileComponent as GymClassProfile } from './gym-classes/profile/profile.component';
 const routes: Routes = [
   { path: 'customers', component: CustomerComponent },
   { path: 'customers/:id', component: CustomerProfile },
@@ -25,6 +27,7 @@ const routes: Routes = [
   { path: 'employees/:id', component: EmployeeProfile},
   {path: 'attendance', component: AttendanceComponent},
   {path: 'classes', component: GymClassesComponent},
+  {path: 'classes/:id', component:	GymClassProfile},
   {path: 'membersips', component: MembershipComponent}
 ];
 
@@ -41,7 +44,9 @@ const routes: Routes = [
     EmployeeProfile,
     AttendanceComponent,
     StoreComponent,
-    MembershipComponent
+    MembershipComponent,
+    TransferListComponent,
+    GymClassProfile
   ],
   imports: [
     FormsModule,

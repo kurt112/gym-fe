@@ -1,11 +1,12 @@
 import { Customer } from "src/app/customer/customer";
 import { Employee } from "src/app/employee/Employee";
+import { GymClass } from "src/app/gym-classes/GymClas";
 import { environment } from "src/environments/environment";
 
 // why separate in future the table for will have different url for sorting and etc...
 export const customerTableUrl = (search: string,page:number, size:number) => `${environment.apiUrl}customers?search&page=${page}&size=${size}`
 export const employeeTableUrl = (search: string,page:number, size:number) => `${environment.apiUrl}employees?search&page=${page}&size=${size}`
-
+export const gymClassTableUrl = (search: string,page:number, size:number) => `${environment.apiUrl}gym/classes?search&page=${page}&size=${size}`
 
 interface Table<T>{
     name: string,
@@ -51,7 +52,20 @@ export const EmployeeTable: Table<Employee> = {
     search:'',
     pointerPage: 1
 }
-
+export const GymClassTable: Table<GymClass> = {
+    name: `Gym Classe's`,
+    columns: ['Class Name','Class Type','Date Start','Date End','Action'],
+    numberOfElements: 1,
+    size: 10,
+    totalElements: 10,
+    totalPages: 10,
+    content: [],
+    currentPage: 1,
+    previousPage: 0,
+    nextPage: 3,
+    search:'',
+    pointerPage: 1
+}
 export const convertDataFromRequestToTable = (data: any, table: Table<any>) => {
     const {content,numberOfElements,size,totalElements,totalPages,pageNumber} = data;
 

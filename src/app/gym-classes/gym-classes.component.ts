@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { EmployeeTable, changeTableSize, convertDataFromRequestToTable, employeeTableUrl, next, previous, updatePageVisit } from 'global/utils/tableColumns';
+import { formatToDateWord } from 'global/date';
+import {  GymClassTable, changeTableSize, convertDataFromRequestToTable, gymClassTableUrl, next, previous, updatePageVisit } from 'global/utils/tableColumns';
 
 @Component({
   selector: 'app-gym-classes',
@@ -11,14 +12,9 @@ export class GymClassesComponent {
 
   isEnrollMemberOpen = false;
 
-  table = EmployeeTable;
+  table = GymClassTable;
   isLoading = false;
 
-  leftChecked: string[] = [];
-  rightChecked: string[] = [];
-
-  leftList = ['h', 'i', 'j', 'k', 'l', 'm', 'n'];
-  rightList = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
 
   constructor(private http: HttpClient) {
     this.getData('', this.table.currentPage, this.table.size);
@@ -26,9 +22,15 @@ export class GymClassesComponent {
 
   getData(search: string, page: number, size: number) {
     this.isLoading = true;
-    const req = this.http.get<any>(employeeTableUrl(search, page, size));
+    const req = this.http.get<any>(gymClassTableUrl(search, page, size));
     req.subscribe((data) => {
-      convertDataFromRequestToTable(data, this.table)
+      convertDataFromRequestToTable(data, this.table);
+      this.table.content.forEach((content) => {
+        if(!content.dateEnd || !content.dateEnd) return;
+        
+        content.dateEnd = formatToDateWord(content.dateEnd);
+        content.dateStart = formatToDateWord(content.dateStart);
+      });
       this.isLoading = false;
     });
   }
@@ -56,32 +58,5 @@ export class GymClassesComponent {
   changeEnrollMember(value: boolean) {
     this.isEnrollMemberOpen = value;
   }
+}  
 
-  transferToRight() {
-    this.leftChecked.forEach(data => {
-      this.rightList.unshift(data);
-      this.leftList = this.leftList.filter(fData => fData !== data)
-    });
-
-    this.leftChecked = [];
-  }
-
-  transferToLeft() {
-    this.rightChecked.forEach(data => {
-      this.leftList.unshift(data);
-      this.rightList = this.rightList.filter(fData => fData !== data)
-    });
-
-    this.rightChecked = [];
-  }
-
-  checked(value: string, isLeft: boolean) {
-    if (isLeft) {
-      this.leftChecked.push(value);
-      return;
-    }
-
-    this.rightChecked.push(value);
-  }
-
-}

@@ -1,0 +1,83 @@
+<transfer-list [transferList]="transferList"></transfer-list>
+<div class="container-fluid ">
+    <div *ngIf="isLoading" class="col-md-12 text-center mt-3">
+        <div class="spinner-grow text-success me-3" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow text-success me-3" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow text-success me-3" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow text-success me-3" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow text-success me-3" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow text-success me-3" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <form #gymClassForm="ngForm" (ngSubmit)="submit(gymClassForm)" class="row g-3 p-3 my-3 bg-body shadow rounded mx-2">
+        <p class="fs-1 fw-semibold bg-secondary text-white">GYM CLASS</p>
+        <div class="row">
+            <div class="col-md-3">
+                <label for="name" class="form-label fw-semibold">Class Name</label>
+                <input type="text" [(ngModel)]="gymClass.name" name="name" placeholder="Gym class name"
+                    class="form-control" id="name" required>
+            </div>
+            <div class="col-md-3">
+                <label for="type" class="form-label fw-semibold">Class Type</label>
+                <input type="text" [(ngModel)]="gymClass.type" class="form-control" name="type" id="type" required>
+            </div>
+            <div class="col-md-3">
+                <label for="dateStart" class="form-label fw-semibold">Date Start</label>
+                <input type="date" [(ngModel)]="gymClass.dateStart" name="dateStart" class="form-control"
+                    id="dateStart">
+            </div>
+            <div class="col-md-3">
+                <label for="dateEnd" class="form-label fw-semibold">Date End</label>
+                <input type="date" [(ngModel)]="gymClass.dateEnd" name="dateEnd" class="form-control" id="dateEnd">
+            </div>
+            <div class="col-md-3">
+                <label for="instructor" class="form-label fw-semibold">Instructor</label>
+                <input type="text" [(ngModel)]="gymClass.instructor" name="instructor" class="form-control"
+                    id="instructor">
+            </div>
+            <div class="col-md-12 mt-3" ngModelGroup="schedules">
+                <table class="table table-secondary table-hover table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">Day</th>
+                            <th scope="col">Time Start</th>
+                            <th scope="col">Time End</th>
+                        </tr>
+                    </thead>
+                    <tr *ngFor="let schedule of schedules; trackBy:identify;">
+                        <th>{{convertDate(schedule.day)}}</th>
+                        <td>Tracking value: [{{ identify(-1, schedule) }}]</td>
+                        <td>
+                            <input type='time' [(ngModel)]="schedule.startTime"
+                                name="schedules[index].startTime" />
+                        </td>
+                        <td>
+                            <input type='time' [(ngModel)]="schedule.endTime" name="schedules[index].endTime" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <a class="btn btn-warning text-white fw-bold" data-bs-toggle="modal" data-bs-target="#myModal">ENROLL
+            MEMBER'S
+        </a>
+        <div class="col-12 d-flex justify-content-between">
+            <a [routerLink]="['/customers']" class="btn btn-primary px-5 btn-md fw-semibold">BACK </a>
+            <button type="submit" class="fw-semibold btn btn-success px-5 btn-md">
+                {{id==='add'?'SAVE':'UPDATE'}}
+            </button>
+        </div>
+    </form>
+</div>

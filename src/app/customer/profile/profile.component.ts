@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 export class ProfileComponent implements OnInit {
   id: string | null = '';
   isLoading = false;
+  isEdit = false;
   customer: Customer = {
     user: {
       birthDate: new Date(Date.now()).toString(),

@@ -1,0 +1,78 @@
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Class Member's</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col">
+                        <h6>{{transferList.leftTitle}}</h6>
+                        <div class="input-group input-group-sm mb-3 w-75">
+                            <input autocomplete="off" type="text" class="form-control" id="leftInput" name="leftInput" placeholder='{{transferList.leftPlaceHolder}}'
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" />
+                            <button class="btn btn-primary  px-3">Search</button>
+                        </div>
+                        <div class="list-group overflow-auto border border-1" style="height: 300px;">
+                            <label class="list-group-item border-bottom "
+                                style="border-width: 0px 0px 0px 0px; border-radius: 0px;"
+                                *ngFor="let data of transferList.leftData;">
+                                <input id="{{data.displayData}}" name="{{data.displayData}}" class="form-check-input me-1" (click)="checked(data, true)" type="checkbox"
+                                    value=`{{data}}`>
+                                {{data.displayData}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-1 text-center">
+                        <button class="btn btn-link-primary" (click)="transferToRight()">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="blue" viewBox="0 0 15 15" width="20"
+                                height="25">
+                                <path
+                                    d="M8.22 2.97a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l2.97-2.97H3.75a.75.75 0 0 1 0-1.5h7.44L8.22 4.03a.75.75 0 0 1 0-1.06Z">
+                                </path>
+                            </svg>
+                        </button>
+
+                        <button class="btn" (click)="transferToLeft()">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="blue" viewBox="0 0 15 15" width="20"
+                                height="25">
+                                <path
+                                    d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="col">
+                        <h6>{{transferList.rightTitle}}</h6>
+                        <div class="input-group input-group-sm mb-3 w-75">
+                            <input type="text" class="form-control" placeholder='{{transferList.rightPlaceHolder}}'
+                                aria-label="Sizing example input" id="righInput" name="rightInput" aria-describedby="inputGroup-sizing-sm" />
+                            <button class="btn btn-primary  px-3">Search</button>
+                        </div>
+                        <div class="list-group overflow-auto border border-1" style="height: 300px;">
+                            <label class="list-group-item border-bottom" *ngFor="let data of transferList.rightData;"
+                                style="border-width: 0px 0px 0px 0px; border-radius: 0px;">
+                                <input id="data.displayData" name="data.displayData" class="form-check-input me-1" (click)="checked(data, false)" type="checkbox"
+                                    value=`{{data}}`>
+                                {{data.displayData}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Save</button>
+            </div>
+
+        </div>
+    </div>
+</div>

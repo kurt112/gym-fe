@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 export class ProfileComponent {
   id: string | null = '';
   isLoading = false;
+  isEdit = false;
   employee: Employee = {
     user:{
       birthDate: new Date(Date.now()).toString(),

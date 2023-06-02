@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { formatToDateWord } from 'global/date';
 import { CustomerTable, changeTableSize, convertDataFromRequestToTable, customerTableUrl, next, previous, updatePageVisit} from 'global/utils/tableColumns';
 
 @Component({
@@ -21,6 +22,9 @@ export class CustomerComponent {
     const req = this.http.get<any>(customerTableUrl(search,page,size));
     req.subscribe((data) => {
       convertDataFromRequestToTable(data,this.table) 
+      this.table.content.forEach((content) => {
+        content.user.birthDate = formatToDateWord(content.user.birthDate);
+      });
       this.isLoading = false;
     });
   }
