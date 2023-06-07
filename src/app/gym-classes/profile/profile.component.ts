@@ -31,7 +31,7 @@ export class ProfileComponent {
     rightTitle: `Current Member's`
   }
   id: string | null = '';
-  isLoading = true;
+  isLoading = false;
   isEdit = true;
   gymClass: GymClass = {
     id: '',
@@ -65,20 +65,13 @@ export class ProfileComponent {
       const req = this.http.get<GymClass>(`${environment.apiUrl}gym/classes/${this.id}`);
       this.isLoading = true;
       req.subscribe((data) => {
-        if (data.schedules !== undefined) {
-         
-        }
-
-        // data.schedules?.forEach(schedule => {
-        //   if(schedule.day === this.schedules[0].day){
-          
-        //   }
-          
-        //   return schedule;
-        // })
-        this.schedules[0].startTime = data.schedules[0].startTime;
-        
-
+        data.schedules.forEach((schedule: Schedule, i: number) => {
+          this.schedules.forEach((thisSched, i: number) => {
+            if (schedule.day === thisSched.day) {
+              this.schedules[i] = { day: schedule.day, endTime: schedule.endTime.substring(0, 5), startTime: schedule.startTime.substring(0, 5) };
+            }
+          });
+        });
         this.gymClass = data;
         this.gymClass.dateStart = formateDateDDMMYY(data.dateStart);
         this.gymClass.dateEnd = formateDateDDMMYY(data.dateEnd);
@@ -86,8 +79,6 @@ export class ProfileComponent {
         this.isLoading = false;
       })
     }
-
-
   }
 
   setEdit() {
@@ -95,15 +86,17 @@ export class ProfileComponent {
     this.isEdit = !temp;
   }
 
-  identify(index:any, item:any) {
-    return item ? item.day: undefined;
- }
+  identify(index: any, item: any) {
+    return item.day;
+  }
 
   submit(gymClassForm: NgForm) {
 
     const formValue: GymClass = gymClassForm.value;
 
     delete formValue.instructor;
+
+    if (this.id !== null && this.id !== 'add') formValue.id = this.id;
 
     this.schedules = this.schedules.filter(schedule => {
       if (!schedule.startTime || !schedule.endTime) return;
@@ -131,7 +124,13 @@ export class ProfileComponent {
         icon: 'success',
         text: data.message,
       }).then(() => {
-        gymClassForm.resetForm();
+        if (this.id === 'add') {
+          gymClassForm.resetForm();
+          return;
+        }
+
+        this.ngOnInit();
+
       })
     })
   }

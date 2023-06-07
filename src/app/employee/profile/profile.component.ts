@@ -56,7 +56,8 @@ export class ProfileComponent {
   }
 
   submit(employee: NgForm){
-    const req = this.http.post<Employee>(`${environment.apiUrl}employees`,employee.value);
+    const newEmployee = {...this.employee, ...employee.value};
+    const req = this.http.post<Employee>(`${environment.apiUrl}employees`,newEmployee);
     req.subscribe((data:any) => {
       Swal.fire({
         title: 'Created',

@@ -20,6 +20,8 @@ import { StoreComponent } from './store/store.component';
 import { MembershipComponent } from './membership/membership.component';
 import { TransferListComponent } from './utility/input/transfer-list/transfer-list.component';
 import { ProfileComponent as GymClassProfile } from './gym-classes/profile/profile.component';
+import { ScheduleComponent } from './utility/schedule/schedule.component';
+import { LoadingComponent as FormLoading } from './utility/form/loading/loading.component';
 const routes: Routes = [
   { path: 'customers', component: CustomerComponent },
   { path: 'customers/:id', component: CustomerProfile },
@@ -46,7 +48,9 @@ const routes: Routes = [
     StoreComponent,
     MembershipComponent,
     TransferListComponent,
-    GymClassProfile
+    GymClassProfile,
+    ScheduleComponent,
+    FormLoading
   ],
   imports: [
     FormsModule,

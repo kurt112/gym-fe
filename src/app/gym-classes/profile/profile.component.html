@@ -1,26 +1,6 @@
 <transfer-list [transferList]="transferList"></transfer-list>
-<div class="container-fluid ">
-    <div *ngIf="isLoading" class="col-md-12 text-center mt-3">
-        <div class="spinner-grow text-success me-3" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-        <div class="spinner-grow text-success me-3" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-        <div class="spinner-grow text-success me-3" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-        <div class="spinner-grow text-success me-3" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-        <div class="spinner-grow text-success me-3" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-        <div class="spinner-grow text-success me-3" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-    </div>
-
+<form-loading *ngIf="isLoading"></form-loading>
+<div class="container-fluid" *ngIf="!isLoading">
     <form #gymClassForm="ngForm" (ngSubmit)="submit(gymClassForm)" class="row g-3 p-3 my-3 bg-body shadow rounded mx-2">
         <p class="fs-1 fw-semibold bg-secondary text-white">GYM CLASS</p>
         <div class="row">
@@ -56,15 +36,17 @@
                             <th scope="col">Time End</th>
                         </tr>
                     </thead>
-                    <tr *ngFor="let schedule of schedules; trackBy:identify;">
+                    <tr *ngFor="let schedule of schedules; let i = index;trackBy:identify">
                         <th>{{convertDate(schedule.day)}}</th>
-                        <td>Tracking value: [{{ identify(-1, schedule) }}]</td>
                         <td>
-                            <input type='time' [(ngModel)]="schedule.startTime"
-                                name="schedules[index].startTime" />
+                            <input type='time' name="{{schedules[i].day + '-' + schedules[i].startTime}}"
+                                [(ngModel)]="schedules[i].startTime" [attr.name]="schedules[i].startTime"
+                                [attr.id]="schedules[i].startTime" />
                         </td>
                         <td>
-                            <input type='time' [(ngModel)]="schedule.endTime" name="schedules[index].endTime" />
+                            <input type='time' name="{{schedules[i].day + ' - ' + schedules[i].endTime}}"
+                                [(ngModel)]="schedules[i].endTime" [attr.name]="schedules[i].endTime"
+                                [attr.id]="schedules[i].endTime" />
                         </td>
                     </tr>
                 </table>
@@ -74,7 +56,7 @@
             MEMBER'S
         </a>
         <div class="col-12 d-flex justify-content-between">
-            <a [routerLink]="['/customers']" class="btn btn-primary px-5 btn-md fw-semibold">BACK </a>
+            <a [routerLink]="['/classes']" class="btn btn-primary px-5 btn-md fw-semibold">BACK </a>
             <button type="submit" class="fw-semibold btn btn-success px-5 btn-md">
                 {{id==='add'?'SAVE':'UPDATE'}}
             </button>

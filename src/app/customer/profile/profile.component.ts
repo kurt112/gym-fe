@@ -55,7 +55,11 @@ export class ProfileComponent implements OnInit {
   }
 
   submit(customer: NgForm) {
-    const req = this.http.post<Customer>(`${environment.apiUrl}customers`, customer.value);
+
+    const newCustomer = {...this.customer, ...customer.value};
+
+    const req = this.http.post<Customer>(`${environment.apiUrl}customers`, newCustomer);
+     
     req.subscribe((data: any) => {
       Swal.fire({
         title: 'Created',

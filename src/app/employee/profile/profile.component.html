@@ -1,25 +1,5 @@
-<div class="container-fluid ">
-    <div *ngIf="isLoading" class="col-md-12 text-center mt-3">
-        <div class="spinner-grow text-success me-3" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-        <div class="spinner-grow text-success me-3" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-        <div class="spinner-grow text-success me-3" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-        <div class="spinner-grow text-success me-3" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-        <div class="spinner-grow text-success me-3" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-        <div class="spinner-grow text-success me-3" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-    </div>
-
+<form-loading *ngIf="isLoading"></form-loading>
+<div class="container-fluid" *ngIf="!isLoading">
     <form #customerForm="ngForm" (ngSubmit)="submit(customerForm)"
         class="row g-3 p-3 my-3 bg-body shadow rounded mx-2">
         <p class="fs-1 fw-semibold bg-secondary text-white">REQUIRED DATA</p>
@@ -107,7 +87,7 @@
             </div>
         </div>
         <div class="col-12 d-flex justify-content-between">
-            <a [routerLink]="['/customers']" class="btn btn-primary px-5 btn-md fw-semibold">BACK </a>
+            <a [routerLink]="['/employees']" class="btn btn-primary px-5 btn-md fw-semibold">BACK </a>
             <button type="submit" class="fw-semibold btn btn-success px-5 btn-md">
                 {{id==='add'?'SAVE':'UPDATE'}}
             </button>
