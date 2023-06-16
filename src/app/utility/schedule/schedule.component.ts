@@ -12,7 +12,6 @@ export class ScheduleComponent {
 
   schedules: Schedule[] = [];
 
-  ngInit() {
-
+  ngOnInit() {
   }
 }

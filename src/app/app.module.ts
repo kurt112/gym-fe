@@ -12,25 +12,33 @@ import { CustomerComponent } from './customer/customer.component';
 import { AddComponent as CustomerAdd } from './customer/add/add.component';
 import { GymClassesComponent } from './gym-classes/gym-classes.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ProfileComponent as CustomerProfile} from './customer/profile/profile.component';
+import { ProfileComponent as CustomerProfile } from './customer/profile/profile.component';
 import { FormsModule } from '@angular/forms';
-import { ProfileComponent as EmployeeProfile} from './employee/profile/profile.component';
+import { ProfileComponent as EmployeeProfile } from './employee/profile/profile.component';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { StoreComponent } from './store/store.component';
 import { MembershipComponent } from './membership/membership.component';
 import { TransferListComponent } from './utility/input/transfer-list/transfer-list.component';
+import { AttendanceComponent as CustomerAttendance } from './utility/attendance/attendance.component';
 import { ProfileComponent as GymClassProfile } from './gym-classes/profile/profile.component';
 import { ScheduleComponent } from './utility/schedule/schedule.component';
 import { LoadingComponent as FormLoading } from './utility/form/loading/loading.component';
+import { ProfileComponent as MembershipProfile } from './membership/profile/profile.component';
+import { MembersComponent as MembershipMembers } from './membership/profile/members/members.component';
+import { CardTapComponent } from './utility/card-tap/card-tap.component';
+import { InputDirective } from './_directives/input.directive';
 const routes: Routes = [
   { path: 'customers', component: CustomerComponent },
   { path: 'customers/:id', component: CustomerProfile },
-  { path: 'employees', component: EmployeeComponent},
-  { path: 'employees/:id', component: EmployeeProfile},
-  {path: 'attendance', component: AttendanceComponent},
-  {path: 'classes', component: GymClassesComponent},
-  {path: 'classes/:id', component:	GymClassProfile},
-  {path: 'membersips', component: MembershipComponent}
+  { path: 'employees', component: EmployeeComponent },
+  { path: 'employees/:id', component: EmployeeProfile },
+  { path: 'attendance', component: AttendanceComponent },
+  { path: 'attendance/customers', component: CustomerAttendance },
+  { path: 'classes', component: GymClassesComponent },
+  { path: 'classes/:id', component: GymClassProfile },
+  { path: 'membersips', component: MembershipComponent },
+  { path: 'membersips/:id', component: MembershipProfile },
+  { path: 'membersips/:id/members', component: MembershipMembers }
 ];
 
 @NgModule({
@@ -50,7 +58,12 @@ const routes: Routes = [
     TransferListComponent,
     GymClassProfile,
     ScheduleComponent,
-    FormLoading
+    FormLoading,
+    CustomerAttendance,
+    MembershipProfile,
+    MembershipMembers,
+    CardTapComponent,
+    InputDirective
   ],
   imports: [
     FormsModule,

@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
   id: string | null = '';
   isLoading = false;
   isEdit = false;
+  isNewData = true;
   customer: Customer = {
     user: {
       birthDate: new Date(Date.now()).toString(),
@@ -40,9 +41,11 @@ export class ProfileComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
 
     if (this.id !== 'add') {
-      const req = this.http.get<Customer>(`${environment.apiUrl}customers/${this.id}`);
+      this.isNewData = false;
       this.isLoading = true;
-      req.subscribe((data) => {
+      this.http.get<Customer>(`${environment.apiUrl}customers/${this.id}`).subscribe((data) => {
+        console.log(data);
+
         this.isLoading = false;
         this.customer = data;
         this.customer.user.birthDate = formateDateDDMMYY(this.customer.user.birthDate);
@@ -54,21 +57,42 @@ export class ProfileComponent implements OnInit {
     this.customer.user.sex = sex;
   }
 
-  submit(customer: NgForm) {
+  submit(customerForm: NgForm) {
 
-    const newCustomer = {...this.customer, ...customer.value};
+    const newCustomer = { ...customerForm.value, ...this.customer };
 
-    const req = this.http.post<Customer>(`${environment.apiUrl}customers`, newCustomer);
-     
-    req.subscribe((data: any) => {
+    if (this.isNewData) {
+      this.createCustomer(customerForm, newCustomer);
+      return;
+    }
+
+    this.updateCustomer(newCustomer);
+
+  }
+
+  updateCustomer(customer: Customer) {
+    this.http.post<Customer>(`${environment.apiUrl}customers`, customer).subscribe((data: any) => {
+      Swal.fire({
+        title: 'Update',
+        timer: 2000,
+        icon: 'success',
+        text: data.message,
+      }).then(() => {
+      })
+    })
+  }
+
+  createCustomer(customerForm: NgForm, customer: Customer) {
+    this.http.post<Customer>(`${environment.apiUrl}customers`, customer).subscribe((data: any) => {
       Swal.fire({
         title: 'Created',
         timer: 2000,
         icon: 'success',
         text: data.message,
       }).then(() => {
-        customer.resetForm();
+        customerForm.resetForm();
       })
     })
   }
+
 }

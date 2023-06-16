@@ -33,6 +33,7 @@ export class ProfileComponent {
   id: string | null = '';
   isLoading = false;
   isEdit = true;
+  isNewData = true;
   gymClass: GymClass = {
     id: '',
     name: '',
@@ -42,7 +43,7 @@ export class ProfileComponent {
     schedules: [],
     instructor: null,
   }
-
+  isModalOpen = false;
   schedules: Schedule[] = [
     { day: 1, startTime: '', endTime: '' },
     { day: 2, startTime: '', endTime: '' },
@@ -62,9 +63,10 @@ export class ProfileComponent {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id !== 'add') {
-      const req = this.http.get<GymClass>(`${environment.apiUrl}gym/classes/${this.id}`);
+      this.isNewData = false;
       this.isLoading = true;
-      req.subscribe((data) => {
+
+      this.http.get<GymClass>(`${environment.apiUrl}gym/classes/${this.id}`).subscribe((data) => {
         data.schedules.forEach((schedule: Schedule, i: number) => {
           this.schedules.forEach((thisSched, i: number) => {
             if (schedule.day === thisSched.day) {
@@ -78,6 +80,7 @@ export class ProfileComponent {
         this.gymClass.schedules = data.schedules;
         this.isLoading = false;
       })
+
     }
   }
 
@@ -106,9 +109,16 @@ export class ProfileComponent {
 
     formValue.schedules = this.schedules;
 
-    const req = this.http.post<Customer>(`${environment.apiUrl}gym/classes`, formValue);
+    if (!this.isNewData) {
+      this.updateGymClass(formValue);
+      return;
+    }
 
-    req.subscribe((data: any) => {
+    this.createGymClass(gymClassForm, formValue);
+  }
+
+  createGymClass(gymClassForm: NgForm, gymClass: GymClass) {
+    this.http.post<Customer>(`${environment.apiUrl}gym/classes`, gymClass).subscribe((data: any) => {
       this.schedules = [
         { day: 1, startTime: '', endTime: '' },
         { day: 2, startTime: '', endTime: '' },
@@ -124,14 +134,34 @@ export class ProfileComponent {
         icon: 'success',
         text: data.message,
       }).then(() => {
-        if (this.id === 'add') {
-          gymClassForm.resetForm();
-          return;
-        }
-
-        this.ngOnInit();
-
+        gymClassForm.resetForm();
       })
     })
   }
+
+  updateGymClass(gymClass: GymClass) {
+    this.http.post<Customer>(`${environment.apiUrl}gym/classes`, gymClass).subscribe((data: any) => {
+      this.schedules = [
+        { day: 1, startTime: '', endTime: '' },
+        { day: 2, startTime: '', endTime: '' },
+        { day: 3, startTime: '', endTime: '' },
+        { day: 4, startTime: '', endTime: '' },
+        { day: 5, startTime: '', endTime: '' },
+        { day: 6, startTime: '', endTime: '' },
+        { day: 7, startTime: '', endTime: '' }
+      ]
+      Swal.fire({
+        title: 'Created',
+        timer: 2000,
+        icon: 'success',
+        text: data.message,
+      }).then(() => {
+      })
+    })
+  }
+
+  openModal() {
+    this.isModalOpen = !this.isModalOpen;
+  }
+
 }

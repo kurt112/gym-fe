@@ -40,8 +40,11 @@
                         {{customer.user.sex === ''? 'Male': customer.user.sex}}
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><button class="dropdown-item" (click)="setSex('Male')">Male</button></li>
-                        <li><button class="dropdown-item" (click)="setSex('Female')">Female</button></li>
+                        <li><button class="dropdown-item" (click)="setSex('Male');
+                            $event.preventDefault()">Male</button>
+                        </li>
+                        <li><button class="dropdown-item"
+                                (click)="setSex('Female'); $event.preventDefault()">Female</button></li>
                     </ul>
                 </div>
             </div>

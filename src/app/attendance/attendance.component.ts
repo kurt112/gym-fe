@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { CustomerTable, customerTableUrl, convertDataFromRequestToTable, next, previous, updatePageVisit, changeTableSize } from 'global/utils/tableColumns';
+import { customerTableUrl, convertDataFromRequestToTable, next, previous, updatePageVisit, changeTableSize, CustomerAttendanceTable, customerTodayTableUrl } from 'global/utils/tableColumns';
 
 @Component({
   selector: 'app-attendance',
@@ -8,16 +8,21 @@ import { CustomerTable, customerTableUrl, convertDataFromRequestToTable, next, p
   styleUrls: ['./attendance.component.scss']
 })
 export class AttendanceComponent {
-  table = CustomerTable
-  isLoading = false;
 
-  constructor(private http: HttpClient) {
+  table = CustomerAttendanceTable
+  isLoading = false;
+  isInOutVisible = true;
+
+
+  constructor(private http: HttpClient) { }
+
+  ngOnInit() {
     this.getData('', this.table.currentPage, this.table.size);
   }
 
   getData(search: string, page: number, size: number) {
     this.isLoading = true;
-    const req = this.http.get<any>(customerTableUrl(search, page, size));
+    const req = this.http.get<any>(customerTodayTableUrl(search, page, size));
     req.subscribe((data) => {
       convertDataFromRequestToTable(data, this.table)
       this.isLoading = false;
@@ -43,4 +48,5 @@ export class AttendanceComponent {
     changeTableSize(this.table, size);
     this.getData('', 1, this.table.size);
   }
+
 }

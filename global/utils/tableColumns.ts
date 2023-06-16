@@ -1,12 +1,17 @@
 import { Customer } from "src/app/customer/customer";
 import { Employee } from "src/app/employee/Employee";
 import { GymClass } from "src/app/gym-classes/GymClas";
+import { Membership } from "src/app/membership/Membership";
+import { MembershipWithUser } from "src/app/membership/MembershipWithUser";
 import { environment } from "src/environments/environment";
 
 // why separate in future the table for will have different url for sorting and etc...
 export const customerTableUrl = (search: string,page:number, size:number) => `${environment.apiUrl}customers?search&page=${page}&size=${size}`
 export const employeeTableUrl = (search: string,page:number, size:number) => `${environment.apiUrl}employees?search&page=${page}&size=${size}`
 export const gymClassTableUrl = (search: string,page:number, size:number) => `${environment.apiUrl}gym/classes?search&page=${page}&size=${size}`
+export const membershipTableUrl = (search: string,page:number, size:number) => `${environment.apiUrl}gym/memberships?search&page=${page}&size=${size}`
+export const customerTodayTableUrl = (search: string,page:number, size:number) => `${environment.apiUrl}customers/today?search&page=${page}&size=${size}`
+export const membershipMembersTableUrl = (membershipId: string | null, search: string,page:number, size:number) => `${environment.apiUrl}gym/memberships/${membershipId}/members?search&page=${page}&size=${size}`
 
 interface Table<T>{
     name: string,
@@ -66,6 +71,51 @@ export const GymClassTable: Table<GymClass> = {
     search:'',
     pointerPage: 1
 }
+export const MembershipTable: Table<Membership> = {
+    name: `Membership`,
+    columns: ['Name','Code','Price', 'Expiration','Duration', 'Date Created', 'Action'],
+    numberOfElements: 1,
+    size: 10,
+    totalElements: 10,
+    totalPages: 10,
+    content: [],
+    currentPage: 1,
+    previousPage: 0,
+    nextPage: 3,
+    search:'',
+    pointerPage: 1
+}
+
+export const MembershipWithUserTable: Table<MembershipWithUser> = {
+    name: `Member's`,
+    columns: ['First Name','Last Name','Price', 'Payment every', 'Start Date','End Date', 'Last Charge'],
+    numberOfElements: 1,
+    size: 10,
+    totalElements: 10,
+    totalPages: 10,
+    content: [],
+    currentPage: 1,
+    previousPage: 0,
+    nextPage: 3,
+    search:'',
+    pointerPage: 1
+}
+
+export const CustomerAttendanceTable: Table<Customer> = {
+    name: `Today's Customer`,
+    columns: ['FirstName','LastName','Time In', 'Time Out','Membership Expiration'],
+    numberOfElements: 1,
+    size: 10,
+    totalElements: 10,
+    totalPages: 10,
+    content: [],
+    currentPage: 1,
+    previousPage: 0,
+    nextPage: 3,
+    search:'',
+    pointerPage: 1
+}
+
 export const convertDataFromRequestToTable = (data: any, table: Table<any>) => {
     const {content,numberOfElements,size,totalElements,totalPages,pageNumber} = data;
 

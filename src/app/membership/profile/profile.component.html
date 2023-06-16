@@ -1,0 +1,99 @@
+<form-loading *ngIf="isLoading"></form-loading>
+<app-card-tap [focus]="true" ></app-card-tap>
+<div class="container-fluid" *ngIf="!isLoading">
+    <div class="row mt-2 mb-2 p-2  bg-body shadow-sm  mx-2">
+        <div class="buttons d-inline-flex justify-content-between">
+            <div id="left  d-inline-flex">
+                <a routerLink="members" class="btn btn-sm text-white btn-warning px-4">View Customer</a>
+            </div>
+            <div id="right  d-inline-flex ">
+                <a (click)="openModal()" class="btn btn-sm text-white btn-success px-4" data-bs-toggle="modal" data-bs-target="#card-tap">Enroll Customer</a>
+            </div>
+        </div>
+    </div>
+    <form #membershipForm="ngForm" (ngSubmit)="submit(membershipForm)"
+        class="row g-3 p-3 my-3 bg-body shadow rounded mx-2">
+        <p class="fs-1 fw-semibold bg-secondary text-white">Membership Promo</p>
+        <div class="row">
+            <div class="col-md-3">
+                <label for="name" class="form-label fw-semibold">Name</label>
+                <input type="text" [(ngModel)]="membership.name" name="name" class="form-control" id="name"
+                    placeholder="Gym Promo Name" required>
+            </div>
+            <div class="col-md-3">
+                <label for="code" class="form-label fw-semibold">Code</label>
+                <input type="text" [(ngModel)]="membership.code" name="code" class="form-control" id="code"
+                    placeholder="Gym Promo Code" required>
+            </div>
+            <div class="col-md-3">
+                <label for="price" class="form-label fw-semibold">Price</label>
+                <input type="text" [(ngModel)]="membership.price" class="form-control" name="price" id="price" required>
+            </div>
+            <div class="col-md-3">
+                <label for="expiration" class="form-label fw-semibold">Promo Expiration</label>
+                <input type="date" [(ngModel)]="membership.membershipPromoExpiration" name="expiration"
+                    class="form-control" id="expiration" required>
+            </div>
+
+            <div class="col-md-3">
+                <label for="year" class="form-label fw-semibold">Years</label>
+                <div class="dropdown align-items-start" id="year">
+                    <button type="button" class="btn btn-outline-secondary dropdown-toggle form-control"
+                        style="font-size:100%; padding-bottom: 5.6px;" data-bs-toggle="dropdown" aria-expanded="true">
+                        {{membership.year}}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="Year">
+                        <li *ngFor="let year of years"><button class="dropdown-item"
+                                (click)="setDropdownValue('year',year); $event.preventDefault()">{{year}}</button></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="month" class="form-label fw-semibold">Months</label>
+                <div class="dropdown align-items-start" id="month">
+                    <button class="btn btn-outline-secondary dropdown-toggle form-control"
+                        style="font-size:100%; padding-bottom: 5.6px;" data-bs-toggle="dropdown" aria-expanded="true">
+                        {{membership.month}}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="month">
+                        <li *ngFor="let month of months"><button class="dropdown-item"
+                                (click)="setDropdownValue('month',month); $event.preventDefault()">{{month}}</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="week" class="form-label fw-semibold">Weeks</label>
+                <div class="dropdown align-items-start" id="week">
+                    <button class="btn btn-outline-secondary dropdown-toggle form-control"
+                        style="font-size:100%; padding-bottom: 5.6px;" data-bs-toggle="dropdown" aria-expanded="true">
+                        {{membership.week}}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="week">
+                        <li *ngFor="let week of weeks"><button class="dropdown-item"
+                                (click)="setDropdownValue('week',week); $event.preventDefault()">{{week}}</button></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="day" class="form-label fw-semibold">Days</label>
+                <div class="dropdown align-items-start" id="day">
+                    <button class="btn btn-outline-secondary dropdown-toggle form-control"
+                        style="font-size:100%; padding-bottom: 5.6px;" data-bs-toggle="dropdown" aria-expanded="true">
+                        {{membership.day}}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="day">
+                        <li *ngFor="let day of days"><button class="dropdown-item"
+                                (click)="setDropdownValue('day',day); $event.preventDefault()">{{day}}</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 d-flex justify-content-between">
+            <a [routerLink]="['/membersips']" class="btn btn-primary px-5 btn-md fw-semibold">BACK </a>
+            <button type="submit" class="fw-semibold btn btn-success px-5 btn-md">
+                {{id==='add'?'SAVE':'UPDATE'}}
+            </button>
+        </div>
+    </form>
+</div>

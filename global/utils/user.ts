@@ -8,7 +8,7 @@ export interface User {
     password?: string,
     cellphone: string,
     sex: string,
-    birthDate: string | Date,
+    birthDate: string | Date | null,
     rfID: string,
     bmi: string,
     bmiNumber: string,
