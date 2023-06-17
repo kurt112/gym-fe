@@ -1,9 +1,11 @@
 import { Customer } from "src/app/customer/customer";
 import { Employee } from "src/app/employee/Employee";
-import { GymClass } from "src/app/gym-classes/GymClas";
+import { GymClass } from "src/app/gym-classes/GymClass";
+import { GymClassWithUser } from "src/app/gym-classes/GymClassWithUser";
 import { Membership } from "src/app/membership/Membership";
 import { MembershipWithUser } from "src/app/membership/MembershipWithUser";
 import { environment } from "src/environments/environment";
+
 
 // why separate in future the table for will have different url for sorting and etc...
 export const customerTableUrl = (search: string,page:number, size:number) => `${environment.apiUrl}customers?search&page=${page}&size=${size}`
@@ -12,6 +14,7 @@ export const gymClassTableUrl = (search: string,page:number, size:number) => `${
 export const membershipTableUrl = (search: string,page:number, size:number) => `${environment.apiUrl}gym/memberships?search&page=${page}&size=${size}`
 export const customerTodayTableUrl = (search: string,page:number, size:number) => `${environment.apiUrl}customers/today?search&page=${page}&size=${size}`
 export const membershipMembersTableUrl = (membershipId: string | null, search: string,page:number, size:number) => `${environment.apiUrl}gym/memberships/${membershipId}/members?search&page=${page}&size=${size}`
+export const gymClassMembers = (gymClassId: string | null, search: string,page:number, size:number) => `${environment.apiUrl}gym/classes/${gymClassId}/members?search&page=${page}&size=${size}`
 
 interface Table<T>{
     name: string,
@@ -104,6 +107,21 @@ export const MembershipWithUserTable: Table<MembershipWithUser> = {
 export const CustomerAttendanceTable: Table<Customer> = {
     name: `Today's Customer`,
     columns: ['FirstName','LastName','Time In', 'Time Out','Membership Expiration'],
+    numberOfElements: 1,
+    size: 10,
+    totalElements: 10,
+    totalPages: 10,
+    content: [],
+    currentPage: 1,
+    previousPage: 0,
+    nextPage: 3,
+    search:'',
+    pointerPage: 1
+}
+
+export const GymClassWithUserTable: Table<GymClassWithUser> = {
+    name: `Today's Customer`,
+    columns: ['FirstName','LastName','Date Start', 'Session'],
     numberOfElements: 1,
     size: 10,
     totalElements: 10,

@@ -27,6 +27,8 @@ import { ProfileComponent as MembershipProfile } from './membership/profile/prof
 import { MembersComponent as MembershipMembers } from './membership/profile/members/members.component';
 import { CardTapComponent } from './utility/card-tap/card-tap.component';
 import { InputDirective } from './_directives/input.directive';
+import { MembersComponent as GymClassMembers} from './gym-classes/profile/members/members.component';
+
 const routes: Routes = [
   { path: 'customers', component: CustomerComponent },
   { path: 'customers/:id', component: CustomerProfile },
@@ -36,6 +38,7 @@ const routes: Routes = [
   { path: 'attendance/customers', component: CustomerAttendance },
   { path: 'classes', component: GymClassesComponent },
   { path: 'classes/:id', component: GymClassProfile },
+  { path: 'classes/:id/members', component: GymClassMembers },
   { path: 'membersips', component: MembershipComponent },
   { path: 'membersips/:id', component: MembershipProfile },
   { path: 'membersips/:id/members', component: MembershipMembers }
@@ -63,7 +66,8 @@ const routes: Routes = [
     MembershipProfile,
     MembershipMembers,
     CardTapComponent,
-    InputDirective
+    InputDirective,
+    GymClassMembers
   ],
   imports: [
     FormsModule,

@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Customer } from 'src/app/customer/customer';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
-import { GymClass } from '../GymClas';
+import { GymClass } from '../GymClass';
 import { convertNumberToDay, formatTimeToShortTime, formateDateDDMMYY } from 'global/date';
 import { Transferlist } from 'global/utils/tranferList';
 import { Schedule } from 'global/utils/schedule';
