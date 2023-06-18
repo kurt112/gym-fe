@@ -1,6 +1,5 @@
-<transfer-list [transferList]="transferList"></transfer-list>
 <form-loading *ngIf="isLoading"></form-loading>
-<app-card-tap [focus]="true" ></app-card-tap>
+<app-card-tap></app-card-tap>
 <div class="row mt-2 mb-2 p-2  bg-body shadow-sm  mx-2">
     <div class="buttons d-inline-flex justify-content-between">
         <div id="left  d-inline-flex">
@@ -67,9 +66,6 @@
                 </table>
             </div>
         </div>
-        <a class="btn btn-warning text-white fw-bold" data-bs-toggle="modal" data-bs-target="#myModal">ENROLL
-            MEMBER'S
-        </a>
         <div class="col-12 d-flex justify-content-between">
             <a [routerLink]="['/classes']" class="btn btn-primary px-5 btn-md fw-semibold">BACK </a>
             <button type="submit" class="fw-semibold btn btn-success px-5 btn-md">

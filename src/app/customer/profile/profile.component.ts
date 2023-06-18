@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   isEdit = false;
   isNewData = true;
   customer: Customer = {
+    rfId: '',
     user: {
       birthDate: new Date(Date.now()).toString(),
       firstName: '',

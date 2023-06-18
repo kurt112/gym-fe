@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { Membership } from '../Membership';
 import { next, previous, updatePageVisit, changeTableSize, MembershipWithUserTable, membershipMembersTableUrl, convertDataFromRequestToTable } from 'global/utils/tableColumns';
 import { MembershipWithUser } from '../MembershipWithUser';
+import { enrollInMembership } from 'global/utils/endpoint';
 
 @Component({
   selector: 'app-profile',
@@ -16,7 +17,7 @@ import { MembershipWithUser } from '../MembershipWithUser';
 })
 export class ProfileComponent {
 
-  id: string | null = '';
+  id: string = '';
   isLoading = false;
   isNewData = true;
   years: number[] = yearsDropDown;
@@ -24,6 +25,7 @@ export class ProfileComponent {
   weeks: number[] = weeksDropDown;
   days: number[] = daysDropDown;
   isModalOpen = false;
+  enrollMemberUrl = '';
 
   membership: Membership = {
     code: '',
@@ -40,7 +42,13 @@ export class ProfileComponent {
   constructor(private route: ActivatedRoute, private http: HttpClient) { }
 
   ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id');
+
+    const routeId: string | null = this.route.snapshot.paramMap.get('id');
+
+    if(routeId !== null){
+      this.id = routeId;
+      this.enrollMemberUrl = enrollInMembership(this.id);
+    }
 
     if (this.id !== 'add') {
       this.isLoading = true;

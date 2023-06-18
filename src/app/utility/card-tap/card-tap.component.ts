@@ -9,7 +9,9 @@ import { timer } from 'rxjs';
 })
 export class CardTapComponent {
 
-  @Input() focus = false;
+  @Input()
+  url: string = '';
+
   rfId: string = '';
 
   currentDateAndTime: Date = new Date();
@@ -25,9 +27,13 @@ export class CardTapComponent {
   }
 
   rfIdInputChanged(data: any) {
-    console.log(data);
-    
     if (data.length === 11) {
+      const newUrl = this.url + data;
+
+      this.http.post<any>(newUrl, {}).subscribe(data => {
+        console.log(data);
+      })
+      
       setTimeout(() => {
         this.rfId = '';
       }, 1)

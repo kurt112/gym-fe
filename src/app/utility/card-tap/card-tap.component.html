@@ -9,7 +9,7 @@
                             <h1 class="text-center py-3">Tap your card to enroll</h1>
                         </div>
                         <div class="modal-body text-center">
-                            <input name="rfIdValue" id="rfIdValue" [focus]="true" onblur="this.focus()" type="text"
+                            <input name="rfIdValue" id="rfIdValue" onblur="this.focus()" type="text"
                                 class="form-control" [(ngModel)]="rfId" (ngModelChange)="rfIdInputChanged($event)" autofocus autocomplete="off" #rfid />
                             {{rfid.focus()}}
                             <div class="mt-3">
