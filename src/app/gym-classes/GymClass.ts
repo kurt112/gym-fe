@@ -5,6 +5,7 @@ export interface GymClass {
     id?: string,
     name: string,
     type: string,
+    session: number,
     dateStart: string | Date | null,
     dateEnd: string | Date | null,
     schedules: Schedule[],

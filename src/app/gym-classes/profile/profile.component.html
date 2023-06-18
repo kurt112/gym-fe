@@ -15,25 +15,29 @@
     <form #gymClassForm="ngForm" (ngSubmit)="submit(gymClassForm)" class="row g-3 p-3 my-3 bg-body shadow rounded mx-2">
         <p class="fs-1 fw-semibold bg-secondary text-white">GYM CLASS</p>
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <label for="name" class="form-label fw-semibold">Class Name</label>
                 <input type="text" [(ngModel)]="gymClass.name" name="name" placeholder="Gym class name"
                     class="form-control" id="name" required>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <label for="type" class="form-label fw-semibold">Class Type</label>
                 <input type="text" [(ngModel)]="gymClass.type" class="form-control" name="type" id="type" required>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
+                <label for="type" class="form-label fw-semibold">Session</label>
+                <input type="number" [(ngModel)]="gymClass.session" class="form-control" name="session" id="session" required>
+            </div>
+            <div class="col-md-4">
                 <label for="dateStart" class="form-label fw-semibold">Date Start</label>
                 <input type="date" [(ngModel)]="gymClass.dateStart" name="dateStart" class="form-control"
                     id="dateStart">
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <label for="dateEnd" class="form-label fw-semibold">Date End</label>
                 <input type="date" [(ngModel)]="gymClass.dateEnd" name="dateEnd" class="form-control" id="dateEnd">
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <label for="instructor" class="form-label fw-semibold">Instructor</label>
                 <input type="text" [(ngModel)]="gymClass.instructor" name="instructor" class="form-control"
                     id="instructor">

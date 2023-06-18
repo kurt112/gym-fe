@@ -42,6 +42,7 @@ export class ProfileComponent {
     dateEnd: '',
     schedules: [],
     instructor: null,
+    session: 0,
   }
   isModalOpen = false;
   schedules: Schedule[] = [
