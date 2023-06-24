@@ -25,13 +25,17 @@ import { ScheduleComponent } from './utility/schedule/schedule.component';
 import { LoadingComponent as FormLoading } from './utility/form/loading/loading.component';
 import { ProfileComponent as MembershipProfile } from './membership/profile/profile.component';
 import { MembersComponent as MembershipMembers } from './membership/profile/members/members.component';
-import { CardTapComponent } from './utility/card-tap/card-tap.component';
+import { CardTapComponent } from './utility/card-tap/enrollment/card-tap-enrollment.component';
 import { InputDirective } from './_directives/input.directive';
-import { MembersComponent as GymClassMembers} from './gym-classes/profile/members/members.component';
+import { MembersComponent as GymClassMembers } from './gym-classes/profile/members/members.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { CardTapTopupComponent } from './utility/card-tap/topUp/card-tap-topup.component';
+import { TopUpComponent as CustomerTopUp } from './customer/top-up/top-up.component';
 
 const routes: Routes = [
   { path: 'customers', component: CustomerComponent },
   { path: 'customers/:id', component: CustomerProfile },
+  { path: 'customers/transaction/top-up', component: CustomerTopUp },
   { path: 'employees', component: EmployeeComponent },
   { path: 'employees/:id', component: EmployeeProfile },
   { path: 'attendance', component: AttendanceComponent },
@@ -41,7 +45,10 @@ const routes: Routes = [
   { path: 'classes/:id/members', component: GymClassMembers },
   { path: 'membersips', component: MembershipComponent },
   { path: 'membersips/:id', component: MembershipProfile },
-  { path: 'membersips/:id/members', component: MembershipMembers }
+  { path: 'membersips/:id/members', component: MembershipMembers },
+  { path: 'dashboard', pathMatch: 'full', component: DashboardComponent },
+  { path: 'store', pathMatch: 'full', component: StoreComponent },
+  { path: '**', redirectTo: '/dashboard', pathMatch: 'full' },
 ];
 
 @NgModule({
@@ -67,7 +74,10 @@ const routes: Routes = [
     MembershipMembers,
     CardTapComponent,
     InputDirective,
-    GymClassMembers
+    GymClassMembers,
+    DashboardComponent,
+    CardTapTopupComponent,
+    CustomerTopUp
   ],
   imports: [
     FormsModule,

@@ -37,7 +37,8 @@ export class ProfileComponent {
     day: 0,
     week: 0,
     month: 0,
-    members: []
+    members: [],
+    charge: 'MONTHLY'
   }
   constructor(private route: ActivatedRoute, private http: HttpClient) { }
 

@@ -21,6 +21,8 @@ export class MembershipComponent {
     this.isLoading = true;
     const req = this.http.get<any>(membershipTableUrl(search, page, size));
     req.subscribe((data) => {
+      console.log(data);
+      
       data.content = data.content.map((value: Membership) => {
         value.createdAt = value.createdAt ? formatToDateWord(value.createdAt) : 'NA';
         value.membershipPromoExpiration = value.membershipPromoExpiration ? formatToDateWord(value.membershipPromoExpiration) : 'NA';

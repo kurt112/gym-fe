@@ -76,7 +76,7 @@ export const GymClassTable: Table<GymClass> = {
 }
 export const MembershipTable: Table<Membership> = {
     name: `Membership`,
-    columns: ['Name','Code','Price', 'Expiration','Duration', 'Date Created', 'Action'],
+    columns: ['Name','Code','Price','Date Created', 'Expiration','Payment Type', 'Action'],
     numberOfElements: 1,
     size: 10,
     totalElements: 10,
@@ -106,7 +106,7 @@ export const MembershipWithUserTable: Table<MembershipWithUser> = {
 
 export const CustomerAttendanceTable: Table<Customer> = {
     name: `Today's Customer`,
-    columns: ['FirstName','LastName','Time In', 'Time Out','Membership Expiration'],
+    columns: ['FirstName','LastName','Balance','Points','Time In', 'Time Out','Membership Expiration'],
     numberOfElements: 1,
     size: 10,
     totalElements: 10,

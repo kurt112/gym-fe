@@ -7,6 +7,9 @@
         <li class="nav-item">
           <a routerLink="customers" class="btn btn-sm btn-primary me-1">IN/OUT</a>
         </li>
+        <li class="nav-item">
+          <a routerLink="/customers/transaction/top-up" class="btn btn-sm btn-primary me-1">Top up</a>
+        </li>
       </ul>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -35,6 +38,8 @@
             <tr scope="row" *ngFor="let customer of table.content;">
               <td>{{customer.user.firstName}}</td>
               <td>{{customer.user.lastName}}</td>
+              <td>{{customer.user.cardValue}}</td>
+              <td>{{customer.user.pointsAmount}}</td>
               <td>{{customer.timeIn | date: 'MMM d, y, h:mm:ss a'}}</td>
               <td>{{customer.timeOut| date: 'MMM d, y, h:mm:ss a'}}</td>
               <td>{{customer.membershipDuration |date: 'MMM d, y'}}</td>

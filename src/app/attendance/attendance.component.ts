@@ -22,8 +22,9 @@ export class AttendanceComponent {
 
   getData(search: string, page: number, size: number) {
     this.isLoading = true;
-    const req = this.http.get<any>(customerTodayTableUrl(search, page, size));
-    req.subscribe((data) => {
+    this.http.get<any>(customerTodayTableUrl(search, page, size)).subscribe((data) => {
+      console.log(data);
+      
       convertDataFromRequestToTable(data, this.table)
       this.isLoading = false;
     });

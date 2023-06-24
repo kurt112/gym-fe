@@ -12,6 +12,7 @@ export interface Membership {
     year: number,
     day: number,
     week: number,
-    month: number 
+    month: number,
+    charge: string,
     members: MembershipWithUser[]
 }

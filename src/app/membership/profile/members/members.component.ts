@@ -5,7 +5,7 @@ import { MembershipWithUserTable, changeTableSize, convertDataFromRequestToTable
 import {Location} from '@angular/common';
 
 @Component({
-  selector: 'app-members',
+  selector: 'membership-members',
   templateUrl: './members.component.html',
   styleUrls: ['./members.component.scss']
 })

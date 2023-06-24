@@ -1,3 +1,6 @@
+<app-card-tap-topup [amount]="amount"></app-card-tap-topup>
+<!-- data-bs-toggle="modal" data-bs-target="#card-tap" (click)="inputTopUpValue()" -->
+<!-- <app-card-tap url="klasjdf"></app-card-tap> -->
 <div class="container-fluid">
   <nav class="navbar navbar-expand-lg mt-2  shadow-sm p-2 mb-2 bg-body rounded">
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
@@ -6,7 +9,7 @@
           <a routerLink="add" class="btn btn-sm btn-primary me-1">Create Customer</a>
         </li>
         <li class="nav-item">
-          <a routerLink="add" class="btn btn-sm btn-primary me-1">Top up</a>
+          <a routerLink="transaction/top-up" class="btn btn-sm btn-primary me-1">Top up</a>
         </li>
         <li class="nav-item">
           <a routerLink="add" class="btn btn-sm btn-primary me-1">Enroll Customer</a>
@@ -21,7 +24,7 @@
   <div class="card shadow-sm bg-body rounded">
     <div class="d-flex justify-content-start  bg-white card-header align-items-center p-3">
       <h5 class="text-dark fw-bold align-items-center m-0 me-2">{{table.name}}</h5>
-      <div  *ngIf="isLoading" class="spinner-border text-primary"  role="status">
+      <div *ngIf="isLoading" class="spinner-border text-primary" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
     </div>
@@ -32,7 +35,7 @@
             <tr>
               <th scope="col" *ngFor="let column of table.columns;">
                 {{column}}
-              </th>          
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -44,7 +47,7 @@
               <td>{{customer.user.cellphone}}</td>
               <td>{{customer.user.email}}</td>
               <td>
-                <a type="button"  class="btn btn-success btn-sm"  [routerLink]="['/customers/'+customer.id]">View</a>
+                <a type="button" class="btn btn-success btn-sm" [routerLink]="['/customers/'+customer.id]">View</a>
               </td>
             </tr>
           </tbody>
@@ -52,26 +55,32 @@
       </div>
     </div>
     <div class="card-footer d-flex flex-row justify-content-between align-items-center">
-      
+
       <div class="dropdown align-middle">
-        <button class="btn btn-outline-primary btn-sm  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="btn btn-outline-primary btn-sm  dropdown-toggle" type="button" id="dropdownMenuButton1"
+          data-bs-toggle="dropdown" aria-expanded="false">
           {{this.table.size}}
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><button class="dropdown-item"  (click)="changeTableSize(10)">10</button></li>
-          <li><button class="dropdown-item"  (click)="changeTableSize(20)">20</button></li> 
-          <li><button class="dropdown-item"  (click)="changeTableSize(30)">30</button></li>
-          <li><button class="dropdown-item"  (click)="changeTableSize(40)">40</button></li>
-          <li><button class="dropdown-item"  (click)="changeTableSize(50)">50</button></li>
+          <li><button class="dropdown-item" (click)="changeTableSize(10)">10</button></li>
+          <li><button class="dropdown-item" (click)="changeTableSize(20)">20</button></li>
+          <li><button class="dropdown-item" (click)="changeTableSize(30)">30</button></li>
+          <li><button class="dropdown-item" (click)="changeTableSize(40)">40</button></li>
+          <li><button class="dropdown-item" (click)="changeTableSize(50)">50</button></li>
         </ul>
       </div>
-      <div >
+      <div>
         <ul class="pagination pagination-sm align-middle mb-0">
-          <li class="page-item" *ngIf="table.pointerPage > 1"><button class="page-link" (click)="previous()">Previous</button></li>
-          <li class="page-item"><button class="page-link" (click)="visitTable(table.pointerPage)">{{table.pointerPage}}</button></li>
-          <li class="page-item" *ngIf="table.pointerPage+1 <= table.totalPages"><button class="page-link" (click)="visitTable(table.pointerPage+1)">{{table.pointerPage+1}}</button></li>
-          <li class="page-item" *ngIf="table.pointerPage+2 <= table.totalPages"><button class="page-link" (click)="visitTable(table.pointerPage+2)">{{table.pointerPage+2}}</button></li>
-          <li class="page-item" *ngIf="table.pointerPage+1 <= table.totalPages"><button class="page-link" (click)="next()">Next</button></li>
+          <li class="page-item" *ngIf="table.pointerPage > 1"><button class="page-link"
+              (click)="previous()">Previous</button></li>
+          <li class="page-item"><button class="page-link"
+              (click)="visitTable(table.pointerPage)">{{table.pointerPage}}</button></li>
+          <li class="page-item" *ngIf="table.pointerPage+1 <= table.totalPages"><button class="page-link"
+              (click)="visitTable(table.pointerPage+1)">{{table.pointerPage+1}}</button></li>
+          <li class="page-item" *ngIf="table.pointerPage+2 <= table.totalPages"><button class="page-link"
+              (click)="visitTable(table.pointerPage+2)">{{table.pointerPage+2}}</button></li>
+          <li class="page-item" *ngIf="table.pointerPage+1 <= table.totalPages"><button class="page-link"
+              (click)="next()">Next</button></li>
         </ul>
       </div>
     </div>

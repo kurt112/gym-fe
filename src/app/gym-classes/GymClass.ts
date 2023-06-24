@@ -9,6 +9,7 @@ export interface GymClass {
     dateStart: string | Date | null,
     dateEnd: string | Date | null,
     schedules: Schedule[],
+    allowedNonMembers: boolean,
     instructor?: Employee | null,
     createdAt?: string | Date | null,
     updatedAt?: string | Date | null

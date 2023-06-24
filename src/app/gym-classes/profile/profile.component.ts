@@ -9,6 +9,7 @@ import { GymClass } from '../GymClass';
 import { convertNumberToDay, formatTimeToShortTime, formateDateDDMMYY } from 'global/date';
 import { Transferlist } from 'global/utils/tranferList';
 import { Schedule } from 'global/utils/schedule';
+import { enrollInGymClass } from 'global/utils/endpoint';
 
 @Component({
   selector: 'gym-class-profile',
@@ -30,7 +31,7 @@ export class ProfileComponent {
     rightPlaceHolder: `Search Member's`,
     rightTitle: `Current Member's`
   }
-  id: string | null = '';
+  id: string = '';
   isLoading = false;
   isEdit = true;
   isNewData = true;
@@ -43,8 +44,10 @@ export class ProfileComponent {
     schedules: [],
     instructor: null,
     session: 0,
+    allowedNonMembers: false
   }
   isModalOpen = false;
+  enrollMemberUrl = '';
   schedules: Schedule[] = [
     { day: 1, startTime: '', endTime: '' },
     { day: 2, startTime: '', endTime: '' },
@@ -62,12 +65,20 @@ export class ProfileComponent {
   }
 
   ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id');
+    const routeId = this.route.snapshot.paramMap.get('id');
+
+    if(routeId !== null){
+      this.id = routeId;
+      this.enrollMemberUrl = enrollInGymClass(this.id)
+    }
+
     if (this.id !== 'add') {
       this.isNewData = false;
       this.isLoading = true;
 
       this.http.get<GymClass>(`${environment.apiUrl}gym/classes/${this.id}`).subscribe((data) => {
+        console.log(data);
+        
         data.schedules.forEach((schedule: Schedule, i: number) => {
           this.schedules.forEach((thisSched, i: number) => {
             if (schedule.day === thisSched.day) {
@@ -152,11 +163,12 @@ export class ProfileComponent {
         { day: 7, startTime: '', endTime: '' }
       ]
       Swal.fire({
-        title: 'Created',
+        title: 'Updated',
         timer: 2000,
         icon: 'success',
         text: data.message,
       }).then(() => {
+        this.ngOnInit();
       })
     })
   }

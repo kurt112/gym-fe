@@ -1,7 +1,7 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 
 @Directive({
-  selector: '[focus]'
+  selector: '[focusElement]'
 })
 export class InputDirective {
 
@@ -15,7 +15,7 @@ export class InputDirective {
   ngAfterViewInit() {
     if (this.focus) {
       setTimeout(() => {
-        // this.element.nativeElement.focus(); 
+        this.element.nativeElement.focus(); 
       },1000)
     }
   }

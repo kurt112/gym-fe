@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { formateDateDDMMYY } from 'global/date';
+import { getInitUser } from 'global/utils/user';
 import { Employee } from 'src/app/employee/Employee';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
@@ -18,29 +19,13 @@ export class ProfileComponent {
   isEdit = false;
   isNewData = true;
   employee: Employee = {
-    user: {
-      birthDate: new Date(Date.now()).toString(),
-      firstName: '',
-      lastName: '',
-      suffix: '',
-      email: '',
-      password: '',
-      cellphone: '',
-      sex: '',
-      rfID: '',
-      bmi: '',
-      bmiNumber: '',
-      weight: '',
-      height: '',
-      middleName: '',
-      role: 'employee'
-    }
+    user: getInitUser
   }
   constructor(private route: ActivatedRoute, private http: HttpClient) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
-   
+
     if (this.id !== 'add') {
       this.http.get<Employee>(`${environment.apiUrl}employees/${this.id}`)
         .subscribe((data) => {

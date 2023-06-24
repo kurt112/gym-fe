@@ -4,8 +4,8 @@ import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-card-tap',
-  templateUrl: './card-tap.component.html',
-  styleUrls: ['./card-tap.component.scss']
+  templateUrl: './card-tap-enrollment.component.html',
+  styleUrls: ['./card-tap-enrollment.component.scss']
 })
 export class CardTapComponent {
 

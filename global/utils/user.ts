@@ -19,5 +19,28 @@ export interface User {
     membershipDateEnd?: string,
     createdAt?: string,
     updatedAt?: string,
-    role: string
+    role: string,
+    pointsAmount: number,
+    cardValue: number
+}
+
+
+export const getInitUser:User = {
+    birthDate: new Date(Date.now()).toString(),
+    firstName: '',
+    lastName: '',
+    suffix: '',
+    email: '',
+    password: '',
+    cellphone: '',
+    sex: '',
+    rfID: '',
+    bmi: '',
+    bmiNumber: '',
+    weight: '',
+    height: '',
+    middleName: '',
+    role: '',
+    cardValue: 0,
+    pointsAmount: 0,
 }

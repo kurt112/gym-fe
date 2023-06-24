@@ -5,7 +5,7 @@ import { membershipMembersTableUrl, convertDataFromRequestToTable, next, previou
 import {Location} from '@angular/common';
 
 @Component({
-  selector: 'app-members',
+  selector: 'gym-class-members',
   templateUrl: './members.component.html',
   styleUrls: ['./members.component.scss']
 })

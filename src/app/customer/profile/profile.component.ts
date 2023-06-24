@@ -6,6 +6,7 @@ import { NgForm } from '@angular/forms';
 import { formateDateDDMMYY } from 'global/date';
 import { Customer } from '../customer';
 import Swal from 'sweetalert2';
+import { getInitUser } from 'global/utils/user';
 @Component({
   selector: 'customer-profile',
   templateUrl: './profile.component.html',
@@ -18,23 +19,7 @@ export class ProfileComponent implements OnInit {
   isNewData = true;
   customer: Customer = {
     rfId: '',
-    user: {
-      birthDate: new Date(Date.now()).toString(),
-      firstName: '',
-      lastName: '',
-      suffix: '',
-      email: '',
-      password: '',
-      cellphone: '',
-      sex: '',
-      rfID: '',
-      bmi: '',
-      bmiNumber: '',
-      weight: '',
-      height: '',
-      middleName: '',
-      role: 'customer'
-    }
+    user: getInitUser
   }
   constructor(private route: ActivatedRoute, private http: HttpClient) { }
 
@@ -45,8 +30,6 @@ export class ProfileComponent implements OnInit {
       this.isNewData = false;
       this.isLoading = true;
       this.http.get<Customer>(`${environment.apiUrl}customers/${this.id}`).subscribe((data) => {
-        console.log(data);
-
         this.isLoading = false;
         this.customer = data;
         this.customer.user.birthDate = formateDateDDMMYY(this.customer.user.birthDate);
