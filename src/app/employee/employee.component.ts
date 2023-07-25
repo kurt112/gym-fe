@@ -14,7 +14,7 @@ export class EmployeeComponent {
   isLoading = false;
 
   constructor(private http: HttpClient) {
-    this.getData('', this.table.currentPage, this.table.size);
+    this.getData(this.table.search, this.table.currentPage, this.table.size);
   }
 
   getData(search: string, page: number, size: number) {
@@ -39,13 +39,18 @@ export class EmployeeComponent {
 
   visitTable(page: number) {
     if (page === this.table.currentPage) return;
-    this.getData('', page, this.table.size);
+    this.getData(this.table.search, page, this.table.size);
     this.table.currentPage = page;
     updatePageVisit(this.table);
   }
 
   changeTableSize(size: number) {
     changeTableSize(this.table, size);
-    this.getData('', 1, this.table.size);
+    this.getData(this.table.search, 1, this.table.size);
+  }
+
+  
+  _handleSearchClick () {
+    this.getData(this.table.search,1,this.table.size);    
   }
 }

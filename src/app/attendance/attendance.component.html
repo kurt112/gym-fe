@@ -10,11 +10,10 @@
         <li class="nav-item">
           <a routerLink="/customers/transaction/top-up" class="btn btn-sm btn-primary me-1">Top up</a>
         </li>
+        <li class="nav-item">
+          <a (click)="popUpForIsGuestIsInvitedByMember()" class="btn btn-sm btn-primary me-1">Generate Guest</a>
+        </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
     </div>
   </nav>
   <div class="card shadow-sm bg-body rounded">

@@ -35,11 +35,13 @@ export class TopUpComponent {
         userId = result.message;
         alert(userId);
       }).catch(ignored => {
+        this.isEnterAmountShowing = true;
         Swal.fire(
           'Customer not found',
           'Card id cannot be found',
           'error'
         ).then(() => {
+          this.isEnterAmountShowing = false;
           setTimeout(() => {
             this.rfId = '';
           }, 1)
@@ -70,7 +72,7 @@ export class TopUpComponent {
               'New balance has been added',
               'success'
             ).then(() => {
-             
+
             })
           })
         }

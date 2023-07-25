@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { customerTableUrl, convertDataFromRequestToTable, next, previous, updatePageVisit, changeTableSize, CustomerAttendanceTable, customerTodayTableUrl } from 'global/utils/tableColumns';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-attendance',
@@ -24,7 +25,7 @@ export class AttendanceComponent {
     this.isLoading = true;
     this.http.get<any>(customerTodayTableUrl(search, page, size)).subscribe((data) => {
       console.log(data);
-      
+
       convertDataFromRequestToTable(data, this.table)
       this.isLoading = false;
     });
@@ -49,5 +50,43 @@ export class AttendanceComponent {
     changeTableSize(this.table, size);
     this.getData('', 1, this.table.size);
   }
+
+  async popUpForIsGuestIsInvitedByMember() {
+    const { value: formValues } = await Swal.fire({
+      title: 'Guest Details',
+      html:
+        '<p class="text-black">Firsname</p> <input id="firstName" class="firstName form-control">' + '<br>' +
+        '<p class="text-black">Lastname</p> <input id="lastName" class="lastName form-control">',
+      focusConfirm: false,
+      preConfirm: () => {
+
+        let firstName = (<HTMLInputElement>document.getElementById('firstName')).value;
+        const lastName =(<HTMLInputElement>document.getElementById('lastName')).value;
+
+        return [
+          firstName,
+          lastName  
+        ]
+      }
+    })
+
+    if (formValues) {
+      Swal.fire(JSON.stringify(formValues))
+    }
+  }
+
+  popUpForInputDataOfGuest() {
+
+  }
+
+  popUpForSearchMember() {
+
+  }
+
+
+
+
+
+
 
 }

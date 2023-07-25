@@ -27,31 +27,36 @@ export class ProfileComponent {
     this.id = this.route.snapshot.paramMap.get('id');
 
     if (this.id !== 'add') {
+      this.isLoading = true;
       this.http.get<Employee>(`${environment.apiUrl}employees/${this.id}`)
         .subscribe((data) => {
-          this.isLoading = true;
+          this.isLoading = false;
           this.employee = data;
           this.employee.user.birthDate = formateDateDDMMYY(this.employee.user.birthDate);
         })
       this.isNewData = false;
+      return;
     }
 
-    this.isLoading = false;
+    this.employee.user.role = 'ADMIN';
+    this.employee.user.sex = 'Male';
   }
 
   setSex(sex: string) {
     this.employee.user.sex = sex;
   }
 
-  submit(employeeForm: NgForm) {
-    const updatedEmployee = { ...this.employee, ...employeeForm.value };
+  setRole(role: string) {
+    this.employee.user.role = role;
+  }
 
+  submit(employeeForm: NgForm) {
     if (!this.isNewData) {
-      this.updateEmployee(updatedEmployee);
+      this.updateEmployee(this.employee);
       return;
     }
 
-    this.createEmployee(employeeForm, updatedEmployee);
+    this.createEmployee(employeeForm, this.employee);
   }
 
   createEmployee(employeeForm: NgForm, employee: Employee) {

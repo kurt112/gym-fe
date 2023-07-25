@@ -34,7 +34,11 @@ export class ProfileComponent implements OnInit {
         this.customer = data;
         this.customer.user.birthDate = formateDateDDMMYY(this.customer.user.birthDate);
       })
+
+      return;
     }
+
+    this.customer.user.role = 'Customer';
   }
 
   setSex(sex: string) {

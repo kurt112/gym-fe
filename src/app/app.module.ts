@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbPaginationModule, NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { Routes, RouterModule } from '@angular/router';
@@ -17,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { ProfileComponent as EmployeeProfile } from './employee/profile/profile.component';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { StoreComponent } from './store/store.component';
+import { ScheduleComponent as StoreSchedule } from './store/schedule/schedule.component';
 import { MembershipComponent } from './membership/membership.component';
 import { TransferListComponent } from './utility/input/transfer-list/transfer-list.component';
 import { AttendanceComponent as CustomerAttendance } from './utility/attendance/attendance.component';
@@ -31,6 +31,9 @@ import { MembersComponent as GymClassMembers } from './gym-classes/profile/membe
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CardTapTopupComponent } from './utility/card-tap/topUp/card-tap-topup.component';
 import { TopUpComponent as CustomerTopUp } from './customer/top-up/top-up.component';
+import { AuditComponent } from './store/audit/audit.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 const routes: Routes = [
   { path: 'customers', component: CustomerComponent },
@@ -48,6 +51,7 @@ const routes: Routes = [
   { path: 'membersips/:id/members', component: MembershipMembers },
   { path: 'dashboard', pathMatch: 'full', component: DashboardComponent },
   { path: 'store', pathMatch: 'full', component: StoreComponent },
+  {path: 'audit', pathMatch: 'full', component: AuditComponent},
   { path: '**', redirectTo: '/dashboard', pathMatch: 'full' },
 ];
 
@@ -77,7 +81,9 @@ const routes: Routes = [
     GymClassMembers,
     DashboardComponent,
     CardTapTopupComponent,
-    CustomerTopUp
+    CustomerTopUp,
+    AuditComponent,
+    StoreSchedule
   ],
   imports: [
     FormsModule,
@@ -87,7 +93,11 @@ const routes: Routes = [
     NgbPaginationModule,
     NgbAlertModule,
     RouterModule.forRoot(routes),
-    HttpClientModule
+    HttpClientModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
