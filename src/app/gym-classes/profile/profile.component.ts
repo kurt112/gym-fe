@@ -49,25 +49,25 @@ export class ProfileComponent {
   isModalOpen = false;
   enrollMemberUrl = '';
   schedules: Schedule[] = [
+    { day: 0, startTime: '', endTime: '' },
     { day: 1, startTime: '', endTime: '' },
     { day: 2, startTime: '', endTime: '' },
     { day: 3, startTime: '', endTime: '' },
     { day: 4, startTime: '', endTime: '' },
     { day: 5, startTime: '', endTime: '' },
-    { day: 6, startTime: '', endTime: '' },
-    { day: 7, startTime: '', endTime: '' }
+    { day: 6, startTime: '', endTime: '' }
   ];
   constructor(private route: ActivatedRoute, private http: HttpClient) { }
 
   convertDate = (day: number) => {
-    if (day <= 0 || day > 7) return 'TBA'
-    return convertNumberToDay[day - 1];
+    if (day < 0 || day > 7) return 'TBA'
+    return convertNumberToDay[day];
   }
 
   ngOnInit() {
     const routeId = this.route.snapshot.paramMap.get('id');
 
-    if(routeId !== null){
+    if (routeId !== null) {
       this.id = routeId;
       this.enrollMemberUrl = enrollInGymClass(this.id)
     }
@@ -78,9 +78,9 @@ export class ProfileComponent {
 
       this.http.get<GymClass>(`${environment.apiUrl}gym/classes/${this.id}`).subscribe((data) => {
         console.log(data);
-        
-        data.schedules.forEach((schedule: Schedule, i: number) => {
-          this.schedules.forEach((thisSched, i: number) => {
+
+        data.schedules?.forEach((schedule: Schedule, i: number) => {
+          this.schedules?.forEach((thisSched, i: number) => {
             if (schedule.day === thisSched.day) {
               this.schedules[i] = { day: schedule.day, endTime: schedule.endTime.substring(0, 5), startTime: schedule.startTime.substring(0, 5) };
             }
@@ -113,13 +113,8 @@ export class ProfileComponent {
 
     if (this.id !== null && this.id !== 'add') formValue.id = this.id;
 
-    this.schedules = this.schedules.filter(schedule => {
-      if (!schedule.startTime || !schedule.endTime) return;
+    delete formValue.schedules;
 
-      return schedule;
-    });
-
-    formValue.schedules = this.schedules;
 
     if (!this.isNewData) {
       this.updateGymClass(formValue);
@@ -127,19 +122,12 @@ export class ProfileComponent {
     }
 
     this.createGymClass(gymClassForm, formValue);
+
   }
 
   createGymClass(gymClassForm: NgForm, gymClass: GymClass) {
     this.http.post<Customer>(`${environment.apiUrl}gym/classes`, gymClass).subscribe((data: any) => {
-      this.schedules = [
-        { day: 1, startTime: '', endTime: '' },
-        { day: 2, startTime: '', endTime: '' },
-        { day: 3, startTime: '', endTime: '' },
-        { day: 4, startTime: '', endTime: '' },
-        { day: 5, startTime: '', endTime: '' },
-        { day: 6, startTime: '', endTime: '' },
-        { day: 7, startTime: '', endTime: '' }
-      ]
+      // this.createGymClassSchedule(data.id);
       Swal.fire({
         title: 'Created',
         timer: 2000,
@@ -153,15 +141,7 @@ export class ProfileComponent {
 
   updateGymClass(gymClass: GymClass) {
     this.http.post<Customer>(`${environment.apiUrl}gym/classes`, gymClass).subscribe((data: any) => {
-      this.schedules = [
-        { day: 1, startTime: '', endTime: '' },
-        { day: 2, startTime: '', endTime: '' },
-        { day: 3, startTime: '', endTime: '' },
-        { day: 4, startTime: '', endTime: '' },
-        { day: 5, startTime: '', endTime: '' },
-        { day: 6, startTime: '', endTime: '' },
-        { day: 7, startTime: '', endTime: '' }
-      ]
+      this.createGymClassSchedule(data.id);
       Swal.fire({
         title: 'Updated',
         timer: 2000,
@@ -175,6 +155,29 @@ export class ProfileComponent {
 
   openModal() {
     this.isModalOpen = !this.isModalOpen;
+  }
+
+  createGymClassSchedule(id: string) {
+
+    this.schedules = this.schedules.filter(schedule => {
+      if (!schedule.startTime || !schedule.endTime) return;
+
+      return schedule;
+    });
+
+    this.http.post<Customer>(`${environment.apiUrl}gym/classes/${id}/generate-schedules`, this.schedules).subscribe((data: any) => {
+
+      // this.schedules = [
+      //   { day: 0, startTime: '', endTime: '' },
+      //   { day: 1, startTime: '', endTime: '' },
+      //   { day: 2, startTime: '', endTime: '' },
+      //   { day: 3, startTime: '', endTime: '' },
+      //   { day: 4, startTime: '', endTime: '' },
+      //   { day: 5, startTime: '', endTime: '' },
+      //   { day: 6, startTime: '', endTime: '' }
+      // ]
+
+    })
   }
 
 }

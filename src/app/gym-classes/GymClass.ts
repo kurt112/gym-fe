@@ -8,8 +8,8 @@ export interface GymClass {
     session: number,
     dateStart: string | Date | null,
     dateEnd: string | Date | null,
-    schedules: Schedule[],
     allowedNonMembers: boolean,
+    schedules?: Schedule[],
     instructor?: Employee | null,
     createdAt?: string | Date | null,
     updatedAt?: string | Date | null

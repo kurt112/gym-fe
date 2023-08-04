@@ -34,6 +34,7 @@ import { TopUpComponent as CustomerTopUp } from './customer/top-up/top-up.compon
 import { AuditComponent } from './store/audit/audit.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
   { path: 'customers', component: CustomerComponent },
@@ -94,6 +95,7 @@ const routes: Routes = [
     NgbAlertModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
+    BrowserAnimationsModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,

@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { GymClass } from 'src/app/gym-classes/GymClass';
 import { Schedule } from 'global/utils/schedule';
 import { formatDate } from '@angular/common';
+import { formatTimeToAmToPm, formatTimeToShortTime, formatToDateWord } from 'global/date';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -67,96 +68,44 @@ export class ScheduleComponent {
   refresh = new Subject<void>();
 
   events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: { ...colors['red'] },
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: { ...colors['yellow'] },
-      actions: this.actions,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: { ...colors['blue'] },
-      allDay: true,
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
-      color: { ...colors['yellow'] },
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 2),
-      title: 'A long event that spans 2 months',
-      color: { ...colors['blue'] },
-      allDay: true,
-    },
+
   ];
 
   activeDayIsOpen: boolean = true;
 
   constructor(private modal: NgbModal, private http: HttpClient) {
+    this.http.get<any>(`${environment.apiUrl}gym/classes/schedules`).subscribe(data => {
+      console.log(data);
+      
+      data.forEach((e: GymClass) => {
+        console.log(e);
+        
+
+        e.schedules?.forEach((schedule:Schedule) => {
+          const dateStart = e.dateStart !== null ? new Date(schedule.startTime) : new Date();
+          const dateEnd =  e.dateEnd !== null ? new Date(schedule.endTime) : new Date();
+
+          const calendarEvent: CalendarEvent = {
+            start:startOfDay(dateStart),
+            end: endOfDay(dateEnd),
+            title: `${e.name} - ${e.type} (${formatTimeToAmToPm(dateStart)} - ${formatTimeToAmToPm(dateEnd)})`,
+            color: { ...colors['blue'] },
+            actions: this.actions,
+          }
+
+          this.events.push(calendarEvent);
+        })
+      });
+      // console.log(calendarEvents);
+    })
+
     this.modalData = {
       event: this.events[0],
       action: 'click'
     }
     this.modalContent = undefined;
 
-    this.http.get<any>(`${environment.apiUrl}gym/classes/schedules`).subscribe(data => {
-      console.log(data);
-      
-      const calendarEvents: CalendarEvent[] = data.map((e: GymClass) =>
-        e.schedules.map((schedule: Schedule) =>{
-          
-          console.log(schedule);
-          
-          const timeStart: string[] = schedule.startTime.split(':');
-          const timeEnd: string[] = schedule.startTime.split(':');
-          
-          const newDateStart =  e.dateStart !== null ? new Date(e.dateStart) : new Date();
-          newDateStart.setHours(+timeStart[0]);
-          newDateStart.setMinutes(+timeStart[1]);
 
-          const newDateEnd =  e.dateEnd !== null ? new Date(e.dateEnd) : new Date();
-          newDateEnd.setHours(+timeEnd[0]);
-          newDateEnd.setMinutes(+timeEnd[1]);
-
-          const calendarEvent: CalendarEvent = {
-            start: addHours(startOfDay(newDateStart), +timeStart[0]),
-            end: addHours(endOfDay(newDateEnd),+timeEnd[0]),
-            title: `${e.name} - ${e.type} (${newDateStart} - ${newDateEnd})`,
-            color: { ...colors['blue'] },
-            actions: this.actions,
-          }
-          this.events.push(calendarEvent);
-        }
-        ));
-        // console.log(calendarEvents);
-    })
-
-    
-    
   }
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
