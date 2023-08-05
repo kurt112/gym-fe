@@ -1,33 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { convertDataFromRequestToTable, next, previous, updatePageVisit, changeTableSize, GymClassWithUserTable, gymClassMembers } from 'global/utils/tableColumns';
+import { gymClassMembers, convertDataFromRequestToTable, next, previous, updatePageVisit, changeTableSize, GymClassScheduleTable, GymClassScheduleTableUrl } from 'global/utils/tableColumns';
 import {Location} from '@angular/common';
 
 @Component({
-  selector: 'gym-class-members',
-  templateUrl: './members.component.html',
-  styleUrls: ['./members.component.scss']
+  selector: 'gym-class-schedule',
+  templateUrl: './schedule.component.html',
+  styleUrls: ['./schedule.component.scss']
 })
-export class MembersComponent {
-  
+export class ScheduleComponent {
+
   id: string | null = '';
-  table = GymClassWithUserTable;
+  table = GymClassScheduleTable;
   isLoading = false;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private location: Location) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.getMembershipMembersTableUrl(this.id, '', this.table.currentPage, this.table.size);
+    this.getGymClassSchedule(this.id);
   }
 
-  getMembershipMembersTableUrl(id: string | null, search: string, page: number, size: number) {
+  getGymClassSchedule(id: string | null) {
     this.isLoading = true;
-    this.http.get<any>(gymClassMembers(id, search, page, size)).subscribe((data) => {
+    this.http.get<any>(GymClassScheduleTableUrl(id)).subscribe((data) => {
       console.log(data);
       
-      convertDataFromRequestToTable(data, this.table)
+      this.table.content = data;
+         
       this.isLoading = false;
     });
   }
@@ -55,6 +56,4 @@ export class MembersComponent {
   goBack() {
     this.location.back();
   }
-
-
 }

@@ -1,0 +1,73 @@
+<div class="row mt-2 mb-2 p-2 bg-body shadow-sm  mx-2">
+    <div class="col-md-3">
+        <a (click)="goBack()" class="btn btn-sm btn-primary px-4">Back</a>
+    </div>
+</div>
+
+<h1 *ngIf="table.content.length === 0" class="text-secondary text-center">No Schedule Found</h1>
+
+<div class="container mt-2">
+    <div *ngIf="table.content.length !== 0" class="card shadow-sm bg-body rounded">
+        <div class="d-flex justify-content-start  bg-white card-header align-items-center p-3">
+            <h5 class="text-dark fw-bold align-items-center m-0 me-2">{{table.name}}</h5>
+            <div *ngIf="isLoading" class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <div class="card-body pb-0">
+            <div class="table-responsive">
+                <table class="table table-hover m-0">
+                    <thead>
+                        <tr>
+                            <th scope="col" *ngFor="let column of table.columns;">
+                                {{column}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr scope="row" *ngFor="let schedule of table.content;">
+                            <td>{{schedule.startTime | date: 'EEEE'}}</td>
+                            <td>{{schedule.startTime | date: 'h:mm a'}}</td>
+                            <td>{{schedule.endTime | date: 'h:mm a'}}</td>
+                            <td>{{schedule.startTime  | date: 'MMMM d, y'}}</td>
+                            <td >
+                                <button class="btn btn-info btn-sm text-white me-3">Update</button>
+                                <button class="btn btn-danger btn-sm text-white">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- <div class="card-footer d-flex flex-row justify-content-between align-items-center">
+
+            <div class="dropdown align-middle">
+                <button class="btn btn-outline-primary btn-sm  dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    {{this.table.size}}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><button class="dropdown-item" (click)="changeTableSize(10)">10</button></li>
+                    <li><button class="dropdown-item" (click)="changeTableSize(20)">20</button></li>
+                    <li><button class="dropdown-item" (click)="changeTableSize(30)">30</button></li>
+                    <li><button class="dropdown-item" (click)="changeTableSize(40)">40</button></li>
+                    <li><button class="dropdown-item" (click)="changeTableSize(50)">50</button></li>
+                </ul>
+            </div>
+            <div>
+                <ul class="pagination pagination-sm align-middle mb-0">
+                    <li class="page-item" *ngIf="table.pointerPage > 1"><button class="page-link"
+                            (click)="previous()">Previous</button></li>
+                    <li class="page-item"><button class="page-link"
+                            (click)="visitTable(table.pointerPage)">{{table.pointerPage}}</button></li>
+                    <li class="page-item" *ngIf="table.pointerPage+1 <= table.totalPages"><button class="page-link"
+                            (click)="visitTable(table.pointerPage+1)">{{table.pointerPage+1}}</button></li>
+                    <li class="page-item" *ngIf="table.pointerPage+2 <= table.totalPages"><button class="page-link"
+                            (click)="visitTable(table.pointerPage+2)">{{table.pointerPage+2}}</button></li>
+                    <li class="page-item" *ngIf="table.pointerPage+1 <= table.totalPages"><button class="page-link"
+                            (click)="next()">Next</button></li>
+                </ul>
+            </div>
+        </div> -->
+    </div>
+</div>

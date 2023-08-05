@@ -4,3 +4,7 @@ export const updateAttendanceCustomer = (rfId: string) => `http://localhost:8080
 
 export const enrollInMembership = (id: string) => `${environment.apiUrl}gym/memberships/${id}/enroll-customer/`
 export const enrollInGymClass = (id: string) => `${environment.apiUrl}gym/classes/${id}/enroll-customer/`
+
+
+// ---------------------------------------------------------------- Auto Complete ----------------------------------------------------------------
+export const autoCompleteEmployee =  (search: string) => `${environment.apiUrl}employees/autocomplete?search=${search}`

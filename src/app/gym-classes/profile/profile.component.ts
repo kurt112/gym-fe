@@ -6,7 +6,7 @@ import { Customer } from 'src/app/customer/customer';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { GymClass } from '../GymClass';
-import { convertNumberToDay, formatTimeToShortTime, formateDateDDMMYY } from 'global/date';
+import { convertNumberToDay, formateDateDDMMYY } from 'global/date';
 import { Transferlist } from 'global/utils/tranferList';
 import { Schedule } from 'global/utils/schedule';
 import { enrollInGymClass } from 'global/utils/endpoint';
@@ -17,20 +17,7 @@ import { enrollInGymClass } from 'global/utils/endpoint';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent {
-  transferList: Transferlist = {
-    leftData: [{
-      id: 1,
-      displayData: 'KURT sdjfkl;asjdf'
-    }],
-    leftPlaceHolder: `Search Member's`,
-    leftTitle: `Available Member's`,
-    rightData: [{
-      id: 2,
-      displayData: 'Kurt Lupin Orioquer'
-    }],
-    rightPlaceHolder: `Search Member's`,
-    rightTitle: `Current Member's`
-  }
+
   id: string = '';
   isLoading = false;
   isEdit = true;
@@ -57,6 +44,7 @@ export class ProfileComponent {
     { day: 5, startTime: '', endTime: '' },
     { day: 6, startTime: '', endTime: '' }
   ];
+  isNewSchedule = true;
   constructor(private route: ActivatedRoute, private http: HttpClient) { }
 
   convertDate = (day: number) => {
@@ -77,8 +65,6 @@ export class ProfileComponent {
       this.isLoading = true;
 
       this.http.get<GymClass>(`${environment.apiUrl}gym/classes/${this.id}`).subscribe((data) => {
-        console.log(data);
-
         data.schedules?.forEach((schedule: Schedule, i: number) => {
           this.schedules?.forEach((thisSched, i: number) => {
             if (schedule.day === thisSched.day) {
@@ -92,7 +78,7 @@ export class ProfileComponent {
         this.gymClass.schedules = data.schedules;
         this.isLoading = false;
       })
-
+      this.isNewSchedule = false;
     }
   }
 
@@ -159,6 +145,10 @@ export class ProfileComponent {
 
   createGymClassSchedule(id: string) {
 
+    if (!this.isNewSchedule) {
+      return;
+    }
+
     this.schedules = this.schedules.filter(schedule => {
       if (!schedule.startTime || !schedule.endTime) return;
 
@@ -166,18 +156,21 @@ export class ProfileComponent {
     });
 
     this.http.post<Customer>(`${environment.apiUrl}gym/classes/${id}/generate-schedules`, this.schedules).subscribe((data: any) => {
-
-      // this.schedules = [
-      //   { day: 0, startTime: '', endTime: '' },
-      //   { day: 1, startTime: '', endTime: '' },
-      //   { day: 2, startTime: '', endTime: '' },
-      //   { day: 3, startTime: '', endTime: '' },
-      //   { day: 4, startTime: '', endTime: '' },
-      //   { day: 5, startTime: '', endTime: '' },
-      //   { day: 6, startTime: '', endTime: '' }
-      // ]
-
+      this.schedules = [
+        { day: 0, startTime: '', endTime: '' },
+        { day: 1, startTime: '', endTime: '' },
+        { day: 2, startTime: '', endTime: '' },
+        { day: 3, startTime: '', endTime: '' },
+        { day: 4, startTime: '', endTime: '' },
+        { day: 5, startTime: '', endTime: '' },
+        { day: 6, startTime: '', endTime: '' }
+      ]
     })
+  }
+
+  _showNewSchedule() {
+    const isNewScheduleOpen = !this.isNewSchedule;
+    this.isNewSchedule = isNewScheduleOpen;
   }
 
 }

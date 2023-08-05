@@ -37,6 +37,7 @@
                 <td>{{employee.user.sex}}</td>
                 <td>{{employee.user.cellphone}}</td>
                 <td>{{employee.user.email}}</td>
+                <td>{{employee.user.role | uppercase}}</td>
                 <td> 
                   <a type="button"  class="btn btn-success btn-sm"  [routerLink]="['/employees/'+employee.id]">View</a>
                 </td>

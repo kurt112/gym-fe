@@ -35,6 +35,8 @@ import { AuditComponent } from './store/audit/audit.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ScheduleComponent as GymClassesSheduleComponent } from './gym-classes/profile/schedule/schedule.component';
+import { AutocompleteComponent } from './utility/input/autocomplete/autocomplete.component';
 
 const routes: Routes = [
   { path: 'customers', component: CustomerComponent },
@@ -46,13 +48,14 @@ const routes: Routes = [
   { path: 'attendance/customers', component: CustomerAttendance },
   { path: 'classes', component: GymClassesComponent },
   { path: 'classes/:id', component: GymClassProfile },
+  { path: 'classes/:id/schedules', component: GymClassesSheduleComponent },
   { path: 'classes/:id/members', component: GymClassMembers },
   { path: 'membersips', component: MembershipComponent },
   { path: 'membersips/:id', component: MembershipProfile },
   { path: 'membersips/:id/members', component: MembershipMembers },
   { path: 'dashboard', pathMatch: 'full', component: DashboardComponent },
   { path: 'store', pathMatch: 'full', component: StoreComponent },
-  {path: 'audit', pathMatch: 'full', component: AuditComponent},
+  { path: 'audit', pathMatch: 'full', component: AuditComponent },
   { path: '**', redirectTo: '/dashboard', pathMatch: 'full' },
 ];
 
@@ -84,7 +87,9 @@ const routes: Routes = [
     CardTapTopupComponent,
     CustomerTopUp,
     AuditComponent,
-    StoreSchedule
+    StoreSchedule,
+    GymClassesSheduleComponent,
+    AutocompleteComponent
   ],
   imports: [
     FormsModule,

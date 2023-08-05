@@ -4,24 +4,28 @@ import { GymClass } from "src/app/gym-classes/GymClass";
 import { GymClassWithUser } from "src/app/gym-classes/GymClassWithUser";
 import { Membership } from "src/app/membership/Membership";
 import { MembershipWithUser } from "src/app/membership/MembershipWithUser";
+import { ScheduleComponent } from "src/app/utility/schedule/schedule.component";
 import { environment } from "src/environments/environment";
+import { Schedule } from "./schedule";
 
 
 // why separate in future the table for will have different url for sorting and etc...
-export const customerTableUrl = (search: string,page:number, size:number) => `${environment.apiUrl}customers?search=${search}&page=${page}&size=${size}`
-export const employeeTableUrl = (search: string,page:number, size:number) => `${environment.apiUrl}employees?search=${search}&page=${page}&size=${size}`
-export const gymClassTableUrl = (search: string,page:number, size:number) => `${environment.apiUrl}gym/classes?search=${search}&page=${page}&size=${size}`
-export const membershipTableUrl = (search: string,page:number, size:number) => `${environment.apiUrl}gym/memberships?search=${search}&page=${page}&size=${size}`
-export const customerTodayTableUrl = (search: string,page:number, size:number) => `${environment.apiUrl}customers/today?search=${search}&page=${page}&size=${size}`
-export const membershipMembersTableUrl = (membershipId: string | null, search: string,page:number, size:number) => `${environment.apiUrl}gym/memberships/${membershipId}/members?search=${search}&page=${page}&size=${size}`
-export const gymClassMembers = (gymClassId: string | null, search: string,page:number, size:number) => `${environment.apiUrl}gym/classes/${gymClassId}/members?search=${search}&page=${page}&size=${size}`
+export const customerTableUrl = (search: string,page:number, size:number) => `${environment.apiUrl}customers?search=${search}&page=${page}&size=${size}`;
+export const employeeTableUrl = (search: string,page:number, size:number) => `${environment.apiUrl}employees?search=${search}&page=${page}&size=${size}`;
+export const gymClassTableUrl = (search: string,page:number, size:number) => `${environment.apiUrl}gym/classes?search=${search}&page=${page}&size=${size}`;
+export const membershipTableUrl = (search: string,page:number, size:number) => `${environment.apiUrl}gym/memberships?search=${search}&page=${page}&size=${size}`;
+export const customerTodayTableUrl = (search: string,page:number, size:number) => `${environment.apiUrl}customers/today?search=${search}&page=${page}&size=${size}`;
+export const membershipMembersTableUrl = (membershipId: string | null, search: string,page:number, size:number) => `${environment.apiUrl}gym/memberships/${membershipId}/members?search=${search}&page=${page}&size=${size}`;
+export const gymClassMembers = (gymClassId: string | null, search: string,page:number, size:number) => `${environment.apiUrl}gym/classes/${gymClassId}/members?search=${search}&page=${page}&size=${size}`;
+export const GymClassScheduleTableUrl = (gymClassId: string | null) => `${environment.apiUrl}gym/classes/${gymClassId}/schedules`;
+
 
 interface Table<T>{
     name: string,
     columns: string[],
     size: number,
     totalElements: number,
-    numberOfElements:number,
+    numberOfElements:number,     
     totalPages: number,
     content: T[],
     currentPage: number,
@@ -48,7 +52,7 @@ export const CustomerTable: Table<Customer> = {
 
 export const EmployeeTable: Table<Employee> = {
     name: `Employees's List`,
-    columns: ['First Name','Last Name','Birthdate','Gender','Cellphone','Email','Action'],
+    columns: ['First Name','Last Name','Birthdate','Gender','Cellphone','Email','Role' ,'Action'],
     numberOfElements: 1,
     size: 10,
     totalElements: 10,
@@ -107,6 +111,21 @@ export const MembershipWithUserTable: Table<MembershipWithUser> = {
 export const CustomerAttendanceTable: Table<Customer> = {
     name: `Today's Customer`,
     columns: ['FirstName','LastName','Balance','Points','Time In', 'Time Out','Membership Expiration'],
+    numberOfElements: 1,
+    size: 10,
+    totalElements: 10,
+    totalPages: 10,
+    content: [],
+    currentPage: 1,
+    previousPage: 0,
+    nextPage: 3,
+    search:'',
+    pointerPage: 1
+}
+
+export const GymClassScheduleTable: Table<Schedule> = {
+    name: `Gym Class Schedule's`,
+    columns: ['Day','Time Start','Time End', 'Date', 'Action'],
     numberOfElements: 1,
     size: 10,
     totalElements: 10,

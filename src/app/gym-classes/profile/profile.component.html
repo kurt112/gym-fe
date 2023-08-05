@@ -3,88 +3,99 @@
 <div class="row mt-2 mb-2 p-2  bg-body shadow-sm  mx-2">
     <div class="buttons d-inline-flex justify-content-between">
         <div id="left  d-inline-flex">
-            <a routerLink="members" class="btn btn-sm text-white btn-warning px-4">View Members</a>
+            <a routerLink="members" class="btn btn-sm btn-warning px-4 me-3">View Members</a>
+            <a routerLink="schedules" class="btn btn-sm  btn-warning px-4 me-3">View Schedule</a>
+            <div class="d-inline-flex" *ngIf="id !== 'add'">
+                <button *ngIf="isNewSchedule" class="btn btn-danger  btn-sm "
+                    (click)="_showNewSchedule(); $event.preventDefault()">
+                    Cancel
+                </button>
+                <button *ngIf="!isNewSchedule" class="btn btn-warning  btn-sm "
+                    (click)="_showNewSchedule(); $event.preventDefault()">
+                    Create New Schedule
+                </button>
+            </div>
         </div>
         <div id="right  d-inline-flex ">
             <a class="btn btn-sm text-white btn-success px-4 mx-3" (click)="openModal()" data-bs-toggle="modal"
                 data-bs-target="#card-tap">Enroll Member</a>
-            <a class="btn btn-sm text-white btn-success px-4" >
+            <a class="btn btn-sm text-white btn-success px-4">
                 Generate Guest
             </a>
         </div>
     </div>
-</div>
-<div class="container-fluid" *ngIf="!isLoading">
-    <form #gymClassForm="ngForm" (ngSubmit)="submit(gymClassForm)" class="row g-3 p-3 my-3 bg-body shadow rounded mx-2">
-        <p class="fs-1 fw-semibold bg-secondary text-white">GYM CLASS</p>
-        <div class="row">
-            <div class="col-md-4">
-                <label for="name" class="form-label fw-semibold">Class Name</label>
-                <input type="text" [(ngModel)]="gymClass.name" name="name" placeholder="Gym class name"
-                    class="form-control" id="name" required>
-            </div>
-            <div class="col-md-4">
-                <label for="type" class="form-label fw-semibold">Class Type</label>
-                <input type="text" [(ngModel)]="gymClass.type" class="form-control" name="type" id="type" required>
-            </div>
-            <div class="col-md-4">
-                <label for="type" class="form-label fw-semibold">Session</label>
-                <input type="number" [(ngModel)]="gymClass.session" class="form-control" name="session" id="session"
-                    required>
-            </div>
-            <div class="col-md-4">
-                <label for="dateStart" class="form-label fw-semibold">Date Start</label>
-                <input type="date" [(ngModel)]="gymClass.dateStart" name="dateStart" class="form-control"
-                    id="dateStart">
-            </div>
-            <div class="col-md-4">
-                <label for="dateEnd" class="form-label fw-semibold">Date End</label>
-                <input type="date" [(ngModel)]="gymClass.dateEnd" name="dateEnd" class="form-control" id="dateEnd">
-            </div>
-            <div class="col-md-4">
-                <label for="instructor" class="form-label fw-semibold">Instructor</label>
-                <input type="text" [(ngModel)]="gymClass.instructor" name="instructor" class="form-control"
-                    id="instructor">
-            </div>
-            <div class="col-md-4">
-                <div class="form-check mt-3">
-                    <input class="form-check-input" type="checkbox" [(ngModel)]="gymClass.allowedNonMembers"
-                        id="allowedNonMembers" name="allowedNonMembers">
-                    <label class="form-check-label fw-semibold text-primary" for="flexCheckDefault">
-                        Is Allowed Non Member
-                    </label>
+    <div class="container-fluid" *ngIf="!isLoading">
+        <form #gymClassForm="ngForm" (ngSubmit)="submit(gymClassForm)"
+            class="row g-3 p-3 my-3 bg-body shadow rounded mx-2">
+            <p class="fs-1 fw-semibold bg-secondary text-white">GYM CLASS</p>
+            <div class="row">
+                <div class="col-md-4 mt-2">
+                    <label for="name" class="form-label fw-semibold">Class Name</label>
+                    <input type="text" [(ngModel)]="gymClass.name" name="name" placeholder="Gym class name"
+                        class="form-control" id="name" required>
+                </div>
+                <div class="col-md-4 mt-2">
+                    <label for="type" class="form-label fw-semibold">Class Type</label>
+                    <input type="text" [(ngModel)]="gymClass.type" class="form-control" name="type" id="type" required>
+                </div>
+                <div class="col-md-4 mt-2">
+                    <label for="type" class="form-label fw-semibold">Session</label>
+                    <input type="number" [(ngModel)]="gymClass.session" class="form-control" name="session" id="session"
+                        required>
+                </div>
+                <div class="col-md-4 mt-2">
+                    <label for="dateStart" class="form-label fw-semibold">Date Start</label>
+                    <input type="date" [(ngModel)]="gymClass.dateStart" name="dateStart" class="form-control"
+                        id="dateStart">
+                </div>
+                <div class="col-md-4 mt-2">
+                    <label for="dateEnd" class="form-label fw-semibold">Date End</label>
+                    <input type="date" [(ngModel)]="gymClass.dateEnd" name="dateEnd" class="form-control" id="dateEnd">
+                </div>
+               
+                <div class="col-md-4 mt-2">
+                   <app-autocomplete placeholder="Search for instructor" label="Instructor" ></app-autocomplete>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-check mt-3">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="gymClass.allowedNonMembers"
+                            id="allowedNonMembers" name="allowedNonMembers">
+                        <label class="form-check-label fw-semibold text-primary" for="flexCheckDefault">
+                            Is Allowed Non Member
+                        </label>
+                    </div>
+                </div>
+
+                <div *ngIf="isNewSchedule" class="col-md-12 mt-3" ngModelGroup="schedules">
+                    <table class="table table-secondary table-hover table-bordered text-center">
+                        <thead>
+                            <tr>
+                                <th scope="col">Day</th>
+                                <th scope="col">Time Start</th>
+                                <th scope="col">Time End</th>
+                            </tr>
+                        </thead>
+                        <tr *ngFor="let schedule of schedules; let i = index;trackBy:identify">
+                            <th>{{convertDate(schedule.day)}}</th>
+                            <td>
+                                <input type='time' name="{{schedules[i].day + '-' + schedules[i].startTime}}"
+                                    [(ngModel)]="schedules[i].startTime" [attr.name]="schedules[i].startTime"
+                                    [attr.id]="schedules[i].startTime" />
+                            </td>
+                            <td>
+                                <input type='time' name="{{schedules[i].day + ' - ' + schedules[i].endTime}}"
+                                    [(ngModel)]="schedules[i].endTime" [attr.name]="schedules[i].endTime"
+                                    [attr.id]="schedules[i].endTime" />
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
-            <div class="col-md-12 mt-3" ngModelGroup="schedules">
-                <table class="table table-secondary table-hover table-bordered text-center">
-                    <thead>
-                        <tr>
-                            <th scope="col">Day</th>
-                            <th scope="col">Time Start</th>
-                            <th scope="col">Time End</th>
-                        </tr>
-                    </thead>
-                    <tr *ngFor="let schedule of schedules; let i = index;trackBy:identify">
-                        <th>{{convertDate(schedule.day)}}</th>
-                        <td>
-                            <input type='time' name="{{schedules[i].day + '-' + schedules[i].startTime}}"
-                                [(ngModel)]="schedules[i].startTime" [attr.name]="schedules[i].startTime"
-                                [attr.id]="schedules[i].startTime" />
-                        </td>
-                        <td>
-                            <input type='time' name="{{schedules[i].day + ' - ' + schedules[i].endTime}}"
-                                [(ngModel)]="schedules[i].endTime" [attr.name]="schedules[i].endTime"
-                                [attr.id]="schedules[i].endTime" />
-                        </td>
-                    </tr>
-                </table>
+            <div class="col-12 d-flex justify-content-between">
+                <a [routerLink]="['/classes']" class="btn btn-primary px-5 btn-md fw-semibold">BACK </a>
+                <button type="submit" class="fw-semibold btn btn-success px-5 btn-md btn-sm">
+                    {{id==='add'?'SAVE':'UPDATE'}}
+                </button>
             </div>
-        </div>
-        <div class="col-12 d-flex justify-content-between">
-            <a [routerLink]="['/classes']" class="btn btn-primary px-5 btn-md fw-semibold">BACK </a>
-            <button type="submit" class="fw-semibold btn btn-success px-5 btn-md">
-                {{id==='add'?'SAVE':'UPDATE'}}
-            </button>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>

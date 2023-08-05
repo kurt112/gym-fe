@@ -1,7 +1,7 @@
 import { Component, TemplateRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarView, CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent } from 'angular-calendar';
-import { subDays, startOfDay, addDays, endOfMonth, addHours, isSameMonth, isSameDay, endOfDay } from 'date-fns';
+import { subDays, startOfDay, addDays, endOfMonth, addHours, isSameMonth, isSameDay, endOfDay, startOfHour, endOfHour } from 'date-fns';
 import { Subject } from 'rxjs';
 import { EventColor } from 'calendar-utils';
 import { HttpClient } from '@angular/common/http';
@@ -85,13 +85,22 @@ export class ScheduleComponent {
           const dateStart = e.dateStart !== null ? new Date(schedule.startTime) : new Date();
           const dateEnd =  e.dateEnd !== null ? new Date(schedule.endTime) : new Date();
 
+          console.log(dateStart);
+          
+
           const calendarEvent: CalendarEvent = {
-            start:startOfDay(dateStart),
-            end: endOfDay(dateEnd),
+            start:startOfHour(dateStart),
+            end: endOfHour(dateEnd),
             title: `${e.name} - ${e.type} (${formatTimeToAmToPm(dateStart)} - ${formatTimeToAmToPm(dateEnd)})`,
             color: { ...colors['blue'] },
             actions: this.actions,
           }
+
+          console.log(calendarEvent);
+
+          console.log('================================================================');
+          
+          
 
           this.events.push(calendarEvent);
         })

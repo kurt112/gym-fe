@@ -1,0 +1,11 @@
+<form>
+    <div class="form-group">
+        <label for="value" class="form-label fw-semibold">{{label}}</label>
+        <input class="form-control" [(ngModel)]="value" (ngModelChange)="ngOnChanges($event)" list="datalistOptions"
+            id="value" name="value" placeholder={{placeholder}} autocomplete="on"/>
+        <datalist id="datalistOptions">
+            <option value={{data.label}} *ngFor="let data of myData  | async">{{data.id}}</option>
+
+        </datalist>
+    </div>
+</form>
