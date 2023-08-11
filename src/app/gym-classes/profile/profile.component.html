@@ -1,3 +1,4 @@
+<table-search [(data)]="instrutor"></table-search>
 <form-loading *ngIf="isLoading"></form-loading>
 <app-card-tap [url]='enrollMemberUrl'></app-card-tap>
 <div class="row mt-2 mb-2 p-2  bg-body shadow-sm  mx-2">
@@ -52,9 +53,17 @@
                     <label for="dateEnd" class="form-label fw-semibold">Date End</label>
                     <input type="date" [(ngModel)]="gymClass.dateEnd" name="dateEnd" class="form-control" id="dateEnd">
                 </div>
-               
+
                 <div class="col-md-4 mt-2">
-                   <app-autocomplete placeholder="Search for instructor" label="Instructor" ></app-autocomplete>
+                    <label for="instructor" class="form-label fw-semibold">Instructor</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="instructor" placeholder="Instructor" aria-label="instrutor"
+                            aria-describedby="instrutor" readonly disabled  [(ngModel)]="instrutor.id" name="id"/>
+                        <button class="btn btn-success" type="button"  data-bs-toggle="modal" data-bs-target="#table-search">
+                            Assign
+                        </button>
+                    </div>
+                    <!-- <app-autocomplete [(id)]="insturctorAutoCompleteId" placeholder="Search for instructor" label="Instructor" ></app-autocomplete> -->
                 </div>
                 <div class="col-md-12">
                     <div class="form-check mt-3">

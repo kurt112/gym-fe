@@ -37,6 +37,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ScheduleComponent as GymClassesSheduleComponent } from './gym-classes/profile/schedule/schedule.component';
 import { AutocompleteComponent } from './utility/input/autocomplete/autocomplete.component';
+import { TableSearchComponent } from './utility/input/modal/table-search/table-search.component';
 
 const routes: Routes = [
   { path: 'customers', component: CustomerComponent },
@@ -89,7 +90,8 @@ const routes: Routes = [
     AuditComponent,
     StoreSchedule,
     GymClassesSheduleComponent,
-    AutocompleteComponent
+    AutocompleteComponent,
+    TableSearchComponent
   ],
   imports: [
     FormsModule,

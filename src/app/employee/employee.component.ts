@@ -19,8 +19,7 @@ export class EmployeeComponent {
 
   getData(search: string, page: number, size: number) {
     this.isLoading = true;
-    const req = this.http.get<any>(employeeTableUrl(search, page, size));
-    req.subscribe((data: any) => {
+    this.http.get<any>(employeeTableUrl(search, page, size)).subscribe((data: any) => {
       convertDataFromRequestToTable(data, this.table);
       this.table.content.forEach((content) => {
         content.user.birthDate = formatToDateWord(content.user.birthDate);
@@ -49,8 +48,8 @@ export class EmployeeComponent {
     this.getData(this.table.search, 1, this.table.size);
   }
 
-  
-  _handleSearchClick () {
-    this.getData(this.table.search,1,this.table.size);    
+
+  _handleSearchClick() {
+    this.getData(this.table.search, 1, this.table.size);
   }
 }

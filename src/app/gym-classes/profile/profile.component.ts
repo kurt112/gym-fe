@@ -6,10 +6,11 @@ import { Customer } from 'src/app/customer/customer';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { GymClass } from '../GymClass';
-import { convertNumberToDay, formateDateDDMMYY } from 'global/date';
-import { Transferlist } from 'global/utils/tranferList';
+import { convertNumberToDay, formatToDateWord, formateDateDDMMYY } from 'global/date';
 import { Schedule } from 'global/utils/schedule';
 import { enrollInGymClass } from 'global/utils/endpoint';
+import { CoachTableModal, EmployeeTable, convertDataFromRequestToTable, employeeTableUrl } from 'global/utils/tableColumns';
+import { Employee } from 'src/app/employee/Employee';
 
 @Component({
   selector: 'gym-class-profile',
@@ -45,6 +46,8 @@ export class ProfileComponent {
     { day: 6, startTime: '', endTime: '' }
   ];
   isNewSchedule = true;
+  instrutor: any = {};
+
   constructor(private route: ActivatedRoute, private http: HttpClient) { }
 
   convertDate = (day: number) => {
@@ -53,6 +56,7 @@ export class ProfileComponent {
   }
 
   ngOnInit() {
+
     const routeId = this.route.snapshot.paramMap.get('id');
 
     if (routeId !== null) {
@@ -65,6 +69,9 @@ export class ProfileComponent {
       this.isLoading = true;
 
       this.http.get<GymClass>(`${environment.apiUrl}gym/classes/${this.id}`).subscribe((data) => {
+
+        this.instrutor = data.instructor;
+
         data.schedules?.forEach((schedule: Schedule, i: number) => {
           this.schedules?.forEach((thisSched, i: number) => {
             if (schedule.day === thisSched.day) {
@@ -94,7 +101,6 @@ export class ProfileComponent {
   submit(gymClassForm: NgForm) {
 
     const formValue: GymClass = gymClassForm.value;
-
     delete formValue.instructor;
 
     if (this.id !== null && this.id !== 'add') formValue.id = this.id;
@@ -112,8 +118,13 @@ export class ProfileComponent {
   }
 
   createGymClass(gymClassForm: NgForm, gymClass: GymClass) {
-    this.http.post<Customer>(`${environment.apiUrl}gym/classes`, gymClass).subscribe((data: any) => {
-      // this.createGymClassSchedule(data.id);
+    this.http.post<GymClass>(`${environment.apiUrl}gym/classes`, gymClass).subscribe((data: any) => {
+
+      this.http.post<GymClass>(`${environment.apiUrl}gym/classes/${data.id}/assign-instructor/${this.instrutor.id}`, gymClass).subscribe(() => {
+
+      })
+
+      this.createGymClassSchedule(data.id);
       Swal.fire({
         title: 'Created',
         timer: 2000,
@@ -127,14 +138,16 @@ export class ProfileComponent {
 
   updateGymClass(gymClass: GymClass) {
     this.http.post<Customer>(`${environment.apiUrl}gym/classes`, gymClass).subscribe((data: any) => {
-      this.createGymClassSchedule(data.id);
-      Swal.fire({
-        title: 'Updated',
-        timer: 2000,
-        icon: 'success',
-        text: data.message,
-      }).then(() => {
-        this.ngOnInit();
+      this.http.post<GymClass>(`${environment.apiUrl}gym/classes/${data.id}/assign-instructor/${this.instrutor.id}`, gymClass).subscribe(() => {
+        this.createGymClassSchedule(data.id);
+        Swal.fire({
+          title: 'Updated',
+          timer: 2000,
+          icon: 'success',
+          text: data.message,
+        }).then(() => {
+          this.ngOnInit();
+        })
       })
     })
   }

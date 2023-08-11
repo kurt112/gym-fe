@@ -1,0 +1,55 @@
+<div class="modal fade" id="table-search" tabindex="-1" aria-labelledby="table-search" aria-hidden="true">
+    <div class="modal-dialog modal-xl ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="table-search">Coache's List</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Search Instructor" aria-label="instrutor"
+                                aria-describedby="instrutor">
+                            <button class="btn btn-success" type="button" id="instrutor">
+                                Search
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col" *ngFor="let column of table.columns;">
+                                    {{column}}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr scope="row" *ngFor="let employee of table.content;">
+                                <td>{{employee.id}}</td>
+                                <td>{{employee.user.firstName}}</td>
+                                <td>{{employee.user.lastName}}</td>
+                                <td>{{employee.user.email}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary btn-sm"
+                                        (click)="getData(employee)">
+                                        Assign
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row flex-row-reverse">
+                    <div class="col-md-3 text-end">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -74,33 +74,35 @@ export class ScheduleComponent {
   activeDayIsOpen: boolean = true;
 
   constructor(private modal: NgbModal, private http: HttpClient) {
+    this.modalData = {
+      event: this.events[0],
+      action: 'click'
+    }
+    this.modalContent = undefined;
+  }
+
+  ngOnInit() {
     this.http.get<any>(`${environment.apiUrl}gym/classes/schedules`).subscribe(data => {
       console.log(data);
-      
+
       data.forEach((e: GymClass) => {
         console.log(e);
-        
 
-        e.schedules?.forEach((schedule:Schedule) => {
+
+        e.schedules?.forEach((schedule: Schedule) => {
           const dateStart = e.dateStart !== null ? new Date(schedule.startTime) : new Date();
-          const dateEnd =  e.dateEnd !== null ? new Date(schedule.endTime) : new Date();
+          const dateEnd = e.dateEnd !== null ? new Date(schedule.endTime) : new Date();
 
           console.log(dateStart);
-          
+
 
           const calendarEvent: CalendarEvent = {
-            start:startOfHour(dateStart),
+            start: startOfHour(dateStart),
             end: endOfHour(dateEnd),
             title: `${e.name} - ${e.type} (${formatTimeToAmToPm(dateStart)} - ${formatTimeToAmToPm(dateEnd)})`,
             color: { ...colors['blue'] },
             actions: this.actions,
           }
-
-          console.log(calendarEvent);
-
-          console.log('================================================================');
-          
-          
 
           this.events.push(calendarEvent);
         })
@@ -108,14 +110,9 @@ export class ScheduleComponent {
       // console.log(calendarEvents);
     })
 
-    this.modalData = {
-      event: this.events[0],
-      action: 'click'
-    }
-    this.modalContent = undefined;
-
-
   }
+
+
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
       if (
