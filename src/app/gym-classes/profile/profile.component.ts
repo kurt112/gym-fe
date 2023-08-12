@@ -11,6 +11,7 @@ import { Schedule } from 'global/utils/schedule';
 import { enrollInGymClass } from 'global/utils/endpoint';
 import { CoachTableModal, EmployeeTable, convertDataFromRequestToTable, employeeTableUrl } from 'global/utils/tableColumns';
 import { Employee } from 'src/app/employee/Employee';
+import { GymClassType } from 'src/app/configuration/gym-classes-types/GymClassType';
 
 @Component({
   selector: 'gym-class-profile',
@@ -26,7 +27,12 @@ export class ProfileComponent {
   gymClass: GymClass = {
     id: '',
     name: '',
-    type: '',
+    gymClassType: {
+      createdAt: '',
+      name: '',
+      updatedAt: '',
+      id: '-1',
+    },
     dateStart: '',
     dateEnd: '',
     schedules: [],
@@ -47,6 +53,8 @@ export class ProfileComponent {
   ];
   isNewSchedule = true;
   instrutor: any = {};
+
+  gymClassTypes: GymClassType[] = []
 
   constructor(private route: ActivatedRoute, private http: HttpClient) { }
 
@@ -87,6 +95,13 @@ export class ProfileComponent {
       })
       this.isNewSchedule = false;
     }
+
+
+    this.http.get<GymClassType[]>(`${environment.apiUrl}gym/classes/types`).subscribe((data: GymClassType[]) => {
+      this.gymClassTypes = data;
+    });
+
+
   }
 
   setEdit() {
@@ -101,12 +116,12 @@ export class ProfileComponent {
   submit(gymClassForm: NgForm) {
 
     const formValue: GymClass = gymClassForm.value;
+    
     delete formValue.instructor;
 
     if (this.id !== null && this.id !== 'add') formValue.id = this.id;
 
     delete formValue.schedules;
-
 
     if (!this.isNewData) {
       this.updateGymClass(formValue);

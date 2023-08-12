@@ -99,7 +99,7 @@ export class ScheduleComponent {
           const calendarEvent: CalendarEvent = {
             start: startOfHour(dateStart),
             end: endOfHour(dateEnd),
-            title: `${e.name} - ${e.type} (${formatTimeToAmToPm(dateStart)} - ${formatTimeToAmToPm(dateEnd)})`,
+            title: `${e.name} - ${e.gymClassType.name} (${formatTimeToAmToPm(dateStart)} - ${formatTimeToAmToPm(dateEnd)})`,
             color: { ...colors['blue'] },
             actions: this.actions,
           }

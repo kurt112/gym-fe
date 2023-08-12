@@ -38,6 +38,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ScheduleComponent as GymClassesSheduleComponent } from './gym-classes/profile/schedule/schedule.component';
 import { AutocompleteComponent } from './utility/input/autocomplete/autocomplete.component';
 import { TableSearchComponent } from './utility/input/modal/table-search/table-search.component';
+import { ConfigurationComponent } from './configuration/configuration.component';
+import { GymClassesTypesComponent } from './configuration/gym-classes-types/gym-classes-types.component';
 
 const routes: Routes = [
   { path: 'customers', component: CustomerComponent },
@@ -57,6 +59,8 @@ const routes: Routes = [
   { path: 'dashboard', pathMatch: 'full', component: DashboardComponent },
   { path: 'store', pathMatch: 'full', component: StoreComponent },
   { path: 'audit', pathMatch: 'full', component: AuditComponent },
+  { path: 'configuration', pathMatch: 'full', component: ConfigurationComponent	},
+  { path: 'configuration/gym-classes-types', pathMatch: 'full', component: GymClassesTypesComponent	},
   { path: '**', redirectTo: '/dashboard', pathMatch: 'full' },
 ];
 
@@ -91,7 +95,9 @@ const routes: Routes = [
     StoreSchedule,
     GymClassesSheduleComponent,
     AutocompleteComponent,
-    TableSearchComponent
+    TableSearchComponent,
+    ConfigurationComponent,
+    GymClassesTypesComponent
   ],
   imports: [
     FormsModule,

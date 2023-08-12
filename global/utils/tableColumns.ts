@@ -7,6 +7,7 @@ import { MembershipWithUser } from "src/app/membership/MembershipWithUser";
 import { ScheduleComponent } from "src/app/utility/schedule/schedule.component";
 import { environment } from "src/environments/environment";
 import { Schedule } from "./schedule";
+import { GymClassType } from "src/app/configuration/gym-classes-types/GymClassType";
 
 
 // why separate in future the table for will have different url for sorting and etc...
@@ -82,7 +83,7 @@ export const CoachTableModal: Table<Employee> = {
 
 export const GymClassTable: Table<GymClass> = {
     name: `Gym Classe's`,
-    columns: ['Class Name', 'Class Type', 'Instructor',  'Date Start', 'Date End', 'Action'],
+    columns: ['Class Name', 'Class Type', 'Instructor', 'Date Start', 'Date End', 'Action'],
     numberOfElements: 1,
     size: 10,
     totalElements: 10,
@@ -157,6 +158,21 @@ export const GymClassScheduleTable: Table<Schedule> = {
 export const GymClassWithUserTable: Table<GymClassWithUser> = {
     name: `Today's Customer`,
     columns: ['FirstName', 'LastName', 'Date Start', 'Session'],
+    numberOfElements: 1,
+    size: 10,
+    totalElements: 10,
+    totalPages: 10,
+    content: [],
+    currentPage: 1,
+    previousPage: 0,
+    nextPage: 3,
+    search: '',
+    pointerPage: 1
+}
+
+export const GymClassesTypes: Table<GymClassType> = {
+    name: `Gym Clases Types`,
+    columns: ['Name', 'Date Created', 'Action'],
     numberOfElements: 1,
     size: 10,
     totalElements: 10,

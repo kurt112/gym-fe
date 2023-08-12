@@ -25,7 +25,6 @@ export class ScheduleComponent {
   getGymClassSchedule(id: string | null) {
     this.isLoading = true;
     this.http.get<any>(GymClassScheduleTableUrl(id)).subscribe((data) => {
-      console.log(data);
       
       this.table.content = data;
          

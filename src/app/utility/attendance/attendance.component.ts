@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { updateAttendanceCustomer } from 'global/utils/endpoint';
 import { timer } from 'rxjs/internal/observable/timer';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'customer-attendance',
@@ -16,7 +17,7 @@ export class AttendanceComponent {
   status: string = 'No Status Yet'
   error: boolean = false;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private location: Location) {
 
   }
 
@@ -58,6 +59,10 @@ export class AttendanceComponent {
       }, 1);
 
     }
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 

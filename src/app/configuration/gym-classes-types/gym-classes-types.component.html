@@ -1,17 +1,20 @@
-<div class="container-fluid">
-    <nav class="navbar navbar-expand-lg mt-2  shadow-sm p-2 mb-2 bg-body rounded">
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a routerLink="add" class="btn btn-sm btn-primary me-1">Create Class </a>
-                </li>
-            </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+<div class="row mt-2 mb-2 p-2 bg-body shadow-sm  mx-2">
+    <div class="buttons d-inline-flex justify-content-between">
+        <div id="left  d-inline-flex">
+            <a class="btn btn-sm btn-primary px-4" (click)="goBack()">Back</a>
         </div>
-    </nav>
+        <div id="right  d-inline-flex ">
+            <a class="btn btn-sm text-white btn-success px-4" (click)="_handleCreateGymClassType()">
+                Create Class Type
+            </a>
+        </div>
+    </div>
+    <div class="col-md-3">
+       
+    </div>
+</div>
+
+<div class="container mt-2">
     <div class="card shadow-sm bg-body rounded">
         <div class="d-flex justify-content-start  bg-white card-header align-items-center p-3">
             <h5 class="text-dark fw-bold align-items-center m-0 me-2">{{table.name}}</h5>
@@ -30,22 +33,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr scope="row" *ngFor="let class of table.content;">
-                            <td>{{class.name}}</td>
-                            <td>{{class.gymClassType.name}}</td>
-                            <td>{{class.instructorName === null ? 'No Instructor': class.instructorName}}</td>
-                            <td>{{class.dateStart}}</td>
-                            <td>{{class.dateEnd}}</td>
-                            <td>
-                                <a type="button" class="btn btn-success btn-sm"
-                                    [routerLink]="['/classes/'+class.id]">View</a>
+                        <tr scope="row" *ngFor="let type of table.content;">
+                            <td>{{type.name}}</td>
+                            <td>{{type.createdAt  | date: 'MMMM d, y'}}</td>
+                           
+                            
+                            <td >
+                                <button class="btn btn-info btn-sm text-white me-3">Update</button>
+                                <button class="btn btn-danger btn-sm text-white" (click)="_handleDeleteGymClassType(type.id)">Delete</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="card-footer d-flex flex-row justify-content-between align-items-center">
+        <!-- <div class="card-footer d-flex flex-row justify-content-between align-items-center">
 
             <div class="dropdown align-middle">
                 <button class="btn btn-outline-primary btn-sm  dropdown-toggle" type="button" id="dropdownMenuButton1"
@@ -74,6 +76,6 @@
                             (click)="next()">Next</button></li>
                 </ul>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
