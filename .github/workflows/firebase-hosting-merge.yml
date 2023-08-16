@@ -16,12 +16,12 @@ jobs:
         with:
         node-version: 16
       - name: npm dependencies
-          run: npm install 
+        run: npm install 
       - name: npm dependencies    
-          run: npm run build
+        run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
-          with:
-            repoToken: '${{ secrets.GITHUB_TOKEN }}'
-            firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GYM_MANAGEMENT_DEMO }}'
-            channelId: live
-            projectId: gym-management-demo
+        with:
+        repoToken: '${{ secrets.GITHUB_TOKEN }}'
+        firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GYM_MANAGEMENT_DEMO }}'
+        channelId: live
+        projectId: gym-management-demo
