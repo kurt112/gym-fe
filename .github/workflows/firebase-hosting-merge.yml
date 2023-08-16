@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 16
       - name: npm dependencies
-        run: npm install 
+        run: npm install --force 
       - name: npm dependencies    
         run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
