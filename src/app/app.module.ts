@@ -40,7 +40,7 @@ import { AutocompleteComponent } from './utility/input/autocomplete/autocomplete
 import { TableSearchComponent } from './utility/input/modal/table-search/table-search.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { GymClassesTypesComponent } from './configuration/gym-classes-types/gym-classes-types.component';
-
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 const routes: Routes = [
   { path: 'customers', component: CustomerComponent },
   { path: 'customers/:id', component: CustomerProfile },
@@ -114,7 +114,7 @@ const routes: Routes = [
       useFactory: adapterFactory,
     }),
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent],
   exports: [RouterModule]
 
