@@ -57,7 +57,7 @@ const routes: Routes = [
   { path: 'membersips/:id', component: MembershipProfile },
   { path: 'membersips/:id/members', component: MembershipMembers },
   { path: 'dashboard', pathMatch: 'full', component: DashboardComponent },
-  { path: 'store', pathMatch: 'full', component: StoreComponent },
+  { path: 'schedules', pathMatch: 'full', component: StoreComponent },
   { path: 'audit', pathMatch: 'full', component: AuditComponent },
   { path: 'configuration', pathMatch: 'full', component: ConfigurationComponent	},
   { path: 'configuration/gym-classes-types', pathMatch: 'full', component: GymClassesTypesComponent	},

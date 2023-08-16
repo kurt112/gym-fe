@@ -171,7 +171,7 @@ export const GymClassWithUserTable: Table<GymClassWithUser> = {
 }
 
 export const GymClassesTypes: Table<GymClassType> = {
-    name: `Gym Clases Types`,
+    name: `Gym Classes Types`,
     columns: ['Name', 'Date Created', 'Action'],
     numberOfElements: 1,
     size: 10,

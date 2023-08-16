@@ -6,11 +6,9 @@ import { Customer } from 'src/app/customer/customer';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { GymClass } from '../GymClass';
-import { convertNumberToDay, formatToDateWord, formateDateDDMMYY } from 'global/date';
+import { convertNumberToDay, formateDateDDMMYY } from 'global/date';
 import { Schedule } from 'global/utils/schedule';
 import { enrollInGymClass } from 'global/utils/endpoint';
-import { CoachTableModal, EmployeeTable, convertDataFromRequestToTable, employeeTableUrl } from 'global/utils/tableColumns';
-import { Employee } from 'src/app/employee/Employee';
 import { GymClassType } from 'src/app/configuration/gym-classes-types/GymClassType';
 
 @Component({
@@ -77,13 +75,16 @@ export class ProfileComponent {
       this.isLoading = true;
 
       this.http.get<GymClass>(`${environment.apiUrl}gym/classes/${this.id}`).subscribe((data) => {
-
+        console.log(data);
+        
         this.instrutor = data.instructor;
 
         data.schedules?.forEach((schedule: Schedule, i: number) => {
           this.schedules?.forEach((thisSched, i: number) => {
             if (schedule.day === thisSched.day) {
-              this.schedules[i] = { day: schedule.day, endTime: schedule.endTime.substring(0, 5), startTime: schedule.startTime.substring(0, 5) };
+              const endTime:string = (<string> schedule.endTime);
+              const startTime:string = (<string> schedule.startTime);
+              this.schedules[i] = { day: schedule.day, endTime: endTime.substring(0, 5), startTime: startTime.substring(0, 5) };
             }
           });
         });
@@ -95,7 +96,6 @@ export class ProfileComponent {
       })
       this.isNewSchedule = false;
     }
-
 
     this.http.get<GymClassType[]>(`${environment.apiUrl}gym/classes/types`).subscribe((data: GymClassType[]) => {
       this.gymClassTypes = data;
@@ -124,6 +124,8 @@ export class ProfileComponent {
     delete formValue.schedules;
 
     if (!this.isNewData) {
+      console.log(formValue);
+      
       this.updateGymClass(formValue);
       return;
     }
@@ -152,7 +154,7 @@ export class ProfileComponent {
   }
 
   updateGymClass(gymClass: GymClass) {
-    this.http.post<Customer>(`${environment.apiUrl}gym/classes`, gymClass).subscribe((data: any) => {
+    this.http.post<GymClass>(`${environment.apiUrl}gym/classes`, gymClass).subscribe((data: any) => {
       this.http.post<GymClass>(`${environment.apiUrl}gym/classes/${data.id}/assign-instructor/${this.instrutor.id}`, gymClass).subscribe(() => {
         this.createGymClassSchedule(data.id);
         Swal.fire({
@@ -199,6 +201,10 @@ export class ProfileComponent {
   _showNewSchedule() {
     const isNewScheduleOpen = !this.isNewSchedule;
     this.isNewSchedule = isNewScheduleOpen;
+  }
+
+  trackByGymClass(index:number, el:any): number {
+    return el.id;
   }
 
 }

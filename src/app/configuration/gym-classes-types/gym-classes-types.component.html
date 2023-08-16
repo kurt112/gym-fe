@@ -39,7 +39,7 @@
                            
                             
                             <td >
-                                <button class="btn btn-info btn-sm text-white me-3">Update</button>
+                                <button class="btn btn-info btn-sm text-white me-3" (click)="_handleUpdateGymClassType(type.id)">Update</button>
                                 <button class="btn btn-danger btn-sm text-white" (click)="_handleDeleteGymClassType(type.id)">Delete</button>
                             </td>
                         </tr>
@@ -47,35 +47,5 @@
                 </table>
             </div>
         </div>
-        <!-- <div class="card-footer d-flex flex-row justify-content-between align-items-center">
-
-            <div class="dropdown align-middle">
-                <button class="btn btn-outline-primary btn-sm  dropdown-toggle" type="button" id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    {{this.table.size}}
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><button class="dropdown-item" (click)="changeTableSize(10)">10</button></li>
-                    <li><button class="dropdown-item" (click)="changeTableSize(20)">20</button></li>
-                    <li><button class="dropdown-item" (click)="changeTableSize(30)">30</button></li>
-                    <li><button class="dropdown-item" (click)="changeTableSize(40)">40</button></li>
-                    <li><button class="dropdown-item" (click)="changeTableSize(50)">50</button></li>
-                </ul>
-            </div>
-            <div>
-                <ul class="pagination pagination-sm align-middle mb-0">
-                    <li class="page-item" *ngIf="table.pointerPage > 1"><button class="page-link"
-                            (click)="previous()">Previous</button></li>
-                    <li class="page-item"><button class="page-link"
-                            (click)="visitTable(table.pointerPage)">{{table.pointerPage}}</button></li>
-                    <li class="page-item" *ngIf="table.pointerPage+1 <= table.totalPages"><button class="page-link"
-                            (click)="visitTable(table.pointerPage+1)">{{table.pointerPage+1}}</button></li>
-                    <li class="page-item" *ngIf="table.pointerPage+2 <= table.totalPages"><button class="page-link"
-                            (click)="visitTable(table.pointerPage+2)">{{table.pointerPage+2}}</button></li>
-                    <li class="page-item" *ngIf="table.pointerPage+1 <= table.totalPages"><button class="page-link"
-                            (click)="next()">Next</button></li>
-                </ul>
-            </div>
-        </div> -->
     </div>
 </div>

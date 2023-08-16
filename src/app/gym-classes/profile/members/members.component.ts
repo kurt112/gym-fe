@@ -25,8 +25,6 @@ export class MembersComponent {
   getMembershipMembersTableUrl(id: string | null, search: string, page: number, size: number) {
     this.isLoading = true;
     this.http.get<any>(gymClassMembers(id, search, page, size)).subscribe((data) => {
-      console.log(data);
-      
       convertDataFromRequestToTable(data, this.table)
       this.isLoading = false;
     });
@@ -49,7 +47,6 @@ export class MembersComponent {
 
   changeTableSize(size: number) {
     changeTableSize(this.table, size);
-    // this.getData('', 1, this.table.size);
   }
 
   goBack() {

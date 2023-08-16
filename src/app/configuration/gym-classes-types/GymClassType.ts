@@ -1,6 +1,6 @@
 export interface GymClassType {
     id?: string,
     name: string,
-    createdAt: string | Date,
-    updatedAt: string | Date
+    createdAt?: string | Date,
+    updatedAt?: string | Date
 }

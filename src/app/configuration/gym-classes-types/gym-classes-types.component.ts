@@ -19,14 +19,10 @@ export class GymClassesTypesComponent {
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private location: Location) { }
 
-  gymClasssType: GymClassType = {
-    createdAt: '',
-    name: '',
-    updatedAt: '',
-  }
 
   ngOnInit() {
     this.http.get<any>(`${environment.apiUrl}gym/classes/types`).subscribe((data: any) => {
+
       this.table.content = data;
     })
   }
@@ -40,24 +36,30 @@ export class GymClassesTypesComponent {
     })
 
     if (name) {
+      const gymClassType: GymClassType = {
+        name: name
+      }
 
-      this.gymClasssType.name = name;
-
-      this.http.post<GymClassType>(`${environment.apiUrl}gym/classes/type`, this.gymClasssType).subscribe((data: GymClassType) => {
-        this.table.content.push(data);
-        this.gymClasssType = {
-          createdAt: '',
-          name: '',
-          updatedAt: '',
-        }
-      }, err => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Duplicate Data',
-          text: `${name} is already existing`,
-        })
-      })
+      this.createGymClassType(gymClassType);
     }
+  }
+
+  async _handleUpdateGymClassType(id: any) {
+    const { value: name } = await Swal.fire({
+      title: 'ENTER NEW GYM CLASS TYPE',
+      input: 'text',
+      inputPlaceholder: 'Enter Gym Class Type Name'
+    })
+
+    if (name) {
+      const currentGymClassType = this.table.content.find((e: GymClassType) => e.id === id);
+
+      if(currentGymClassType === undefined) return;
+
+      currentGymClassType.name = name;
+      // this.createGymClassType(this.gymClasssType);
+    }
+
   }
 
   async _handleDeleteGymClassType(id: any) {
@@ -66,18 +68,31 @@ export class GymClassesTypesComponent {
       Swal.fire({
         icon: 'success',
         title: 'Gym Class Type Deleted',
-        timer: 500
+        timer: 2000
       })
     }, err => {
       Swal.fire({
         icon: 'error',
         title: 'Cant delete',
-        timer: 500
+        timer: 2000
       })
     })
   }
 
   goBack() {
     this.location.back();
+  }
+
+  createGymClassType(data: GymClassType) {
+    this.table.content = this.table.content.filter((e: GymClassType) => e.id !== data.id);
+    this.http.post<GymClassType>(`${environment.apiUrl}gym/classes/type`, data).subscribe((updatedData: GymClassType) => {
+      this.table.content.push({...updatedData, ...data});
+    }, err => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Duplicate Data',
+        text: `${name} is already existing`,
+      })
+    })
   }
 }

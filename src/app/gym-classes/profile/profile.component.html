@@ -1,7 +1,7 @@
 <table-search [(data)]="instrutor"></table-search>
 <form-loading *ngIf="isLoading"></form-loading>
 <app-card-tap [url]='enrollMemberUrl'></app-card-tap>
-<div class="row mt-2 mb-2 p-2  bg-body shadow-sm  mx-2">
+<div class="row mt-2 mb-2 p-2  bg-body shadow-sm  mx-2" *ngIf="!isLoading">
     <div class="buttons d-inline-flex justify-content-between">
         <div id="left  d-inline-flex">
             <a routerLink="members" class="btn btn-sm btn-warning px-4 me-3">View Members</a>
@@ -25,7 +25,7 @@
             </a>
         </div>
     </div>
-    <div class="container-fluid" *ngIf="!isLoading">
+    <div class="container-fluid">
         <form #gymClassForm="ngForm" (ngSubmit)="submit(gymClassForm)"
             class="row g-3 p-3 my-3 bg-body shadow rounded mx-2">
             <p class="fs-1 fw-semibold bg-secondary text-white">GYM CLASS</p>
@@ -38,7 +38,7 @@
                 <div class="col-md-4 mt-2">
                     <label for="gymClassType" class="form-label fw-semibold">Class Type</label>
                     <select [(ngModel)]="gymClass.gymClassType" name="gymClassType" class="form-select" aria-label="Default select example" id="gymClassType">
-                        <option [ngValue]="type" *ngFor="let type of gymClassTypes">{{type.name}}</option>
+                        <option [ngValue]="type" [selected]="gymClass.gymClassType === type" *ngFor="let type of gymClassTypes; trackBy: trackByGymClass">{{type.name}}</option>
                       </select>
                     <!-- <label for="type" class="form-label fw-semibold">Class Type</label>
                     <input type="text" [(ngModel)]="gymClass.gymClassType" class="form-control" name="type" id="type" required> -->
