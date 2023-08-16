@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/gym-fe",
+    "public": "dist/gym-fe/index.html",
     "ignore": [
       "firebase.json",
       "**/.*",
