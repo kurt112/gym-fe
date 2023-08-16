@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "/dist/gym-fe/index.html",
+    "public": "public/index.html",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -10,7 +10,7 @@
   "rewrites": [
     {
       "source": "**",
-      "destination": "/dist/gym-fe/index.html"
+      "destination": "dist/gym-fe/index.html"
     }
   ]
 }
