@@ -1,16 +1,16 @@
 {
   "hosting": {
-    "public": "public/index.html",
+    "public": "dist/gym-fe",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/dist/gym-fe/index.html"
+      }
     ]
-  },
-  "rewrites": [
-    {
-      "source": "**",
-      "destination": "dist/gym-fe/index.html"
-    }
-  ]
+  }
 }
