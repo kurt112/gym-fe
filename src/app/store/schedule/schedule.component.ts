@@ -79,22 +79,17 @@ export class ScheduleComponent {
       action: 'click'
     }
     this.modalContent = undefined;
+    this.view = CalendarView.Month;
   }
 
   ngOnInit() {
     this.http.get<any>(`${environment.apiUrl}gym/classes/schedules`).subscribe(data => {
-      console.log(data);
 
       data.forEach((e: GymClass) => {
-        console.log(e);
-
 
         e.schedules?.forEach((schedule: Schedule) => {
           const dateStart = e.dateStart !== null ? new Date(schedule.startTime) : new Date();
           const dateEnd = e.dateEnd !== null ? new Date(schedule.endTime) : new Date();
-
-          console.log(dateStart);
-
 
           const calendarEvent: CalendarEvent = {
             start: startOfHour(dateStart),
@@ -106,8 +101,8 @@ export class ScheduleComponent {
 
           this.events.push(calendarEvent);
         })
+
       });
-      // console.log(calendarEvents);
     })
 
   }
