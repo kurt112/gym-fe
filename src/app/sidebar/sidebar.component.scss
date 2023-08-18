@@ -1,8 +1,24 @@
 #sidebar-nav {
-    width: 200px;
+    width: 230px;
     height: 100vh;
 }
 
 #sidebar {
     height: 100vh;
+}
+
+svg {
+    fill: white;
+    height: 30px;
+    width: 30px;
+    margin-right: 20px;
+}
+
+a:hover svg {
+    fill: black;
+}
+
+a {
+    display: flex;
+    align-items: center; 
 }

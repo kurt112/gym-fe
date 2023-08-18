@@ -1,9 +1,9 @@
 <table-search [(data)]="instrutor"></table-search>
 <form-loading *ngIf="isLoading"></form-loading>
 <app-card-tap [url]='enrollMemberUrl'></app-card-tap>
-<div class="row mt-2 mb-2 p-2  bg-body shadow-sm  mx-2" *ngIf="!isLoading">
-    <div class="buttons d-inline-flex justify-content-between">
-        <div id="left  d-inline-flex">
+<div class="container-fluid" *ngIf="!isLoading">
+    <div *ngIf="id !== 'add'" class="d-inline-flex justify-content-between bg-body shadow-sm  mt-2 mb-2 p-2 w-100 ">
+        <div id="left  d-inline-flex"> 
             <a routerLink="members" class="btn btn-sm btn-warning px-4 me-3">View Members</a>
             <a routerLink="schedules" class="btn btn-sm  btn-warning px-4 me-3">View Schedule</a>
             <div class="d-inline-flex" *ngIf="id !== 'add'">
@@ -37,9 +37,11 @@
                 </div>
                 <div class="col-md-4 mt-2">
                     <label for="gymClassType" class="form-label fw-semibold">Class Type</label>
-                    <select [(ngModel)]="gymClass.gymClassType" name="gymClassType" class="form-select" aria-label="Default select example" id="gymClassType">
-                        <option [ngValue]="type" [selected]="gymClass.gymClassType === type" *ngFor="let type of gymClassTypes; trackBy: trackByGymClass">{{type.name}}</option>
-                      </select>
+                    <select [(ngModel)]="gymClass.gymClassType" name="gymClassType" class="form-select"
+                        aria-label="Default select example" id="gymClassType">
+                        <option [ngValue]="type" [selected]="gymClass.gymClassType === type"
+                            *ngFor="let type of gymClassTypes; trackBy: trackByGymClass">{{type.name}}</option>
+                    </select>
                     <!-- <label for="type" class="form-label fw-semibold">Class Type</label>
                     <input type="text" [(ngModel)]="gymClass.gymClassType" class="form-control" name="type" id="type" required> -->
                 </div>
@@ -61,9 +63,11 @@
                 <div class="col-md-4 mt-2">
                     <label for="instructor" class="form-label fw-semibold">Instructor</label>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" id="instructor" placeholder="Instructor" aria-label="instrutor"
-                            aria-describedby="instrutor" readonly disabled  [(ngModel)]="instrutor.id" name="id"/>
-                        <button class="btn btn-success" type="button"  data-bs-toggle="modal" data-bs-target="#table-search">
+                        <input type="text" class="form-control" id="instructor" placeholder="Instructor"
+                            aria-label="instrutor" aria-describedby="instrutor" readonly disabled
+                            [(ngModel)]="instrutor.id" name="id" />
+                        <button class="btn btn-success" type="button" data-bs-toggle="modal"
+                            data-bs-target="#table-search">
                             Assign
                         </button>
                     </div>
@@ -112,3 +116,4 @@
             </div>
         </form>
     </div>
+</div>
