@@ -51,8 +51,6 @@ export class CustomerComponent {
   }
 
   _handleSearchClick() {
-    console.log('the data' + this.table.search);
-    
     this.getData(this.table.search, 1, this.table.size);
   }
 }

@@ -30,3 +30,10 @@
 #rfIdValue:focus{
     box-shadow: none !important;
 }
+
+
+button img{
+    width: fit-content;
+    height: 20px;
+    filter: brightness(0) invert(1);
+}

@@ -19,10 +19,7 @@ export class MembershipComponent {
 
   getData(search: string, page: number, size: number) {
     this.isLoading = true;
-    const req = this.http.get<any>(membershipTableUrl(search, page, size));
-    req.subscribe((data) => {
-      console.log(data);
-      
+    this.http.get<any>(membershipTableUrl(search, page, size)).subscribe((data) => {
       data.content = data.content.map((value: Membership) => {
         value.createdAt = value.createdAt ? formatToDateWord(value.createdAt) : 'NA';
         value.membershipPromoExpiration = value.membershipPromoExpiration ? formatToDateWord(value.membershipPromoExpiration) : 'NA';
@@ -30,6 +27,8 @@ export class MembershipComponent {
       })
       convertDataFromRequestToTable(data, this.table)
       this.isLoading = false;
+    }, () => {
+      
     });
   }
 
@@ -51,5 +50,10 @@ export class MembershipComponent {
   changeTableSize(size: number) {
     changeTableSize(this.table, size);
     this.getData('', 1, this.table.size);
+  }
+
+  _handleSearchClick() {
+  
+    this.getData(this.table.search, 1, this.table.size);
   }
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { formatToDateWord } from 'global/date';
-import {  GymClassTable, changeTableSize, convertDataFromRequestToTable, gymClassTableUrl, next, previous, updatePageVisit } from 'global/utils/tableColumns';
+import { GymClassTable, changeTableSize, convertDataFromRequestToTable, gymClassTableUrl, next, previous, updatePageVisit } from 'global/utils/tableColumns';
 
 @Component({
   selector: 'app-gym-classes',
@@ -22,12 +22,11 @@ export class GymClassesComponent {
 
   getData(search: string, page: number, size: number) {
     this.isLoading = true;
-    const req = this.http.get<any>(gymClassTableUrl(search, page, size));
-    req.subscribe((data) => {
+    this.http.get<any>(gymClassTableUrl(search, page, size)).subscribe((data) => {
       convertDataFromRequestToTable(data, this.table);
       this.table.content.forEach((content) => {
-        if(!content.dateEnd || !content.dateEnd) return;
-        
+        if (!content.dateEnd || !content.dateEnd) return;
+
         content.dateEnd = formatToDateWord(content.dateEnd);
         content.dateStart = formatToDateWord(content.dateStart);
       });
@@ -58,5 +57,10 @@ export class GymClassesComponent {
   changeEnrollMember(value: boolean) {
     this.isEnrollMemberOpen = value;
   }
-}  
+  _handleSearchClick() {
+    console.log(this.table.search);
+    
+    this.getData(this.table.search, 1, this.table.size);
+  }
+}
 

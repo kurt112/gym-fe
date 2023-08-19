@@ -1,82 +1,56 @@
 <nav id="sidebar" role="navigation" class="collapse collapse-horizontal show  bg-dark sticky-top">
     <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100 bg-dark text-white">
         <div class="container text-center ">
-            <div class="navbar-brand text-center py-2" >
+            <div class="navbar-brand text-center py-2">
                 <p class="fw-semibold user-select-none m-0">Gym Mangement <br> System</p>
             </div>
         </div>
         <a routerLink="customer" ariaCurrentWhenActive="page" [routerLink]="['/dashboard']" routerLinkActive="active"
             class="list-group-item  text-truncate bg-transparent text-white" data-bs-parent="#sidebar">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-                <path
-                    d="M510-570v-270h330v270H510ZM120-450v-390h330v390H120Zm390 330v-390h330v390H510Zm-390 0v-270h330v270H120Zm60-390h210v-270H180v270Zm390 330h210v-270H570v270Zm0-450h210v-150H570v150ZM180-180h210v-150H180v150Zm210-330Zm180-120Zm0 180ZM390-330Z" />
-            </svg>
-            <span class="fw-semibold">Dashboard</span>
+            <img src="assets/logo/sidebar/dashboard.svg"/>
+            <span>Dashboard</span>
         </a>
 
         <a routerLink="customer" ariaCurrentWhenActive="page" [routerLink]="['/customers']" routerLinkActive="active"
             class="list-group-item text-truncate bg-transparent text-white" data-bs-parent="#sidebar">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-                <path
-                    d="M0-240v-53q0-38.567 41.5-62.784Q83-380 150.376-380q12.165 0 23.395.5Q185-379 196-377.348q-8 17.348-12 35.165T180-305v65H0Zm240 0v-65q0-32 17.5-58.5T307-410q32-20 76.5-30t96.5-10q53 0 97.5 10t76.5 30q32 20 49 46.5t17 58.5v65H240Zm540 0v-65q0-19.861-3.5-37.431Q773-360 765-377.273q11-1.727 22.171-2.227 11.172-.5 22.829-.5 67.5 0 108.75 23.768T960-293v53H780Zm-480-60h360v-6q0-37-50.5-60.5T480-390q-79 0-129.5 23.5T300-305v5ZM149.567-410Q121-410 100.5-430.562 80-451.125 80-480q0-29 20.562-49.5Q121.125-550 150-550q29 0 49.5 20.5t20.5 49.933Q220-451 199.5-430.5T149.567-410Zm660 0Q781-410 760.5-430.562 740-451.125 740-480q0-29 20.562-49.5Q781.125-550 810-550q29 0 49.5 20.5t20.5 49.933Q880-451 859.5-430.5T809.567-410ZM480-480q-50 0-85-35t-35-85q0-51 35-85.5t85-34.5q51 0 85.5 34.5T600-600q0 50-34.5 85T480-480Zm.351-60Q506-540 523-557.351t17-43Q540-626 522.851-643t-42.5-17Q455-660 437.5-642.851t-17.5 42.5Q420-575 437.351-557.5t43 17.5ZM480-300Zm0-300Z" />
-            </svg>
-            <span class="fw-semibold">Customer</span>
+            <img src="assets/logo/sidebar/usersGroup.svg"/>
+            <span>Customer</span>
         </a>
         <a routerLink="employee" ariaCurrentWhenActive="page" [routerLink]="['/employees']" routerLinkActive="active"
             class="list-group-item text-truncate bg-transparent text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-                <path
-                    d="M232-247h239v-14q0-18-9-32t-23-19q-32-11-50-14.5t-35-3.5q-19 0-40.5 4.5T265-312q-15 5-24 19t-9 32v14Zm336-67h170v-50H568v50Zm-214-50q22.5 0 38.25-15.75T408-418q0-22.5-15.75-38.25T354-472q-22.5 0-38.25 15.75T300-418q0 22.5 15.75 38.25T354-364Zm214-63h170v-50H568v50ZM80-80v-600h310v-200h180v200h310v600H80Zm60-60h680v-480H570v90H390v-90H140v480Zm310-450h60v-230h-60v230Zm30 210Z" />
-            </svg>
-            <span class="fw-semibold">Employee</span>
+            <img src="assets/logo/sidebar/employee.svg"/>
+            <span>Employee</span>
         </a>
         <a routerLink="classes" ariaCurrentWhenActive="page" [routerLink]="['/classes']" routerLinkActive="active"
             class="list-group-item text-truncate bg-transparent text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-                <path
-                    d="m490-80-20-398-149-52H40v-60h243l275-197 39 46-149 107 97 34 340-200 35 42-346 251-24 427h-60ZM240.08-647q-30.08 0-51.58-21.42-21.5-21.421-21.5-51.5 0-30.08 21.42-51.58 21.421-21.5 51.5-21.5 30.08 0 51.58 21.42 21.5 21.421 21.5 51.5 0 30.08-21.42 51.58-21.421 21.5-51.5 21.5Z" />
-            </svg>
-            <span class="fw-semibold">Gym Class</span>
+            <img src="assets/logo/sidebar/gymClasses.svg"/>
+           
+            <span>Gym Class</span>
         </a>
         <a routerLink="attendance" ariaCurrentWhenActive="page" [routerLink]="['/attendance']" routerLinkActive="active"
             class="list-group-item text-truncate bg-transparent text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-                <path
-                    d="M272-120v-512l278-288 58 46-52 242h359v171L767-120H272Zm60-60h397l126-299v-93H482l53-249-203 214v427Zm0-427v427-427Zm-60-25v60H139v392h133v60H79v-512h193Z" />
-            </svg>
-            <span class="fw-semibold">Attendance</span>
+            <img src="assets/logo/sidebar/attendance.svg"/>
+            <span>Attendance</span>
         </a>
         <a routerLink="membersips" ariaCurrentWhenActive="page" [routerLink]="['/membersips']" routerLinkActive="active"
             class="list-group-item text-truncate bg-transparent text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-                <path
-                    d="M140-340h680v-103H140v103ZM334-80v-200H80v-600h800v600H626v200l-146-74-146 74ZM140-551h680v-269H140v269Zm0 211v-480 480Z" />
-            </svg>
-            <span class="fw-semibold">Membersip</span>
+            <img src="assets/logo/sidebar/membership.svg"/>
+            <span>Membersip</span>
         </a>
         <a routerLink="schedules" ariaCurrentWhenActive="page" [routerLink]="['/schedules']" routerLinkActive="active"
             class="list-group-item border-end-0 d-inline-block text-truncate bg-transparent text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-                <path
-                    d="M440-400v-80h80v80h-80Zm-160 0v-80h80v80h-80Zm320 0v-80h80v80h-80ZM440-240v-80h80v80h-80Zm-160 0v-80h80v80h-80Zm320 0v-80h80v80h-80ZM120-80v-740h125v-60h65v60h340v-60h65v60h125v740H120Zm60-60h600v-430H180v430Zm0-490h600v-130H180v130Zm0 0v-130 130Z" />
-            </svg>
-            <span class="fw-semibold">Schedules</span>
+            <img src="assets/logo/sidebar/schedule.svg"/>
+            <span>Schedules</span>
         </a>
         <a routerLink="audit" ariaCurrentWhenActive="page" [routerLink]="['/audit']" routerLinkActive="active"
             class="list-group-item border-end-0 d-inline-block text-truncate bg-transparent text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-                <path
-                    d="M286-289h60l255-255-59-61-256 256v60Zm333-273 55-55-61-59-53 53 59 61ZM120-120v-720h265q5-35 32-57.5t63-22.5q36 0 63 22.5t32 57.5h265v720H120Zm60-60h600v-600H180v600Zm300-617q14 0 24.5-10.5T515-832q0-14-10.5-24.5T480-867q-14 0-24.5 10.5T445-832q0 14 10.5 24.5T480-797ZM180-180v-600 600Z" />
-            </svg>
-            <span class="fw-semibold">Audit Trail</span>
+            <img src="assets/logo/sidebar/logs.svg"/>
+            <span>Audit Trail</span>
         </a>
         <a routerLink="configuration" ariaCurrentWhenActive="page" [routerLink]="['/configuration']"
             routerLinkActive="active" class="list-group-item text-truncate bg-transparent text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48">
-                <path
-                    d="m388-80-20-126q-19-7-40-19t-37-25l-118 54-93-164 108-79q-2-9-2.5-20.5T185-480q0-9 .5-20.5T188-521L80-600l93-164 118 54q16-13 37-25t40-18l20-127h184l20 126q19 7 40.5 18.5T669-710l118-54 93 164-108 77q2 10 2.5 21.5t.5 21.5q0 10-.5 21t-2.5 21l108 78-93 164-118-54q-16 13-36.5 25.5T592-206L572-80H388Zm92-270q54 0 92-38t38-92q0-54-38-92t-92-38q-54 0-92 38t-38 92q0 54 38 92t92 38Zm0-60q-29 0-49.5-20.5T410-480q0-29 20.5-49.5T480-550q29 0 49.5 20.5T550-480q0 29-20.5 49.5T480-410Zm0-70Zm-44 340h88l14-112q33-8 62.5-25t53.5-41l106 46 40-72-94-69q4-17 6.5-33.5T715-480q0-17-2-33.5t-7-33.5l94-69-40-72-106 46q-23-26-52-43.5T538-708l-14-112h-88l-14 112q-34 7-63.5 24T306-642l-106-46-40 72 94 69q-4 17-6.5 33.5T245-480q0 17 2.5 33.5T254-413l-94 69 40 72 106-46q24 24 53.5 41t62.5 25l14 112Z" />
-            </svg>
-            <span class="fw-semibold">Configuration</span>
+            <img src="assets/logo/sidebar/settings.svg"/>
+            <span>Configuration</span>
         </a>
     </div>
 </nav>

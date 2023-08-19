@@ -7,8 +7,13 @@
                 </li>
             </ul>
             <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <div class="input-group">
+                    <input class="form-control" name="search" [(ngModel)]="table.search" type="search"
+                        placeholder="Search" aria-label="Search">
+                    <button class="btn btn-success" type="submit" (click)="_handleSearchClick()">
+                        <img src="assets/logo/search.svg" />
+                    </button>
+                </div>
             </form>
         </div>
     </nav>
