@@ -21,7 +21,11 @@ export class TableSearchComponent {
 
 
   ngOnInit() {
-    this.http.get<any>(employeeTableUrl('', 1, 10)).subscribe((data: any) => {
+    this.getDataTable();
+  }
+
+  getDataTable() {
+    this.http.get<any>(employeeTableUrl(this.table.search, 1, 10, 'coach')).subscribe((data: any) => {
       convertDataFromRequestToTable(data, this.table);
       this.table.content.forEach((content) => {
         content.user.birthDate = formatToDateWord(content.user.birthDate);
@@ -42,5 +46,9 @@ export class TableSearchComponent {
     }).then(() => {
 
     })
+  }
+
+  _handleSearchClick() {
+    this.getDataTable();
   }
 }

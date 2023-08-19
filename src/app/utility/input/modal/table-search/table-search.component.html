@@ -8,13 +8,15 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-5">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Search Instructor" aria-label="instrutor"
-                                aria-describedby="instrutor">
-                            <button class="btn btn-success" type="button" id="instrutor">
+                        <form class="d-flex">
+                            <div class="input-group mb-3">
+                              <input class="form-control" name="search" autofocus [(ngModel)]="table.search" name="search" type="search" placeholder="Search"
+                                aria-label="Search">
+                              <button class="btn btn-success" (click)="_handleSearchClick()" type="submit">
                                 <img src="assets/logo/search.svg" />
-                            </button>
-                        </div>
+                              </button>
+                            </div>
+                          </form>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -22,13 +24,13 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th scope="col" *ngFor="let column of table.columns;">
+                                <th scope="col" *ngFor="let column of table?.columns;">
                                     {{column}}
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr scope="row" *ngFor="let employee of table.content;">
+                            <tr scope="row" *ngFor="let employee of table?.content;">
                                 <td>{{employee.id}}</td>
                                 <td>{{employee.user.firstName}}</td>
                                 <td>{{employee.user.lastName}}</td>

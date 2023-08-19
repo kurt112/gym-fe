@@ -22,50 +22,56 @@
                 <label for="suffix" class="form-label fw-semibold">Suffix</label>
                 <input type="text" [(ngModel)]="customer.user.suffix" name="suffix" class="form-control" id="suffix">
             </div>
-            <div class="col-md-5">
-                <label for="email" class="form-label fw-semibold">Email</label>
-                <input type="email" class="form-control" [(ngModel)]="customer.user.email" name="email" id="email"
-                    required placeholder="doe@email.com">
-            </div>
-            <div class="col-md-5">
-                <label for="cellphone" class="form-label fw-semibold">Cellphone</label>
-                <input type="text" class="form-control" [(ngModel)]="customer.user.cellphone" name="cellphone"
-                    id="cellphone" required>
-            </div>
-            <div class="col-md-2">
-                <label for="sex" class="form-label fw-semibold">Sex</label>
-                <div class="dropdown align-items-start " id="sex">
-                    <button class="btn btn-outline-secondary dropdown-toggle form-control"
-                        style="font-size:100%; padding-bottom: 5.6px;" data-bs-toggle="dropdown" aria-expanded="true">
-                        {{customer.user.sex === ''? 'Male': customer.user.sex}}
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><button class="dropdown-item" (click)="setSex('Male');
-                            $event.preventDefault()">Male</button>
-                        </li>
-                        <li><button class="dropdown-item"
-                                (click)="setSex('Female'); $event.preventDefault()">Female</button></li>
-                    </ul>
+            <div class="row mt-3">
+                <div class="col-md-5">
+                    <label for="email" class="form-label fw-semibold">Email</label>
+                    <input type="email" class="form-control" [(ngModel)]="customer.user.email" name="email" id="email"
+                        required placeholder="doe@email.com">
+                </div>
+                <div class="col-md-5">
+                    <label for="cellphone" class="form-label fw-semibold">Cellphone</label>
+                    <input type="text" class="form-control" [(ngModel)]="customer.user.cellphone" name="cellphone"
+                        id="cellphone" required>
+                </div>
+                <div class="col-md-2">
+                    <label for="sex" class="form-label fw-semibold">Sex</label>
+                    <div class="dropdown align-items-start " id="sex">
+                        <button class="btn btn-outline-secondary dropdown-toggle form-control"
+                            style="font-size:100%; padding-bottom: 5.6px;" data-bs-toggle="dropdown"
+                            aria-expanded="true">
+                            {{customer.user.sex === ''? 'Male': customer.user.sex}}
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><button class="dropdown-item" (click)="setSex('Male');
+                                $event.preventDefault()">Male</button>
+                            </li>
+                            <li><button class="dropdown-item"
+                                    (click)="setSex('Female'); $event.preventDefault()">Female</button></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <label for="rfId" class="form-label fw-semibold">Customer ID</label>
-                <input type="text" class="form-control" [(ngModel)]="customer.rfId" name="rfId" id="rfId">
+            <div class="row mt-3">
+                <div class="col-md-3">
+                    <label for="rfId" class="form-label fw-semibold">Customer ID</label>
+                    <input type="text" class="form-control" [(ngModel)]="customer.rfId" name="rfId" id="rfId">
+                </div>
+                <div class="col-md-3">
+                    <label for="password" class="form-label fw-semibold">Password</label>
+                    <input type="password" class="form-control" [(ngModel)]="customer.user.password" name="password"
+                        class="form-control" id="password">
+                </div>
+                <div class="col-md-3">
+                    <label for="retype-password" class="form-label fw-semibold">Re-type Password</label>
+                    <input type="password" class="form-control" name="reTypePassword" id="retype-password">
+                </div>
+                <div class="col-md-3">
+                    <label for="birthDate" class="form-label fw-semibold">Birthdate</label>
+                    <input type="date" [(ngModel)]="customer.user.birthDate" class="form-control" name="birthDate"
+                        id="birthDate">
+                </div>
             </div>
-            <div class="col-md-3">
-                <label for="password" class="form-label fw-semibold">Password</label>
-                <input type="password" class="form-control" [(ngModel)]="customer.user.password" name="password"
-                    class="form-control" id="password">
-            </div>
-            <div class="col-md-3">
-                <label for="retype-password" class="form-label fw-semibold">Re-type Password</label>
-                <input type="password" class="form-control" name="reTypePassword" id="retype-password">
-            </div>
-            <div class="col-md-3">
-                <label for="birthDate" class="form-label fw-semibold">Birthdate</label>
-                <input type="date" [(ngModel)]="customer.user.birthDate" class="form-control" name="birthDate"
-                    id="birthDate">
-            </div>
+            
             <p class="fs-1 fw-semibold bg-secondary text-white mt-3">OPTIONAL DATA</p>
             <div class="col-md-3">
                 <label for="weight" class="form-label fw-semibold">Weight</label>

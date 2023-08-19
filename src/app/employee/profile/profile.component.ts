@@ -74,7 +74,7 @@ export class ProfileComponent {
   }
 
   updateEmployee(employee: Employee) {
-    this.http.put<Employee>(`${environment.apiUrl}employees`, employee)
+    this.http.put<Employee>(`${environment.apiUrl}employees/${employee.id}`, employee)
       .subscribe((data: any) => {
         Swal.fire({
           title: 'Updated',
