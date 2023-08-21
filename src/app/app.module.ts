@@ -41,9 +41,12 @@ import { TableSearchComponent } from './utility/input/modal/table-search/table-s
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { GymClassesTypesComponent } from './configuration/gym-classes-types/gym-classes-types.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { LandingComponent } from './landing/landing.component';
+import { LoginComponent } from './landing/login/login.component';
+import { RegisterComponent } from './landing/register/register.component';
 
 const routes: Routes = [
-  { path: 'customers', component: CustomerComponent },
+  { path: 'customers', component: CustomerComponent},
   { path: 'customers/:id', component: CustomerProfile },
   { path: 'customers/transaction/top-up', component: CustomerTopUp },
   { path: 'employees', component: EmployeeComponent },
@@ -62,6 +65,8 @@ const routes: Routes = [
   { path: 'audit', pathMatch: 'full', component: AuditComponent },
   { path: 'configuration', pathMatch: 'full', component: ConfigurationComponent	},
   { path: 'configuration/gym-classes-types', pathMatch: 'full', component: GymClassesTypesComponent	},
+  { path: 'login', pathMatch: 'full', component: LoginComponent	},
+  { path: '', pathMatch: 'full', component: LandingComponent	},
   { path: '**', redirectTo: '/dashboard', pathMatch: 'full' },
 ];
 
@@ -98,7 +103,10 @@ const routes: Routes = [
     AutocompleteComponent,
     TableSearchComponent,
     ConfigurationComponent,
-    GymClassesTypesComponent
+    GymClassesTypesComponent,
+    LandingComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     FormsModule,

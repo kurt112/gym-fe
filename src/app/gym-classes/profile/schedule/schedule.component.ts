@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { gymClassMembers, convertDataFromRequestToTable, next, previous, updatePageVisit, changeTableSize, GymClassScheduleTable, GymClassScheduleTableUrl } from 'global/utils/tableColumns';
+import { next, previous, updatePageVisit, changeTableSize, GymClassScheduleTable, GymClassScheduleTableUrl } from 'global/utils/tableColumns';
 import { Location } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { Schedule } from 'global/utils/schedule';
