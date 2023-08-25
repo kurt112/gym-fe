@@ -13,14 +13,14 @@ import { Audit } from "src/app/store/audit/Audit";
 
 // why separate in future the table for will have different url for sorting and etc...
 export const customerTableUrl = (search: string, page: number, size: number) => `${environment.apiUrl}customers?search=${search}&page=${page}&size=${size}`;
-export const employeeTableUrl = (search: string, page: number, size: number, role?: string) => `${environment.apiUrl}employees?search=${search}&page=${page}&size=${size}${role === undefined? '' : '&role=' + role}`;
+export const employeeTableUrl = (search: string, page: number, size: number, role?: string) => `${environment.apiUrl}employees?search=${search}&page=${page}&size=${size}${role === undefined ? '' : '&role=' + role}`;
 export const gymClassTableUrl = (search: string, page: number, size: number) => `${environment.apiUrl}gym/classes?search=${search}&page=${page}&size=${size}`;
 export const membershipTableUrl = (search: string, page: number, size: number) => `${environment.apiUrl}gym/memberships?search=${search}&page=${page}&size=${size}`;
 export const customerTodayTableUrl = (search: string, page: number, size: number) => `${environment.apiUrl}customers/today?search=${search}&page=${page}&size=${size}`;
 export const membershipMembersTableUrl = (membershipId: string | null, search: string, page: number, size: number) => `${environment.apiUrl}gym/memberships/${membershipId}/members?search=${search}&page=${page}&size=${size}`;
 export const gymClassMembers = (gymClassId: string | null, search: string, page: number, size: number) => `${environment.apiUrl}gym/classes/${gymClassId}/members?search=${search}&page=${page}&size=${size}`;
 export const GymClassScheduleTableUrl = (gymClassId: string | null) => `${environment.apiUrl}gym/classes/${gymClassId}/schedules`;
-export const auditTrailTableUrl = (search: string, page: number, size: number) => `${environment.apiUrl}audit?search=${search}&page=${page}&size=${size}`;
+export const auditTrailTableUrl = (search: string, page: number, size: number, startDate: string | null, endDate: string | null) => `${environment.apiUrl}audit/${startDate}/${endDate}?search=${search}&page=${page}&size=${size}`;
 
 export interface Table<T> {
     name: string,

@@ -1,10 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { formatToDateWord } from 'global/date';
-import { membershipTableUrl, convertDataFromRequestToTable, next, previous, updatePageVisit, changeTableSize, AuditTable, auditTrailTableUrl } from 'global/utils/tableColumns';
-import { Membership } from 'src/app/membership/Membership';
+import { next, previous, updatePageVisit, changeTableSize, AuditTable, auditTrailTableUrl, convertDataFromRequestToTable } from 'global/utils/tableColumns';
+import { formatDate } from '@angular/common';
 import { Audit } from './Audit';
-
 @Component({
   selector: 'app-audit',
   templateUrl: './audit.component.html',
@@ -14,19 +12,21 @@ export class AuditComponent {
   table = AuditTable
   isLoading = false;
 
+  startDate: string | null = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+  endDate: string | null = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+
   constructor(private http: HttpClient) {
     this.getData('', this.table.currentPage, this.table.size);
   }
-
   getData(search: string, page: number, size: number) {
     this.isLoading = true;
-    this.http.get<Audit>(auditTrailTableUrl(search, page, size)).subscribe((data) => {
+    this.http.get<Audit>(auditTrailTableUrl(search, page, size, this.startDate, this.endDate)).subscribe((data) => {
       console.log(data);
-      
+
       convertDataFromRequestToTable(data, this.table)
       this.isLoading = false;
     }, () => {
-      
+
     });
   }
 
@@ -51,7 +51,7 @@ export class AuditComponent {
   }
 
   _handleSearchClick() {
-  
-    this.getData(this.table.search, 1, this.table.size);
+
+    this.getData('', this.table.currentPage, this.table.size);
   }
 }

@@ -8,13 +8,13 @@ import { GlobalService } from './services/global.service';
 })
 export class AppComponent {
   title = 'gym-fe';
-  isLogin: boolean = false;
+  isLogin: boolean = true;
 
   constructor(public globalService: GlobalService) {
 
-    this.globalService.login.subscribe({
-      next: newValue => this.isLogin = newValue.isLogin
-    });
+    // this.globalService.login.subscribe({
+    //   next: newValue => this.isLogin = newValue.isLogin
+    // });
 
   }
 }

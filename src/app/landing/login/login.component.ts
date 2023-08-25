@@ -26,5 +26,7 @@ export class LoginComponent {
     this.globalService.login.next({
       isLogin: true
     })
+
+    this.location.go('/dashboard')
   }
 }

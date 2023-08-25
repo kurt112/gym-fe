@@ -1,17 +1,21 @@
 <div class="container-fluid">
   <nav class="navbar navbar-expand mt-2  shadow-sm p-2 mb-2 bg-body rounded">
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-     
+
       <form class="d-flex">
         <div class="input-group align-items-center">
           <label for="startDate" class="form-label m-0 fw-semibold me-3 text-primary">Start Date: </label>
-          <input class="form-control" type="date" name="startDate">
+          <input class="form-control" (ngModelChange)="startDate = $event" [ngModel]="startDate | date:'yyyy-MM-dd'"
+            type="date" name="startDate">
         </div>
         <div class="input-group align-items-center ms-3">
-          <label for="startDate" class="form-label m-0 fw-semibold me-3 text-primary">End Date: </label>
-          <input class="form-control" type="date" name="startDate">
+          <label for="endDate" class="form-label m-0 fw-semibold me-3 text-primary">End Date: </label>
+          <input class="form-control" (ngModelChange)="endDate = $event" [ngModel]="endDate | date:'yyyy-MM-dd'"
+            type="date" name="endDate">
         </div>
-        
+        <button class="btn btn-sm px-4 btn-success ms-3 fw-semibold" (click)="_handleSearchClick()">
+          Search
+        </button>
       </form>
     </div>
   </nav>
