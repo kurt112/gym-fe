@@ -44,9 +44,10 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './landing/login/login.component';
 import { RegisterComponent } from './landing/register/register.component';
+import { LoginRouteService } from './services/routes/login-route.service';
 
 const routes: Routes = [
-  { path: 'customers', component: CustomerComponent},
+  { path: 'customers', component: CustomerComponent },
   { path: 'customers/:id', component: CustomerProfile },
   { path: 'customers/transaction/top-up', component: CustomerTopUp },
   { path: 'employees', component: EmployeeComponent },
@@ -63,10 +64,10 @@ const routes: Routes = [
   { path: 'dashboard', pathMatch: 'full', component: DashboardComponent },
   { path: 'schedules', pathMatch: 'full', component: StoreComponent },
   { path: 'audit', pathMatch: 'full', component: AuditComponent },
-  { path: 'configuration', pathMatch: 'full', component: ConfigurationComponent	},
-  { path: 'configuration/gym-classes-types', pathMatch: 'full', component: GymClassesTypesComponent	},
-  { path: 'login', pathMatch: 'full', component: LoginComponent	},
-  { path: '', pathMatch: 'full', component: LandingComponent	},
+  { path: 'configuration', pathMatch: 'full', component: ConfigurationComponent },
+  { path: 'configuration/gym-classes-types', pathMatch: 'full', component: GymClassesTypesComponent },
+  { path: 'login', pathMatch: 'full', component: LoginComponent, canActivate: [LoginRouteService] },
+  { path: '', pathMatch: 'full', component: LandingComponent },
   { path: '**', redirectTo: '/dashboard', pathMatch: 'full' },
 ];
 
@@ -123,7 +124,7 @@ const routes: Routes = [
       useFactory: adapterFactory,
     }),
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, LoginRouteService],
   bootstrap: [AppComponent],
   exports: [RouterModule]
 

@@ -8,3 +8,6 @@ export const enrollInGymClass = (id: string) => `${environment.apiUrl}gym/classe
 
 // ---------------------------------------------------------------- Auto Complete ----------------------------------------------------------------
 export const autoCompleteEmployee =  (search: string) => `${environment.apiUrl}employees/autocomplete?search=${search}`
+
+// ---------------------------------------------------------------- Login Endpoint ----------------------------------------------------------------
+export const loginByUserNameAndPassword =  () => `${environment.apiUrl}auth/login`

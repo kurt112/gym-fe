@@ -52,6 +52,12 @@ export class TopUpComponent {
 
       this.isEnterAmountShowing = true;
 
+      const token: string | null = window.sessionStorage.getItem('token');
+
+      if (token === null) {
+        return alert('Please Login')
+      }
+
       Swal.fire({
         title: 'Please enter amount',
         input: 'number',
@@ -65,7 +71,7 @@ export class TopUpComponent {
       }).then((result) => {
         this.isEnterAmountShowing = false;
         if (result.isConfirmed) {
-          this.http.post<any>(topUpCustomerUrl('asdas', userId, result.value), {
+          this.http.post<any>(topUpCustomerUrl(token, userId, result.value), {
           }).subscribe(ignored => {
             Swal.fire(
               'Top up!',

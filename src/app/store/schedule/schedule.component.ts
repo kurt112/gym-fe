@@ -82,7 +82,7 @@ export class ScheduleComponent {
     this.view = CalendarView.Month;
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.http.get<any>(`${environment.apiUrl}gym/classes/schedules`).subscribe(data => {
 
       data.forEach((e: GymClass) => {
@@ -103,6 +103,7 @@ export class ScheduleComponent {
         })
 
       });
+      this.refresh.next();
     })
 
   }
