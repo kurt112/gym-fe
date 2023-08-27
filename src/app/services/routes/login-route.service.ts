@@ -11,7 +11,6 @@ export class LoginRouteService {
   canActivate(): boolean {
     const token: string | null = window.sessionStorage.getItem('token');
 
-    alert(token ===null)
     return token === null;
   }
 }

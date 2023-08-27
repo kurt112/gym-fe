@@ -67,8 +67,8 @@ const routes: Routes = [
   { path: 'configuration', pathMatch: 'full', component: ConfigurationComponent },
   { path: 'configuration/gym-classes-types', pathMatch: 'full', component: GymClassesTypesComponent },
   { path: 'login', pathMatch: 'full', component: LoginComponent, canActivate: [LoginRouteService] },
-  { path: '', pathMatch: 'full', component: LandingComponent },
-  { path: '**', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', pathMatch: 'full', component: LandingComponent, canActivate: [LoginRouteService] },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 ];
 
 @NgModule({

@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router,} from '@angular/router';
 import { Location } from '@angular/common';
 import { GlobalService } from 'src/app/services/global.service';
 import { loginByUserNameAndPassword } from 'global/utils/endpoint';
 import { Credentials } from './Credentials';
+import { Subject } from 'rxjs';
+import { LoginRouteService } from 'src/app/services/routes/login-route.service';
 
 @Component({
   selector: 'app-login',
@@ -17,9 +19,11 @@ export class LoginComponent {
     username: '',
     password: '',
   }
+  refresh = new Subject<void>();
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private location: Location, public globalService: GlobalService) {
-
+  constructor(private router:Router, private route: ActivatedRoute, private http: HttpClient, private location: Location, public globalService: GlobalService, private loginrouteService: LoginRouteService) {
+    if (this.globalService.login.value.isLogin === true) {
+    }
   }
 
   goBack() {
@@ -31,12 +35,17 @@ export class LoginComponent {
 
   login() {
     this.http.post<any>(loginByUserNameAndPassword(), this.credential).subscribe((data) => {
-      window.sessionStorage.setItem('token', data.token);
-      this.location.go('/dashboard')
       this.globalService.login.next({
         isLogin: true
       })
+      window.sessionStorage.setItem('token', data.token);
+
+      this.router.navigate(['/dashboard'])
+      
     }, (err) => {
+
+
+    }, () => {
 
     });
 
