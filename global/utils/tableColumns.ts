@@ -202,7 +202,11 @@ export const AuditTable: Table<Audit> = {
 }
 
 export const convertDataFromRequestToTable = (data: any, table: Table<any>) => {
-    const { content, numberOfElements, size, totalElements, totalPages, pageNumber } = data;
+    let { content, numberOfElements, size, totalElements, totalPages, pageNumber } = data;
+    if (size === undefined) {
+        size = 10;
+    }
+
 
     table.content = content;
     table.size = size;

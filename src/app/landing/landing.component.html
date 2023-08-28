@@ -8,11 +8,11 @@
     <nav id="navbar" class="navbar">
       <ul>
         <li><a class="nav-link scrollto active" href="#home">Home</a></li>
-        <li><a class="nav-link scrollto" href="#about">About</a></li>
+        <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
 
         <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
 
-        <li><a class="nav-link scrollto" routerLink="features">All features</a></li>
+        <li><a class="nav-link scrollto" href="#services">All features</a></li>
         <li><a class="getstarted scrollto" routerLink="login">Get Started</a></li>
       </ul>
       <i class="bi bi-list mobile-nav-toggle"></i>
@@ -32,7 +32,7 @@
         <h2>Manage your gym with ease and affordable solution <br>"Track all happening in your gym wiht our solution"
         </h2>
         <div class="d-flex justify-content-center justify-content-lg-start">
-          <a href="#about" class="btn-get-started scrollto">Get Started</a>
+          <a routerLink="login" class="btn-get-started scrollto">Get Started</a>
           <!-- <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i
               class="bi bi-play-circle"></i><span>Watch Video</span></a> -->
         </div>
@@ -169,7 +169,7 @@
 </section><!-- End Features Section -->
 
 <!-- ======= Incoming Features  ======= -->
-<section  class="services section-bg incoming-features">
+<section class="services section-bg incoming-features">
   <div class="container" data-aos="fade-up">
     <div class="section-title">
       <h2>Incoming Features</h2>
@@ -231,40 +231,61 @@
 
     <div class="row">
 
-      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-        <div class="box">
+      <div class="col-lg-4 mt-4 mt-lg-0 mb-3" data-aos="fade-up" data-aos-delay="100">
+        <div class="box featured">
           <h3>Free Plan</h3>
-          <h4><sup>$</sup>0<span>per month</span></h4>
+          <h4><sup>₱</sup>0<span>per month</span></h4>
           <ul>
-            <li><i class="bx bx-check"></i> Quam adipiscing vitae proin</li>
-            <li><i class="bx bx-check"></i> Nec feugiat nisl pretium</li>
-            <li><i class="bx bx-check"></i> Nulla at volutpat diam uteera</li>
-            <li class="na"><i class="bx bx-x"></i> <span>Pharetra massa massa ultricies</span></li>
-            <li class="na"><i class="bx bx-x"></i> <span>Massa ultricies mi quis hendrerit</span></li>
+            <li><i class="bx bx-check"></i><span>&#10003;</span>50 users in system</li>
+            <li><i class="bx bx-check"></i><span>&#10003;</span>All core features </li>
+            <li><i class="bx bx-check"></i><span>&#10003;</span>Receive updates </li>
+            <li><i class="bx bx-check"></i><span>&#10003;</span> Free 1 online session user training </li>
+            <li><i class="bx bx-check"></i><span>&#10003;</span> 1 month free online Support</li>
           </ul>
-          <a href="#" class="buy-btn">Get Started</a>
+          <footer>
+            <a href="#" class="buy-btn">Get Started</a>
+          </footer>
+        </div>
+      </div>
+      <div class="col-lg-4 mt-4 mt-lg-0 mb-3" data-aos="fade-up" data-aos-delay="100">
+        <div class="box featured">
+          <h3>Blue Plan</h3>
+          <h4><sup>₱</sup>500<span>per month</span></h4>
+          <ul>
+            <li><i class="bx bx-check"></i><span>&#10003;</span>200 users in system</li>
+            <li><i class="bx bx-check"></i><span>&#10003;</span>All core features </li>
+            <li><i class="bx bx-check"></i><span>&#10003;</span>Receive updates </li>
+            <li><i class="bx bx-check"></i><span>&#10003;</span> Free onsite user training </li>
+            <li><i class="bx bx-check"></i><span>&#10003;</span> 1 month free online Support</li>
+            <li><i class="bx bx-check"></i><span>&#10003;</span> Customized Card</li>
+          </ul>
+          <footer>
+            <a href="#" class="buy-btn">Get Started</a>
+          </footer>
         </div>
       </div>
 
-      <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
+      <div class="col-lg-4 mt-4 mt-lg-0 mb-3" data-aos="fade-up" data-aos-delay="200">
         <div class="box featured">
-          <h3>Business Plan</h3>
-          <h4><sup>$</sup>29<span>per month</span></h4>
+          <h3>Gold Plan</h3>
+          <h4><sup>₱</sup>1000<span>per month</span></h4>
           <ul>
-            <li><i class="bx bx-check"></i> Quam adipiscing vitae proin</li>
+            <li><i class="bx bx-check"></i><span>&#10003;</span> Quam adipiscing vitae proin</li>
             <li><i class="bx bx-check"></i> Nec feugiat nisl pretium</li>
             <li><i class="bx bx-check"></i> Nulla at volutpat diam uteera</li>
             <li><i class="bx bx-check"></i> Pharetra massa massa ultricies</li>
             <li><i class="bx bx-check"></i> Massa ultricies mi quis hendrerit</li>
           </ul>
-          <a href="#" class="buy-btn">Get Started</a>
+          <footer>
+            <a href="#" class="buy-btn">Get Started</a>
+          </footer>
         </div>
       </div>
 
       <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
-        <div class="box">
-          <h3>Developer Plan</h3>
-          <h4><sup>$</sup>49<span>per month</span></h4>
+        <div class="box featured">
+          <h3>Platinum Plan</h3>
+          <h4><sup>₱</sup>2000<span>per month</span></h4>
           <ul>
             <li><i class="bx bx-check"></i> Quam adipiscing vitae proin</li>
             <li><i class="bx bx-check"></i> Nec feugiat nisl pretium</li>
@@ -272,7 +293,9 @@
             <li><i class="bx bx-check"></i> Pharetra massa massa ultricies</li>
             <li><i class="bx bx-check"></i> Massa ultricies mi quis hendrerit</li>
           </ul>
-          <a href="#" class="buy-btn">Get Started</a>
+          <footer>
+            <a href="#" class="buy-btn">Get Started</a>
+          </footer>
         </div>
       </div>
 

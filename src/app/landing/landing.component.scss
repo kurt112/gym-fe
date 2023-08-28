@@ -780,44 +780,59 @@ section {
     padding: 50px 30px;
     transition: all ease-in-out 0.4s;
     background: #fff;
-  }
-  
-  .services .icon-box .icon {
+}
+
+.services .icon-box .icon {
     margin-bottom: 10px;
-  }
-  
-  .services .icon-box .icon i {
+}
+
+.services .icon-box .icon i {
     color: #47b2e4;
     font-size: 36px;
     transition: 0.3s;
-  }
-  
-  .services .icon-box h4 {
+}
+
+.services .icon-box h4 {
     font-weight: 500;
     margin-bottom: 15px;
     font-size: 24px;
-  }
-  
-  .services .icon-box h4 {
+}
+
+.services .icon-box h4 {
     color: #37517e;
     transition: ease-in-out 0.3s;
-  }
-  
-  .services .icon-box p {
+}
+
+.services .icon-box p {
     line-height: 24px;
     font-size: 14px;
     margin-bottom: 0;
-  }
-  
-  .services .icon-box:hover {
-    transform: translateY(-10px);
-  }
-  
-  .services .icon-box:hover h4 {
-    color: #47b2e4;
-  }
+}
 
-  .incoming-features{ 
+.services .icon-box:hover {
+    transform: translateY(-10px);
+}
+
+.services .icon-box:hover h4 {
+    color: #47b2e4;
+}
+
+.incoming-features {
     padding: 0px;
-  }
-  
+}
+
+li span {
+    color: #47b2e4;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.box footer {
+    position: absolute;
+    bottom: 0;
+    padding-bottom: 20px;
+}
+.box {
+    position: relative;
+}

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router,} from '@angular/router';
+import { ActivatedRoute, Router, } from '@angular/router';
 import { Location } from '@angular/common';
 import { GlobalService } from 'src/app/services/global.service';
 import { loginByUserNameAndPassword } from 'global/utils/endpoint';
@@ -21,7 +21,7 @@ export class LoginComponent {
   }
   refresh = new Subject<void>();
 
-  constructor(private router:Router, private route: ActivatedRoute, private http: HttpClient, private location: Location, public globalService: GlobalService, private loginrouteService: LoginRouteService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private location: Location, public globalService: GlobalService, private loginrouteService: LoginRouteService) {
     if (this.globalService.login.value.isLogin === true) {
     }
   }
@@ -40,8 +40,8 @@ export class LoginComponent {
       })
       window.sessionStorage.setItem('token', data.token);
 
-      this.router.navigate(['/dashboard'])
-      
+      this.router.navigate(['/dashboard']);
+
     }, (err) => {
 
 

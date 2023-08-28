@@ -45,24 +45,25 @@ import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './landing/login/login.component';
 import { RegisterComponent } from './landing/register/register.component';
 import { LoginRouteService } from './services/routes/login-route.service';
+import { AdminRouteService } from './services/routes/role/admin-route.service';
 
 const routes: Routes = [
-  { path: 'customers', component: CustomerComponent },
-  { path: 'customers/:id', component: CustomerProfile },
-  { path: 'customers/transaction/top-up', component: CustomerTopUp },
-  { path: 'employees', component: EmployeeComponent },
-  { path: 'employees/:id', component: EmployeeProfile },
-  { path: 'attendance', component: AttendanceComponent },
-  { path: 'attendance/customers', component: CustomerAttendance },
-  { path: 'classes', component: GymClassesComponent },
-  { path: 'classes/:id', component: GymClassProfile },
-  { path: 'classes/:id/schedules', component: GymClassesSheduleComponent },
-  { path: 'classes/:id/members', component: GymClassMembers },
-  { path: 'membersips', component: MembershipComponent },
-  { path: 'membersips/:id', component: MembershipProfile },
-  { path: 'membersips/:id/members', component: MembershipMembers },
-  { path: 'dashboard', pathMatch: 'full', component: DashboardComponent },
-  { path: 'schedules', pathMatch: 'full', component: StoreComponent },
+  { path: 'customers', component: CustomerComponent, canActivate: [AdminRouteService] },
+  { path: 'customers/:id', component: CustomerProfile, canActivate: [AdminRouteService] },
+  { path: 'customers/transaction/top-up', component: CustomerTopUp, canActivate: [AdminRouteService] },
+  { path: 'employees', component: EmployeeComponent, canActivate: [AdminRouteService] },
+  { path: 'employees/:id', component: EmployeeProfile, canActivate: [AdminRouteService] },
+  { path: 'attendance', component: AttendanceComponent, canActivate: [AdminRouteService] },
+  { path: 'attendance/customers', component: CustomerAttendance, canActivate: [AdminRouteService] },
+  { path: 'classes', component: GymClassesComponent, canActivate: [AdminRouteService] },
+  { path: 'classes/:id', component: GymClassProfile, canActivate: [AdminRouteService] },
+  { path: 'classes/:id/schedules', component: GymClassesSheduleComponent, canActivate: [AdminRouteService] },
+  { path: 'classes/:id/members', component: GymClassMembers, canActivate: [AdminRouteService] },
+  { path: 'membersips', component: MembershipComponent, canActivate: [AdminRouteService] },
+  { path: 'membersips/:id', component: MembershipProfile, canActivate: [AdminRouteService] },
+  { path: 'membersips/:id/members', component: MembershipMembers, canActivate: [AdminRouteService] },
+  { path: 'dashboard', pathMatch: 'full', component: DashboardComponent, canActivate: [AdminRouteService] },
+  { path: 'schedules', pathMatch: 'full', component: StoreComponent, canActivate: [AdminRouteService] },
   { path: 'audit', pathMatch: 'full', component: AuditComponent },
   { path: 'configuration', pathMatch: 'full', component: ConfigurationComponent },
   { path: 'configuration/gym-classes-types', pathMatch: 'full', component: GymClassesTypesComponent },
@@ -124,7 +125,7 @@ const routes: Routes = [
       useFactory: adapterFactory,
     }),
   ],
-  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, LoginRouteService],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, LoginRouteService,AdminRouteService],
   bootstrap: [AppComponent],
   exports: [RouterModule]
 
