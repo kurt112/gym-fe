@@ -1,6 +1,7 @@
-<div class="container bg-white mt-4 card shadow p-3 mb-5 bg-body rounded" style="padding: 100px 20px !important;">
+<div *ngIf="!isEnterAmountShowing" class="container bg-white mt-4 card shadow p-3 mb-5 bg-body rounded"
+    style="padding: 100px 20px !important;">
     <div class="mb-5">
-        <div *ngIf="!isEnterAmountShowing">
+        <div>
             <div>
                 <div>
                     <h1 class="text-center py-3">Please tap your card to begin transaction</h1>
@@ -20,9 +21,10 @@
                     </div>
                 </div>
             </div>
-          
+
         </div>
     </div>
-    <button type="button" class="btn btn-warning  text-white fw-semibold border-0" style="border-radius: 0px !important;" (click)="goBack()">BACK</button>
-    
+    <button type="button" class="btn btn-warning  text-white fw-semibold border-0"
+        style="border-radius: 0px !important;" (click)="goBack()">BACK</button>
+
 </div>

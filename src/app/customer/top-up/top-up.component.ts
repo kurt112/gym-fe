@@ -33,7 +33,6 @@ export class TopUpComponent {
     if (data.length >= 11) {
       await firstValueFrom(this.http.get<any>(getUserIdByCustomerRfId(this.rfId))).then(result => {
         userId = result.message;
-        alert(userId);
       }).catch(ignored => {
         this.isEnterAmountShowing = true;
         Swal.fire(
