@@ -2,11 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { formateDateDDMMYY } from 'global/date';
 import { Customer } from '../customer';
 import Swal from 'sweetalert2';
 import { getInitUser } from 'global/utils/user';
+import { UserFormValidationService } from 'src/app/services/validation/user/user-form-validation.service';
 @Component({
   selector: 'customer-profile',
   templateUrl: './profile.component.html',
@@ -21,7 +22,12 @@ export class ProfileComponent implements OnInit {
     rfId: '',
     user: getInitUser
   }
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+
+  userGroup: any = {}
+
+  constructor(private route: ActivatedRoute, private http: HttpClient,  public userForm: UserFormValidationService) {
+    this.userGroup = {...this.userForm.userGroupForm}
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -47,14 +53,20 @@ export class ProfileComponent implements OnInit {
 
   submit(customerForm: NgForm) {
 
-    const newCustomer = { ...customerForm.value, ...this.customer };
+    let newCustomer = { ...customerForm.value, ...this.customer };
+    console.log(newCustomer);
 
-    if (this.isNewData) {
-      this.createCustomer(customerForm, newCustomer);
-      return;
-    }
+    // newCustomer.user = { ...this.userGroupForm.value }
 
-    this.updateCustomer(newCustomer);
+
+    console.log(newCustomer);
+
+    // if (this.isNewData) {
+    //   this.createCustomer(customerForm, newCustomer);
+    //   return;
+    // }
+
+    // this.updateCustomer(newCustomer);
 
   }
 
@@ -81,6 +93,10 @@ export class ProfileComponent implements OnInit {
         customerForm.resetForm();
       })
     })
+  }
+
+  get isFirstNameInvalid() {
+    return this.userGroup.userGroupForm.get('firstName')?.invalid;
   }
 
 }

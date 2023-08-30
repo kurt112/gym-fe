@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { formateDateDDMMYY } from 'global/date';
 import { getInitUser } from 'global/utils/user';
 import { Employee } from 'src/app/employee/Employee';
+import { UserFormValidationService } from 'src/app/services/validation/user/user-form-validation.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
@@ -21,7 +22,10 @@ export class ProfileComponent {
   employee: Employee = {
     user: getInitUser
   }
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, public userForm: UserFormValidationService) { 
+    console.log(userForm.userGroupForm);
+    
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -84,5 +88,9 @@ export class ProfileComponent {
         }).then(() => {
         });
       })
+  }
+
+  get isFirstNameInvalid() {
+    return this.userForm.userGroupForm.get('firstName')?.invalid;
   }
 }

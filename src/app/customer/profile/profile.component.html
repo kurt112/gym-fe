@@ -3,36 +3,43 @@
     <form #customerForm="ngForm" (ngSubmit)="submit(customerForm)" class="row g-3 p-3 my-3 bg-body shadow rounded mx-2">
         <p class="fs-1 fw-semibold bg-secondary text-white">REQUIRED DATA</p>
         <div class="row" ngModelGroup="user">
-            <div class="col-md-5">
-                <label for="firstName" class="form-label fw-semibold">First Name</label>
-                <input type="text" [(ngModel)]="customer.user.firstName" name="firstName" class="form-control"
-                    id="firstName" required>
-            </div>
-            <div class="col-md-3">
-                <label for="lastName" class="form-label fw-semibold">Last Name</label>
-                <input type="text" [(ngModel)]="customer.user.lastName" class="form-control" name="lastName"
-                    id="lastName" required>
-            </div>
-            <div class="col-md-3">
-                <label for="middleName" class="form-label fw-semibold">Middle Name</label>
-                <input type="text" [(ngModel)]="customer.user.middleName" name="middleName" class="form-control"
-                    id="middleName">
-            </div>
-            <div class="col-md-1">
-                <label for="suffix" class="form-label fw-semibold">Suffix</label>
-                <input type="text" [(ngModel)]="customer.user.suffix" name="suffix" class="form-control" id="suffix">
-            </div>
-            <div class="row mt-3">
+            <div class="row" [formGroup]="userGroup.userGroupForm">
+                <div class="col-md-5">
+                    <label for="firstName" class="form-label fw-semibold ">First Name</label>
+                    <input type="text" formControlName="firstName" class="form-control" id="firstName" required
+                        name="firstName" [class.invalid]="isFirstNameInvalid" />
+                    <!-- <span class="text-danger fw-semibold" style="font-size: 12px;"
+                        *ngIf="firstNameForm?.invalid &&  (firstNameForm?.dirty  || firstNameForm?.touched)">
+                        Please
+                    </span> -->
+                </div>
+                <div class="col-md-3">
+                    <label for="lastName" class="form-label fw-semibold">Last Name</label>
+                    <input type="text" formControlName="lastName" class="form-control" name="lastName" id="lastName"
+                        required>
+                </div>
+                <div class="col-md-3">
+                    <label for="middleName" class="form-label fw-semibold">Middle Name</label>
+                    <input type="text" formControlName="middleName" name="middleName" class="form-control"
+                        id="middleName">
+                </div>
+
+                <div class="col-md-1">
+                    <label for="suffix" class="form-label fw-semibold">Suffix</label>
+                    <input type="text" formControlName="suffix" name="suffix" class="form-control" id="suffix">
+                </div>
+
                 <div class="col-md-5">
                     <label for="email" class="form-label fw-semibold">Email</label>
-                    <input type="email" class="form-control" [(ngModel)]="customer.user.email" name="email" id="email"
-                        required placeholder="doe@email.com">
+                    <input type="email" formControlName="email" class="form-control" name="email" id="email" required
+                        placeholder="doe@email.com">
                 </div>
                 <div class="col-md-5">
                     <label for="cellphone" class="form-label fw-semibold">Cellphone</label>
-                    <input type="text" class="form-control" [(ngModel)]="customer.user.cellphone" name="cellphone"
-                        id="cellphone" required>
+                    <input type="text" formControlName="cellphone" class="form-control" name="cellphone" id="cellphone"
+                        required>
                 </div>
+
                 <div class="col-md-2">
                     <label for="sex" class="form-label fw-semibold">Sex</label>
                     <div class="dropdown align-items-start " id="sex">
@@ -50,28 +57,27 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-            <div class="row mt-3">
+
                 <div class="col-md-3">
                     <label for="rfId" class="form-label fw-semibold">Customer ID</label>
-                    <input type="text" class="form-control" [(ngModel)]="customer.rfId" name="rfId" id="rfId">
+                    <input type="text" class="form-control" formControlName="rfID" name="rfId" id="rfId">
                 </div>
+
                 <div class="col-md-3">
                     <label for="password" class="form-label fw-semibold">Password</label>
-                    <input type="password" class="form-control" [(ngModel)]="customer.user.password" name="password"
+                    <input type="password" class="form-control" formControlName="password" name="password"
                         class="form-control" id="password">
                 </div>
                 <div class="col-md-3">
                     <label for="retype-password" class="form-label fw-semibold">Re-type Password</label>
-                    <input type="password" class="form-control" name="reTypePassword" id="retype-password">
+                    <input type="password" class="form-control" formControlName="reTypePassword" name="reTypePassword"
+                        id="retype-password">
                 </div>
                 <div class="col-md-3">
                     <label for="birthDate" class="form-label fw-semibold">Birthdate</label>
-                    <input type="date" [(ngModel)]="customer.user.birthDate" class="form-control" name="birthDate"
-                        id="birthDate">
+                    <input type="date" formControlName="birthDate" class="form-control" name="birthDate" id="birthDate">
                 </div>
             </div>
-            
             <p class="fs-1 fw-semibold bg-secondary text-white mt-3">OPTIONAL DATA</p>
             <div class="col-md-3">
                 <label for="weight" class="form-label fw-semibold">Weight</label>
@@ -96,7 +102,8 @@
         </div>
         <div class="col-12 d-flex justify-content-between">
             <a [routerLink]="['/customers']" class="btn btn-primary px-5 btn-md fw-semibold">BACK </a>
-            <button type="submit" class="fw-semibold btn btn-success px-5 btn-md">
+            <button type="submit" class="fw-semibold btn btn-success px-5 btn-md"
+                [disabled]="userForm.userGroupForm.invalid">
                 {{id==='add'?'SAVE':'UPDATE'}}
             </button>
         </div>
