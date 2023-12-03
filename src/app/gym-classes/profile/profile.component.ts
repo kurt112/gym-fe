@@ -77,7 +77,7 @@ export class ProfileComponent {
       this.http.get<GymClass>(`${environment.apiUrl}gym/classes/${this.id}`).subscribe((data) => {
         console.log(data);
         
-        this.instrutor = data.instructor;
+        if(data.instructor) this.instrutor = data.instructor;
 
         data.schedules?.forEach((schedule: Schedule, i: number) => {
           this.schedules?.forEach((thisSched, i: number) => {
@@ -137,9 +137,11 @@ export class ProfileComponent {
   createGymClass(gymClassForm: NgForm, gymClass: GymClass) {
     this.http.post<GymClass>(`${environment.apiUrl}gym/classes`, gymClass).subscribe((data: any) => {
 
-      this.http.post<GymClass>(`${environment.apiUrl}gym/classes/${data.id}/assign-instructor/${this.instrutor.id}`, gymClass).subscribe(() => {
+      if(this.instrutor !== null || this.instrutor !== undefined){
+        this.http.post<GymClass>(`${environment.apiUrl}gym/classes/${data.id}/assign-instructor/${this.instrutor.id}`, gymClass).subscribe(() => {
 
-      })
+        })
+      }
 
       this.createGymClassSchedule(data.id);
       Swal.fire({

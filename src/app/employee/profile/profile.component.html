@@ -1,124 +1,130 @@
 <form-loading *ngIf="isLoading"></form-loading>
 <div class="container-fluid" *ngIf="!isLoading">
-    <form #customerForm="ngForm" (ngSubmit)="submit(customerForm)" class="row g-3 p-3 my-3 bg-body shadow rounded mx-2">
-        <p class="fs-1 fw-semibold bg-secondary text-white">REQUIRED DATA</p>
-        <div class="row" ngModelGroup="user">
-            <div class="row" [formGroup]="userForm.userGroupForm">
+    <form #employeeForm="ngForm" (ngSubmit)="submit(employeeForm)" class="row g-3 p-3 my-3 bg-body shadow rounded mx-2">
+        <div class="container-fluid">
+            <div class="row" ngModelGroup="user" >
+                <p class="fs-1 fw-semibold bg-secondary text-white">REQUIRED DATA</p>
+                <!-- <div class="row" [formGroup]="userForm.userGroupForm">
+                    <div class="col-md-5">
+                        <label for="firstName" class="form-label fw-semibold ">First Name</label>
+                        <input type="text" formControlName="firstName" class="form-control" id="firstName" required
+                            name="firstName" [class.invalid]="isFirstNameInvalid" />
+                             <span class="text-danger fw-semibold" style="font-size: 12px;"
+                            *ngIf="isFirstNameInvalid">
+                            Please
+                        </span>
+                    </div>
+                </div> -->
                 <div class="col-md-5">
-                    <label for="firstName" class="form-label fw-semibold ">First Name</label>
-                    <input type="text" formControlName="firstName" class="form-control" id="firstName" required
-                        name="firstName" [class.invalid]="isFirstNameInvalid" />
-                         <span class="text-danger fw-semibold" style="font-size: 12px;"
-                        *ngIf="isFirstNameInvalid">
-                        Please
-                    </span>
+                    <label for="firstName" class="form-label fw-semibold">First Name</label>
+                    <input type="text" [(ngModel)]="employee.user.firstName" name="firstName" class="form-control"
+                        id="firstName" required>
                 </div>
-            </div>
-            <!-- <div class="col-md-5">
-                <label for="firstName" class="form-label fw-semibold">First Name</label>
-                <input type="text" [(ngModel)]="employee.user.firstName" name="firstName" class="form-control"
-                    id="firstName" required>
-            </div> -->
-            <div class="col-md-3">
-                <label for="lastName" class="form-label fw-semibold">Last Name</label>
-                <input type="text" [(ngModel)]="employee.user.lastName" class="form-control" name="lastName"
-                    id="lastName" required>
-            </div>
-            <div class="col-md-3">
-                <label for="middleName" class="form-label fw-semibold">Middle Name</label>
-                <input type="text" [(ngModel)]="employee.user.middleName" name="middleName" class="form-control"
-                    id="middleName">
-            </div>
-            <div class="col-md-1">
-                <label for="suffix" class="form-label fw-semibold">Suffix</label>
-                <input type="text" [(ngModel)]="employee.user.suffix" name="suffix" class="form-control" id="suffix">
-            </div>
-            <div class="col-md-5">
-                <label for="email" class="form-label fw-semibold">Email</label>
-                <input type="email" class="form-control" [(ngModel)]="employee.user.email" name="email" id="email"
-                    required placeholder="doe@email.com">
-            </div>
-            <div class="col-md-5">
-                <label for="cellphone" class="form-label fw-semibold">Cellphone</label>
-                <input type="text" class="form-control" [(ngModel)]="employee.user.cellphone" name="cellphone"
-                    id="cellphone" required>
-            </div>
-            <div class="col-md-2">
-                <label for="sex" class="form-label fw-semibold">Sex</label>
-                <div class="dropdown align-items-start " id="sex">
-                    <button class="btn btn-outline-secondary dropdown-toggle form-control"
-                        style="font-size:100%; padding-bottom: 5.6px;" data-bs-toggle="dropdown" aria-expanded="true">
-                        {{employee.user.sex}}
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><button class="dropdown-item"
-                                (click)="setSex('Male'); $event.preventDefault()">Male</button></li>
-                        <li><button class="dropdown-item"
-                                (click)="setSex('Female');$event.preventDefault()">Female</button></li>
-                    </ul>
+                <div class="col-md-3">
+                    <label for="lastName" class="form-label fw-semibold">Last Name</label>
+                    <input type="text" [(ngModel)]="employee.user.lastName" class="form-control" name="lastName"
+                        id="lastName" required>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <label for="rfID" class="form-label fw-semibold">Empoyee ID</label>
-                <input type="text" class="form-control" [(ngModel)]="employee.user.rfID" name="rfID" id="rfID">
-            </div>
-            <div class="col-md-3">
-                <label for="password" class="form-label fw-semibold">Password</label>
-                <input type="password" class="form-control" [(ngModel)]="employee.user.password" name="password"
-                    class="form-control" id="password">
-            </div>
-            <div class="col-md-3">
-                <label for="retype-password" class="form-label fw-semibold">Re-type Password</label>
-                <input type="password" class="form-control" name="reTypePassword" id="retype-password">
-            </div>
-            <div class="col-md-3">
-                <label for="birthDate" class="form-label fw-semibold">Birthdate</label>
-                <input type="date" [(ngModel)]="employee.user.birthDate" class="form-control" name="birthDate"
-                    id="birthDate">
-            </div>
-            <div class="col-md-2">
-                <label for="role" class="form-label fw-semibold">Role</label>
-                <div class="dropdown align-items-start " id="role">
-                    <button class="btn btn-outline-secondary dropdown-toggle form-control"
-                        style="font-size:100%; padding-bottom: 5.6px;" data-bs-toggle="dropdown" aria-expanded="true">
-                        {{employee.user.role}}
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><button class="dropdown-item" (click)="setRole('Front Desk'); $event.preventDefault()">Front
-                                Desk</button></li>
-                        <li><button class="dropdown-item"
-                                (click)="setRole('Admin');$event.preventDefault()">Admin</button></li>
-                        <li><button class="dropdown-item"
-                                (click)="setRole('Coach');$event.preventDefault()">Coach</button></li>
-                    </ul>
+                <div class="col-md-3">
+                    <label for="middleName" class="form-label fw-semibold">Middle Name</label>
+                    <input type="text" [(ngModel)]="employee.user.middleName" name="middleName" class="form-control"
+                        id="middleName">
                 </div>
-            </div>
-            <p class="fs-1 fw-semibold bg-secondary text-white mt-3">OPTIONAL DATA</p>
-            <div class="col-md-3">
-                <label for="weight" class="form-label fw-semibold">Weight</label>
-                <input type="number" class="form-control" [(ngModel)]="employee.user.weight" name="weight" id="weight"
-                    placeholder="Weight in KG">
-            </div>
-            <div class="col-md-3">
-                <label for="height" class="form-label fw-semibold">Height</label>
-                <input type="number" class="form-control" [(ngModel)]="employee.user.height" name="height" id="height"
-                    placeholder="Weight in Feet">
-            </div>
-            <div class="col-md-3">
-                <label for="bmiNumber" class="form-label fw-semibold">BMI</label>
-                <input type="number" class="form-control" [(ngModel)]="employee.user.bmiNumber" name="bmiNumber"
-                    id="bmiNumber" disabled>
-            </div>
-            <div class="col-md-3">
-                <label for="bmi" class="form-label fw-semibold">Category Result</label>
-                <input type="text" class="form-control" [(ngModel)]="employee.user.bmi" name="bmi" id="bmi" name="bmi"
-                    disabled>
+                <div class="col-md-1">
+                    <label for="suffix" class="form-label fw-semibold">Suffix</label>
+                    <input type="text" [(ngModel)]="employee.user.suffix" name="suffix" class="form-control"
+                        id="suffix">
+                </div>
+                <div class="col-md-5">
+                    <label for="email" class="form-label fw-semibold">Email</label>
+                    <input type="email" class="form-control" [(ngModel)]="employee.user.email" name="email" id="email"
+                        required placeholder="doe@email.com">
+                </div>
+                <div class="col-md-5">
+                    <label for="cellphone" class="form-label fw-semibold">Cellphone</label>
+                    <input type="text" class="form-control" [(ngModel)]="employee.user.cellphone" name="cellphone"
+                        id="cellphone" required>
+                </div>
+                <div class="col-md-2">
+                    <label for="sex" class="form-label fw-semibold">Sex</label>
+                    <div class="dropdown align-items-start " id="sex">
+                        <button class="btn btn-outline-secondary dropdown-toggle form-control"
+                            style="font-size:100%; padding-bottom: 5.6px;" data-bs-toggle="dropdown"
+                            aria-expanded="true">
+                            {{employee.user.sex}}
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><button class="dropdown-item"
+                                    (click)="setSex('Male'); $event.preventDefault()">Male</button></li>
+                            <li><button class="dropdown-item"
+                                    (click)="setSex('Female');$event.preventDefault()">Female</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="rfID" class="form-label fw-semibold">Empoyee ID</label>
+                    <input type="text" class="form-control" [(ngModel)]="employee.rfID" name="rfID" id="rfID">
+                </div>
+                <div class="col-md-3">
+                    <label for="password" class="form-label fw-semibold">Password</label>
+                    <input type="password" class="form-control" [(ngModel)]="employee.user.password" name="password"
+                        class="form-control" id="password">
+                </div>
+                <div class="col-md-3">
+                    <label for="retype-password" class="form-label fw-semibold">Re-type Password</label>
+                    <input type="password" class="form-control" name="reTypePassword" id="retype-password">
+                </div>
+                <div class="col-md-3">
+                    <label for="birthDate" class="form-label fw-semibold">Birthdate</label>
+                    <input type="date" [(ngModel)]="employee.user.birthDate" class="form-control" name="birthDate"
+                        id="birthDate">
+                </div>
+                <div class="col-md-2">
+                    <label for="role" class="form-label fw-semibold">Role</label>
+                    <div class="dropdown align-items-start " id="role">
+                        <button class="btn btn-outline-secondary dropdown-toggle form-control"
+                            style="font-size:100%; padding-bottom: 5.6px;" data-bs-toggle="dropdown"
+                            aria-expanded="true">
+                            {{employee.user.role}}
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><button class="dropdown-item"
+                                    (click)="setRole('Front Desk'); $event.preventDefault()">Front
+                                    Desk</button></li>
+                            <li><button class="dropdown-item"
+                                    (click)="setRole('Admin');$event.preventDefault()">Admin</button></li>
+                            <li><button class="dropdown-item"
+                                    (click)="setRole('Coach');$event.preventDefault()">Coach</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="fs-1 fw-semibold bg-secondary text-white mt-3">OPTIONAL DATA</p>
+                <div class="col-md-3">
+                    <label for="weight" class="form-label fw-semibold">Weight</label>
+                    <input type="number" class="form-control" [(ngModel)]="employee.user.weight" name="weight"
+                        id="weight" placeholder="Weight in KG">
+                </div>
+                <div class="col-md-3">
+                    <label for="height" class="form-label fw-semibold">Height</label>
+                    <input type="number" class="form-control" [(ngModel)]="employee.user.height" name="height"
+                        id="height" placeholder="Weight in Feet">
+                </div>
+                <div class="col-md-3">
+                    <label for="bmiNumber" class="form-label fw-semibold">BMI</label>
+                    <input type="number" class="form-control" [(ngModel)]="employee.user.bmiNumber" name="bmiNumber"
+                        id="bmiNumber" disabled>
+                </div>
+                <div class="col-md-3">
+                    <label for="bmi" class="form-label fw-semibold">Category Result</label>
+                    <input type="text" class="form-control" [(ngModel)]="employee.user.bmi" name="bmi" id="bmi"
+                        name="bmi" disabled>
+                </div>
             </div>
         </div>
         <div class="col-12 d-flex justify-content-between">
             <a [routerLink]="['/employees']" class="btn btn-primary px-5 btn-md fw-semibold">BACK </a>
-            <button type="submit" class="fw-semibold btn btn-success px-5 btn-md"  [disabled]="userForm.userGroupForm.invalid">
-                {{id==='add'?'SAVE':'UPDATE'}}
+            <button type="submit" class="fw-semibold btn btn-success px-5 btn-md">
+                <span>{{id === 'add'?'SAVE':'UPDATE'}}</span>
             </button>
         </div>
     </form>

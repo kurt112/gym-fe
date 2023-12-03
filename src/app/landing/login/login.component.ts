@@ -34,6 +34,7 @@ export class LoginComponent {
   }
 
   login() {
+    alert("alksjdf");
     this.http.post<any>(loginByUserNameAndPassword(), this.credential).subscribe((data) => {
       this.globalService.login.next({
         isLogin: true

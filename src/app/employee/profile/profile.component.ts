@@ -22,18 +22,21 @@ export class ProfileComponent {
   employee: Employee = {
     user: getInitUser
   }
-  constructor(private route: ActivatedRoute, private http: HttpClient, public userForm: UserFormValidationService) { 
-    console.log(userForm.userGroupForm);
-    
+
+  userGroup: any = {}
+
+  constructor(private route: ActivatedRoute, private http: HttpClient, public userForm: UserFormValidationService) {
+    this.userGroup = { ...this.userForm.userGroupForm }
   }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
-
     if (this.id !== 'add') {
       this.isLoading = true;
       this.http.get<Employee>(`${environment.apiUrl}employees/${this.id}`)
         .subscribe((data) => {
+          console.log(data);
+          
           this.isLoading = false;
           this.employee = data;
           this.employee.user.birthDate = formateDateDDMMYY(this.employee.user.birthDate);
@@ -55,12 +58,18 @@ export class ProfileComponent {
   }
 
   submit(employeeForm: NgForm) {
+
+    const newEmloyee = {...employeeForm.value, ...this.employee}
+    console.log(newEmloyee);
+    
+    newEmloyee.user.birthDate = formateDateDDMMYY(this.employee.user.birthDate);
+
     if (!this.isNewData) {
-      this.updateEmployee(this.employee);
+      this.updateEmployee(newEmloyee);
       return;
     }
 
-    this.createEmployee(employeeForm, this.employee);
+    this.createEmployee(employeeForm, newEmloyee);
   }
 
   createEmployee(employeeForm: NgForm, employee: Employee) {

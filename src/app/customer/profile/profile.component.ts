@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { formateDateDDMMYY } from 'global/date';
 import { Customer } from '../customer';
 import Swal from 'sweetalert2';
@@ -26,7 +26,12 @@ export class ProfileComponent implements OnInit {
   userGroup: any = {}
 
   constructor(private route: ActivatedRoute, private http: HttpClient,  public userForm: UserFormValidationService) {
-    this.userGroup = {...this.userForm.userGroupForm}
+    this.userGroup = this.userForm.userGroupForm
+    console.log(this.userGroup);
+    
+    // this.userGroup = new FormGroup({
+    //   firstName: new FormControl(''),
+    // })
   }
 
   ngOnInit() {
@@ -61,12 +66,12 @@ export class ProfileComponent implements OnInit {
 
     console.log(newCustomer);
 
-    // if (this.isNewData) {
-    //   this.createCustomer(customerForm, newCustomer);
-    //   return;
-    // }
+    if (this.isNewData) {
+      this.createCustomer(customerForm, newCustomer);
+      return;
+    }
 
-    // this.updateCustomer(newCustomer);
+    this.updateCustomer(newCustomer);
 
   }
 
@@ -96,7 +101,10 @@ export class ProfileComponent implements OnInit {
   }
 
   get isFirstNameInvalid() {
-    return this.userGroup.userGroupForm.get('firstName')?.invalid;
+    
+    // console.log(this.userGroup.userGroupForm.get('firstName'));
+    
+    return this.userGroup.get('firstName')?.invalid;
   }
 
 }
