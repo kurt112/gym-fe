@@ -9,10 +9,13 @@
           <a routerLink="add" class="btn btn-sm btn-primary me-1">Create Customer</a>
         </li>
         <li class="nav-item">
-          <a routerLink="transaction/top-up" class="btn btn-sm btn-primary me-1">Top up</a>
+          <a routerLink="add" class="btn btn-sm btn-primary me-1">Enroll Customer</a>
         </li>
         <li class="nav-item">
-          <a routerLink="add" class="btn btn-sm btn-primary me-1">Enroll Customer</a>
+          <a routerLink="transaction/top-up" class="btn btn-sm btn-primary me-1">Card Top-up</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-sm btn-primary me-1" (click)="_handleManualTopup()">Manual Top-up</a>
         </li>
       </ul>
       <form class="d-flex">
@@ -51,6 +54,7 @@
               <td>{{customer.user.sex}}</td>
               <td>{{customer.user.cellphone}}</td>
               <td>{{customer.user.email}}</td>
+              <td>{{customer.status}}</td>
               <td>
                 <a type="button" class="btn btn-success btn-sm" [routerLink]="['/customers/'+customer.id]">View</a>
               </td>

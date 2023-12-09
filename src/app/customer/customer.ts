@@ -5,6 +5,7 @@ export interface Customer {
     user: User
     membershipDuration?: Date,
     membershipLevel?: string,
+    status?: string,
     rfId?: string,
     isMember?: boolean,
     isOut?: boolean,

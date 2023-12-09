@@ -39,7 +39,7 @@ export interface Table<T> {
 
 export const CustomerTable: Table<Customer> = {
     name: `Customer's List`,
-    columns: ['First Name', 'Last Name', 'Birthdate', 'Gender', 'Cellphone', 'Email', 'Action'],
+    columns: ['First Name', 'Last Name', 'Birthdate', 'Gender', 'Cellphone', 'Email', 'Status', 'Action'],
     numberOfElements: 1,
     size: 10,
     totalElements: 10,

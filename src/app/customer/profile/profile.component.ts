@@ -25,10 +25,10 @@ export class ProfileComponent implements OnInit {
 
   userGroup: any = {}
 
-  constructor(private route: ActivatedRoute, private http: HttpClient,  public userForm: UserFormValidationService) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, public userForm: UserFormValidationService) {
     this.userGroup = this.userForm.userGroupForm
     console.log(this.userGroup);
-    
+
     // this.userGroup = new FormGroup({
     //   firstName: new FormControl(''),
     // })
@@ -49,7 +49,7 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
-    this.customer.user.role = 'Customer';
+    this.customer.user.role = 'CUSTOMER';
   }
 
   setSex(sex: string) {
@@ -101,9 +101,9 @@ export class ProfileComponent implements OnInit {
   }
 
   get isFirstNameInvalid() {
-    
+
     // console.log(this.userGroup.userGroupForm.get('firstName'));
-    
+
     return this.userGroup.get('firstName')?.invalid;
   }
 

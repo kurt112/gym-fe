@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { formatToDateWord } from 'global/date';
+import { firstNameLastNameAndMiddleNamePopUpForm } from 'global/utils/pop-up-form';
 import { CustomerTable, changeTableSize, convertDataFromRequestToTable, customerTableUrl, next, previous, updatePageVisit } from 'global/utils/tableColumns';
 import Swal from 'sweetalert2';
 
@@ -52,5 +53,22 @@ export class CustomerComponent {
 
   _handleSearchClick() {
     this.getData(this.table.search, 1, this.table.size);
+  }
+
+
+  async _handleManualTopup() {
+    const { value } = await firstNameLastNameAndMiddleNamePopUpForm()
+
+    if (value) {
+
+      const firstName = value[0];
+      const lastName = value[1];
+      const middleName = value[2];
+
+      // this.http.get<any>(udpateAttendanceByFirstNameLastNameandMiddleName(firstName, lastName, middleName)).subscribe((data) => {
+      //   convertDataFromRequestToTable(data, this.table)
+      //   this.isLoading = false;
+      // });
+    }
   }
 }

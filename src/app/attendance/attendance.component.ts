@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { udpateAttendanceByFirstNameLastNameandMiddleName } from 'global/utils/endpoint';
+import { firstNameLastNameAndMiddleNamePopUpForm } from 'global/utils/pop-up-form';
 import { convertDataFromRequestToTable, next, previous, updatePageVisit, changeTableSize, CustomerAttendanceTable, customerTodayTableUrl } from 'global/utils/tableColumns';
 import Swal from 'sweetalert2';
 
@@ -52,26 +54,19 @@ export class AttendanceComponent {
   }
 
   async popUpForIsGuestIsInvitedByMember() {
-    const { value: formValues } = await Swal.fire({
-      title: 'Guest Details',
-      html:
-        '<p class="text-black">Firsname</p> <input id="firstName" class="firstName form-control">' + '<br>' +
-        '<p class="text-black">Lastname</p> <input id="lastName" class="lastName form-control">',
-      focusConfirm: false,
-      preConfirm: () => {
 
-        let firstName = (<HTMLInputElement>document.getElementById('firstName')).value;
-        const lastName =(<HTMLInputElement>document.getElementById('lastName')).value;
-
-        return [
-          firstName,
-          lastName  
-        ]
-      }
-    })
-
-    if (formValues) {
-      Swal.fire(JSON.stringify(formValues))
+    const {value} = await firstNameLastNameAndMiddleNamePopUpForm()
+    
+    if (value) {
+      
+      const firstName = value[0];
+      const lastName = value[1];
+      const middleName = value[2];
+      
+      this.http.get<any>(udpateAttendanceByFirstNameLastNameandMiddleName(firstName, lastName, middleName)).subscribe((data) => {
+        convertDataFromRequestToTable(data, this.table)
+        this.isLoading = false;
+      });
     }
   }
 

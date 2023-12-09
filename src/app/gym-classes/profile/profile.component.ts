@@ -136,7 +136,7 @@ export class ProfileComponent {
 
   createGymClass(gymClassForm: NgForm, gymClass: GymClass) {
     this.http.post<GymClass>(`${environment.apiUrl}gym/classes`, gymClass).subscribe((data: any) => {
-
+      
       if(this.instrutor !== null || this.instrutor !== undefined){
         this.http.post<GymClass>(`${environment.apiUrl}gym/classes/${data.id}/assign-instructor/${this.instrutor.id}`, gymClass).subscribe(() => {
 
