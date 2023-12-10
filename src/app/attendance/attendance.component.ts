@@ -66,6 +66,13 @@ export class AttendanceComponent {
       this.http.get<any>(udpateAttendanceByFirstNameLastNameandMiddleName(firstName, lastName, middleName)).subscribe((data) => {
         convertDataFromRequestToTable(data, this.table)
         this.isLoading = false;
+        this.ngOnInit();
+        Swal.fire({
+          title: "Manual Attendance",
+          text: "Attendance is Success",
+          icon: "success",
+          timer: 500,
+        });
       });
     }
   }

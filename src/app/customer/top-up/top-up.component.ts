@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { firstValueFrom, timer } from 'rxjs';
 import { getUserIdByCustomerRfId, topUpCustomerUrl } from 'global/enpoint/customer';
 import Swal from 'sweetalert2';
+import { getToken } from 'global/utils/jwt';
 
 @Component({
   selector: 'customer-top-up',
@@ -27,6 +28,9 @@ export class TopUpComponent {
   }
 
   async rfIdInputChanged(data: any) {
+    const token = getToken();
+
+    if (token == null) return;
 
     let userId: string = '';
 
@@ -50,12 +54,6 @@ export class TopUpComponent {
       if (userId === '') return;
 
       this.isEnterAmountShowing = true;
-
-      const token: string | null = window.sessionStorage.getItem('token');
-
-      if (token === null) {
-        return alert('Please Login')
-      }
 
       Swal.fire({
         title: 'Please enter amount',
