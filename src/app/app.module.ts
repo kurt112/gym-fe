@@ -47,6 +47,7 @@ import { LoginComponent } from './landing/login/login.component';
 import { RegisterComponent } from './landing/register/register.component';
 import { LoginRouteService } from './services/routes/login-route.service';
 import { AdminRouteService } from './services/routes/role/admin-route.service';
+import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
 
 const routes: Routes = [
   { path: 'customers', component: CustomerComponent, canActivate: [AdminRouteService] },
@@ -122,12 +123,13 @@ const routes: Routes = [
     HttpClientModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    NgChartsModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
   ],
-  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, LoginRouteService, AdminRouteService],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, { provide: NgChartsConfiguration, useValue: { generateColors: false } }, LoginRouteService, AdminRouteService],
   bootstrap: [AppComponent],
   exports: [RouterModule]
 
