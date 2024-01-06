@@ -73,10 +73,6 @@ export class DashboardComponent {
       this.barChartData.datasets[0].data.push(...newData);
       this.barChartDataNewLabel.push(...sortedDateKeys);
       this.barChartData.labels = this.barChartDataNewLabel;
-      const canvas = document.getElementsByTagName("canvas");
-
-      canvas[0].removeAttribute("height");
-      canvas[0].removeAttribute("width");
 
       this.chart?.update();
     })
