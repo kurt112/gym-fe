@@ -48,6 +48,7 @@ import { RegisterComponent } from './landing/register/register.component';
 import { LoginRouteService } from './services/routes/login-route.service';
 import { AdminRouteService } from './services/routes/role/admin-route.service';
 import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
+import { ScheduleTodayTableComponent } from './dashboard/schedule/table/today/schedule-today-table.component';
 
 const routes: Routes = [
   { path: 'customers', component: CustomerComponent, canActivate: [AdminRouteService] },
@@ -110,7 +111,8 @@ const routes: Routes = [
     GymClassesTypesComponent,
     LandingComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ScheduleTodayTableComponent
   ],
   imports: [
     FormsModule,

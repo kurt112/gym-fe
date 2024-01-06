@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
-import { formateDateDDMMYY } from 'global/date';
+import { formatDateYYYMMDD } from 'global/date';
 import { Customer } from '../customer';
 import Swal from 'sweetalert2';
 import { getInitUser } from 'global/utils/user';
@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit {
       this.http.get<Customer>(`${environment.apiUrl}customers/${this.id}`).subscribe((data) => {
         this.isLoading = false;
         this.customer = data;
-        this.customer.user.birthDate = formateDateDDMMYY(this.customer.user.birthDate);
+        this.customer.user.birthDate = formatDateYYYMMDD(this.customer.user.birthDate);
       })
 
       return;

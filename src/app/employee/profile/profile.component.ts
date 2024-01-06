@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { formateDateDDMMYY } from 'global/date';
+import { formatDateYYYMMDD } from 'global/date';
 import { getInitUser } from 'global/utils/user';
 import { Employee } from 'src/app/employee/Employee';
 import { UserFormValidationService } from 'src/app/services/validation/user/user-form-validation.service';
@@ -39,7 +39,7 @@ export class ProfileComponent {
           
           this.isLoading = false;
           this.employee = data;
-          this.employee.user.birthDate = formateDateDDMMYY(this.employee.user.birthDate);
+          this.employee.user.birthDate = formatDateYYYMMDD(this.employee.user.birthDate);
         })
       this.isNewData = false;
       return;
@@ -62,7 +62,7 @@ export class ProfileComponent {
     const newEmloyee = {...employeeForm.value, ...this.employee}
     console.log(newEmloyee);
     
-    newEmloyee.user.birthDate = formateDateDDMMYY(this.employee.user.birthDate);
+    newEmloyee.user.birthDate = formatDateYYYMMDD(this.employee.user.birthDate);
 
     if (!this.isNewData) {
       this.updateEmployee(newEmloyee);

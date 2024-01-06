@@ -65,16 +65,16 @@
 
 
     </div>
-
-    <div style="width:100%; height: 300px; margin-top: 10px; padding-left: 10px; padding-right: 10px;">
-        <h1 class="fs-back text-dark">10 Day Total Sales</h1>
-        <canvas baseChart class="chart" style="width: 100% !important; height: 100% !important; background-size: contain; display: block;" [data]="barChartData" 
-            [options]="barChartOptions" [type]="barChartType" (chartHover)="chartHovered($event)"
-            (chartClick)="chartClicked($event)">
-        </canvas>
+    <div class="card shadow-sm bg-body rounded mb-3" style="width:100%; height: 500px; margin-top: 10px; padding-left: 10px; padding-right: 10px; ">
+        <h1 class="fs-back text-dark mt-3">10 Day Total Sales</h1>
+            <canvas baseChart class="chart"
+                style="width: 100% !important; height: 100% !important; background-size: contain; display: block;"
+                [data]="barChartData" [options]="barChartOptions" [type]="barChartType"
+                (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+            </canvas>
     </div>
 
-
+    <schedule-today-table></schedule-today-table>
 
     <!-- <button mat-button mat-raised-button color="primary">
         Update -->

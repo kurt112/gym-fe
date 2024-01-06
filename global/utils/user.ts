@@ -44,3 +44,11 @@ export const getInitUser:User = {
     cardValue: 0,
     pointsAmount: 0,
 }
+
+
+export const userRole = {
+    'ADMIN': 1,
+    'COACH': 2,
+    'FRONT_DESK': 3,
+    'CUSTOMER': 4
+}; 

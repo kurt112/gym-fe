@@ -25,7 +25,7 @@ export class TableSearchComponent {
   }
 
   getDataTable() {
-    this.http.get<any>(employeeTableUrl(this.table.search, 1, 10, 'coach')).subscribe((data: any) => {
+    this.http.get<any>(employeeTableUrl(this.table.search, 1, 10, 2)).subscribe((data: any) => {
       convertDataFromRequestToTable(data, this.table);
       this.table.content.forEach((content) => {
         content.user.birthDate = formatToDateWord(content.user.birthDate);

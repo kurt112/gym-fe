@@ -1,0 +1,28 @@
+<div class="card shadow-sm bg-body rounded mb-3">
+    <div class="d-flex justify-content-start  bg-white card-header align-items-center p-3">
+        <h5 class="text-dark fw-bold align-items-center m-0 me-2">{{table.name}}</h5>
+        <!-- <div *ngIf="isLoading" class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div> -->
+    </div>
+    <div class="card-body pb-0">
+        <div class="table-responsive">
+            <table class="table table-hover m-0">
+                <thead>
+                    <tr>
+                        <th scope="col" *ngFor="let column of table.columns;">
+                            {{column}}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr scope="row" *ngFor="let schedule of table.content;">
+                        <td>{{schedule.startTime | date: 'h:mm:ss a'}}</td>
+                        <td>{{schedule.endTime | date: 'h:mm:ss a'}}</td>
+                        <td>{{schedule.instructor === null ? 'No Instructor': ''}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

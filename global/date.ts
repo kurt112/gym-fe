@@ -2,7 +2,7 @@ import { formatDate } from "@angular/common";
 
 const YYYMMDD = 'yyyy-MM-dd', longDate = 'MMMM d, y', shortTime = 'HH:mm:ss', longTime = 'HH:mm a'
 const locale = 'en-US'
-export const formateDateDDMMYY = (value: string | number | Date | null) => {
+export const formatDateYYYMMDD = (value: string | number | Date | null) => {
     if (value == null) return null;
     return formatDate(value, YYYMMDD, locale);
 }

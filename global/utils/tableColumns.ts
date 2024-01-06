@@ -13,7 +13,7 @@ import { Audit } from "src/app/store/audit/Audit";
 
 // why separate in future the table for will have different url for sorting and etc...
 export const customerTableUrl = (search: string, page: number, size: number) => `${environment.apiUrl}customers?search=${search}&page=${page}&size=${size}`;
-export const employeeTableUrl = (search: string, page: number, size: number, role?: string) => `${environment.apiUrl}employees?search=${search}&page=${page}&size=${size}${role === undefined ? '' : '&role=' + role}`;
+export const employeeTableUrl = (search: string, page: number, size: number, role?: number) => `${environment.apiUrl}employees?search=${search}&page=${page}&size=${size}${role === undefined ? '' : '&role=' + role}`;
 export const gymClassTableUrl = (search: string, page: number, size: number) => `${environment.apiUrl}gym/classes?search=${search}&page=${page}&size=${size}`;
 export const membershipTableUrl = (search: string, page: number, size: number) => `${environment.apiUrl}gym/memberships?search=${search}&page=${page}&size=${size}`;
 export const customerTodayTableUrl = (search: string, page: number, size: number) => `${environment.apiUrl}customers/today?search=${search}&page=${page}&size=${size}`;
@@ -21,6 +21,7 @@ export const membershipMembersTableUrl = (membershipId: string | null, search: s
 export const gymClassMembers = (gymClassId: string | null, search: string, page: number, size: number) => `${environment.apiUrl}gym/classes/${gymClassId}/members?search=${search}&page=${page}&size=${size}`;
 export const GymClassScheduleTableUrl = (gymClassId: string | null) => `${environment.apiUrl}gym/classes/${gymClassId}/schedules`;
 export const auditTrailTableUrl = (search: string, page: number, size: number, startDate: string | null, endDate: string | null) => `${environment.apiUrl}audit/${startDate}/${endDate}?search=${search}&page=${page}&size=${size}`;
+export const todayScheduleTalbeUrl = (storeId: string) => `${environment.apiUrl}gym/${storeId}/today-schedule`;
 
 export interface Table<T> {
     name: string,
@@ -189,6 +190,21 @@ export const GymClassesTypes: Table<GymClassType> = {
 export const AuditTable: Table<Audit> = {
     name: `Audit Trail`,
     columns: ['Message', 'Date Created', 'Action'],
+    numberOfElements: 1,
+    size: 10,
+    totalElements: 10,
+    totalPages: 10,
+    content: [],
+    currentPage: 1,
+    previousPage: 0,
+    nextPage: 3,
+    search: '',
+    pointerPage: 1
+}
+
+export const ScheduleTodayTable: Table<Schedule> = {
+    name: `Today Schedule's`,
+    columns: ['Start Time', 'End Time', 'Instructor'],
     numberOfElements: 1,
     size: 10,
     totalElements: 10,

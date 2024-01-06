@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { daysDropDown, formateDateDDMMYY, monthsDropDown, weeksDropDown, yearsDropDown } from 'global/date';
+import { daysDropDown, formatDateYYYMMDD, monthsDropDown, weeksDropDown, yearsDropDown } from 'global/date';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { Membership } from '../Membership';
@@ -55,7 +55,7 @@ export class ProfileComponent {
       this.isLoading = true;
       this.http.get<Membership>(`${environment.apiUrl}gym/memberships/${this.id}`).subscribe((data) => {
         this.membership = data;
-        this.membership.membershipPromoExpiration = formateDateDDMMYY(this.membership.membershipPromoExpiration);
+        this.membership.membershipPromoExpiration = formatDateYYYMMDD(this.membership.membershipPromoExpiration);
         this.isLoading = false;
       });
 

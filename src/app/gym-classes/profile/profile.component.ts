@@ -6,7 +6,7 @@ import { Customer } from 'src/app/customer/customer';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { GymClass } from '../GymClass';
-import { convertNumberToDay, formateDateDDMMYY } from 'global/date';
+import { convertNumberToDay, formatDateYYYMMDD } from 'global/date';
 import { Schedule } from 'global/utils/schedule';
 import { enrollInGymClass } from 'global/utils/endpoint';
 import { GymClassType } from 'src/app/configuration/gym-classes-types/GymClassType';
@@ -89,8 +89,8 @@ export class ProfileComponent {
           });
         });
         this.gymClass = data;
-        this.gymClass.dateStart = formateDateDDMMYY(data.dateStart);
-        this.gymClass.dateEnd = formateDateDDMMYY(data.dateEnd);
+        this.gymClass.dateStart = formatDateYYYMMDD(data.dateStart);
+        this.gymClass.dateEnd = formatDateYYYMMDD(data.dateEnd);
         this.gymClass.schedules = data.schedules;
         this.isLoading = false;
       })
