@@ -202,9 +202,9 @@ export const AuditTable: Table<Audit> = {
     pointerPage: 1
 }
 
-export const ScheduleTodayTable: Table<Schedule> = {
-    name: `Today Schedule's`,
-    columns: ['Start Time', 'End Time', 'Instructor'],
+export const TodayClassTable: Table<GymClass> = {
+    name: `Today Classes`,
+    columns: ['Class Name', 'Start Time', 'End Time', 'Instructor Name'],
     numberOfElements: 1,
     size: 10,
     totalElements: 10,

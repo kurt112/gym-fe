@@ -16,10 +16,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr scope="row" *ngFor="let schedule of table.content;">
-                        <td>{{schedule.startTime | date: 'h:mm:ss a'}}</td>
-                        <td>{{schedule.endTime | date: 'h:mm:ss a'}}</td>
-                        <td>{{schedule.instructor === null ? 'No Instructor': ''}}</td>
+                    <tr scope="row" *ngFor="let classes of table.content;">
+                        <td>{{classes.name}}</td>
+                        <td>{{(classes.schedules ? classes.schedules[0].startTime : 'NA') | date: 'h:mm:ss a'}}</td>
+                        <td>{{(classes.schedules ? classes.schedules[0].endTime : 'NA') | date: 'h:mm:ss a'}}</td>
+                        <td>{{classes.instructorName ? classes.instructorName: 'No Instructor'}}</td>
                     </tr>
                 </tbody>
             </table>

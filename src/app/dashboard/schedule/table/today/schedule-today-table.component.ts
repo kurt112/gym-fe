@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { formatToDateWord } from "global/date";
-import { convertDataFromRequestToTable, ScheduleTodayTable, todayScheduleTalbeUrl } from "global/utils/tableColumns";
+import { convertDataFromRequestToTable, TodayClassTable, todayScheduleTalbeUrl } from "global/utils/tableColumns";
 
 @Component({
   selector: 'schedule-today-table',
@@ -9,7 +9,7 @@ import { convertDataFromRequestToTable, ScheduleTodayTable, todayScheduleTalbeUr
   styleUrls: ['./schedule-today-table.scss']
 })
 export class ScheduleTodayTableComponent {
-  table = ScheduleTodayTable;
+  table = TodayClassTable;
   isLoading = false;
 
   constructor(private http: HttpClient) {
