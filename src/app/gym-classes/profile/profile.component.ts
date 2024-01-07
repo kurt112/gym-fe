@@ -10,6 +10,7 @@ import { convertNumberToDay, formatDateYYYMMDD } from 'global/date';
 import { Schedule } from 'global/utils/schedule';
 import { enrollInGymClass } from 'global/utils/endpoint';
 import { GymClassType } from 'src/app/configuration/gym-classes-types/GymClassType';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'gym-class-profile',
@@ -61,7 +62,7 @@ export class ProfileComponent {
     return convertNumberToDay[day];
   }
 
-  ngOnInit() {
+  async ngOnInit() {
 
     const routeId = this.route.snapshot.paramMap.get('id');
 
@@ -74,16 +75,16 @@ export class ProfileComponent {
       this.isNewData = false;
       this.isLoading = true;
 
-      this.http.get<GymClass>(`${environment.apiUrl}gym/classes/${this.id}`).subscribe((data) => {
+      await firstValueFrom(this.http.get<GymClass>(`${environment.apiUrl}gym/classes/${this.id}`)).then(data => {
         console.log(data);
-        
-        if(data.instructor) this.instrutor = data.instructor;
+
+        if (data.instructor) this.instrutor = data.instructor;
 
         data.schedules?.forEach((schedule: Schedule, i: number) => {
           this.schedules?.forEach((thisSched, i: number) => {
             if (schedule.day === thisSched.day) {
-              const endTime:string = (<string> schedule.endTime);
-              const startTime:string = (<string> schedule.startTime);
+              const endTime: string = (<string>schedule.endTime);
+              const startTime: string = (<string>schedule.startTime);
               this.schedules[i] = { day: schedule.day, endTime: endTime.substring(0, 5), startTime: startTime.substring(0, 5) };
             }
           });
@@ -94,14 +95,13 @@ export class ProfileComponent {
         this.gymClass.schedules = data.schedules;
         this.isLoading = false;
       })
+
       this.isNewSchedule = false;
     }
 
-    this.http.get<GymClassType[]>(`${environment.apiUrl}gym/classes/types`).subscribe((data: GymClassType[]) => {
-      this.gymClassTypes = data;
-    });
-
-
+    await firstValueFrom(this.http.get<GymClassType[]>(`${environment.apiUrl}gym/classes/types`)).then((data: GymClassType[]) => {
+      this.gymClassTypes.push(...data);
+    })
   }
 
   setEdit() {
@@ -116,7 +116,7 @@ export class ProfileComponent {
   submit(gymClassForm: NgForm) {
 
     const formValue: GymClass = gymClassForm.value;
-    
+
     delete formValue.instructor;
 
     if (this.id !== null && this.id !== 'add') formValue.id = this.id;
@@ -125,7 +125,7 @@ export class ProfileComponent {
 
     if (!this.isNewData) {
       console.log(formValue);
-      
+
       this.updateGymClass(formValue);
       return;
     }
@@ -136,8 +136,8 @@ export class ProfileComponent {
 
   createGymClass(gymClassForm: NgForm, gymClass: GymClass) {
     this.http.post<GymClass>(`${environment.apiUrl}gym/classes`, gymClass).subscribe((data: any) => {
-      
-      if(this.instrutor !== null || this.instrutor !== undefined){
+
+      if (this.instrutor !== null || this.instrutor !== undefined) {
         this.http.post<GymClass>(`${environment.apiUrl}gym/classes/${data.id}/assign-instructor/${this.instrutor.id}`, gymClass).subscribe(() => {
 
         })
@@ -205,8 +205,8 @@ export class ProfileComponent {
     this.isNewSchedule = isNewScheduleOpen;
   }
 
-  trackByGymClass(index:number, el:any): number {
-    return el.id;
+  selectedGymType(type: GymClassType, existing: string): boolean {
+    return type.name === existing;
   }
 
 }

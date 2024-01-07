@@ -3,7 +3,7 @@
 <app-card-tap [url]='enrollMemberUrl'></app-card-tap>
 <div class="container-fluid" *ngIf="!isLoading">
     <div *ngIf="id !== 'add'" class="d-inline-flex justify-content-between bg-body shadow-sm  mt-2 mb-2 p-2 w-100 ">
-        <div id="left  d-inline-flex"> 
+        <div id="left  d-inline-flex">
             <a routerLink="members" class="btn btn-sm btn-warning px-4 me-3">View Members</a>
             <a routerLink="schedules" class="btn btn-sm  btn-warning px-4 me-3">View Schedule</a>
             <div class="d-inline-flex" *ngIf="id !== 'add'">
@@ -39,8 +39,8 @@
                     <label for="gymClassType" class="form-label fw-semibold">Class Type</label>
                     <select [(ngModel)]="gymClass.gymClassType" name="gymClassType" class="form-select"
                         aria-label="Default select example" id="gymClassType">
-                        <option [ngValue]="type" [selected]="gymClass.gymClassType === type"
-                            *ngFor="let type of gymClassTypes; trackBy: trackByGymClass">{{type.name}}</option>
+                        <option *ngFor="let type of gymClassTypes"
+                            [selected]="selectedGymType(gymClass.gymClassType, type.name)">{{type.name}}</option>
                     </select>
                     <!-- <label for="type" class="form-label fw-semibold">Class Type</label>
                     <input type="text" [(ngModel)]="gymClass.gymClassType" class="form-control" name="type" id="type" required> -->
