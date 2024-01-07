@@ -9,6 +9,9 @@ import { Store } from '../store/Store';
   styleUrls: ['./configuration.component.scss']
 })
 export class ConfigurationComponent {
+
+  isEditMode:boolean = false;
+
   store: Store = {
     amountNeedToEarnOnePoint: 1,
     createdAt: '',
@@ -27,6 +30,19 @@ export class ConfigurationComponent {
       this.store = data;
     })
 
+  }
+
+
+  _toggleEditMode(state: boolean) {
+    this.isEditMode = state;
+  }
+
+  _save() {
+    this._toggleEditMode(false);
+  }
+
+  _invalidateCache() {
+    alert('to be implemented')
   }
 
 }
