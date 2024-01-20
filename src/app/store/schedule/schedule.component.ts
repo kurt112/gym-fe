@@ -83,7 +83,7 @@ export class ScheduleComponent {
   }
 
   async ngOnInit() {
-    this.http.get<any>(`${environment.apiUrl}gym/classes/schedules`).subscribe(data => {
+    this.http.get<any>(`${environment.apiUrl}gym/classes/schedules`).subscribe((data: any) => {
 
       data.forEach((e: GymClass) => {
 
