@@ -4,5 +4,6 @@ export interface Store {
     createdAt: Date | string,
     name: string,
     updateAt: Date | string
-    email: string
+    email: string,
+    vatPercentage: number
 } 

@@ -30,6 +30,10 @@
                 <label for="users" class="form-label fw-semibold">User's available: </label>
                 <input type="number" disabled  name="users" id="users" class="form-control" />
             </div>
+            <div class="col-md-4 mt-3">
+                <label for="vat" class="form-label fw-semibold">Vat Percentage: </label>
+                <input type="number" disabled [disabled]="!isEditMode" [(ngModel)]="store.vatPercentage"  name="vat" id="vat" class="form-control" />
+            </div>
         </div>
         <div class="col-12 d-flex justify-content-between" *ngIf="isEditMode">
             <p></p>

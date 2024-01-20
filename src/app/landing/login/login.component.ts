@@ -34,7 +34,6 @@ export class LoginComponent {
   }
 
   login() {
-    alert("alksjdf");
     this.http.post<any>(loginByUserNameAndPassword(), this.credential).subscribe((data) => {
       this.globalService.login.next({
         isLogin: true
@@ -44,8 +43,7 @@ export class LoginComponent {
       this.router.navigate(['/dashboard']);
 
     }, (err) => {
-
-
+      alert(err.error.message);
     }, () => {
 
     });

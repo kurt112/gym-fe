@@ -33,7 +33,10 @@ export class DashboardComponent {
   barChartData: ChartData<'bar'> = {
     datasets: [
       {
-        data: [], label: '10 Day Sale'
+        data: [], label: '10 DAYS SALES',
+      },
+      {
+        data: [], label: '10 DAYS VAT',
       }
     ],
   };
@@ -65,12 +68,16 @@ export class DashboardComponent {
     const date = formatDateYYYMMDD(currentDate.toDate());
     
     await firstValueFrom(this.http.get<any>(`${environment.apiUrl}gym/1/dashboard/date-sale/${date}/10`)).then((data) => {
-  
+
+      
       const sortedDateKeys = Object.keys(data).sort();
 
-      const newData: number[] =  sortedDateKeys.map(key => data[key] ? data[key]: 0);
+      const newDataSales: number[] =  sortedDateKeys.map(key => data[key] ? data[key].sales: 0);
+      const newDataVat: number[] =  sortedDateKeys.map(key => data[key] ? data[key].vat: 0);
 
-      this.barChartData.datasets[0].data.push(...newData);
+      
+      this.barChartData.datasets[0].data.push(...newDataSales);
+      this.barChartData.datasets[1].data.push(...newDataVat);
       this.barChartDataNewLabel.push(...sortedDateKeys);
       this.barChartData.labels = this.barChartDataNewLabel;
 

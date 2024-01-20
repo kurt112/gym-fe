@@ -5,6 +5,7 @@ import { topUpByFirstLastMiddleName } from 'global/enpoint/customer';
 import { getToken } from 'global/utils/jwt';
 import { firstNameLastNameAndMiddleNameTopupPopUpForm } from 'global/utils/pop-up-form';
 import { CustomerTable, changeTableSize, convertDataFromRequestToTable, customerTableUrl, next, previous, updatePageVisit } from 'global/utils/tableColumns';
+import { firstValueFrom } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -18,7 +19,7 @@ export class CustomerComponent {
   isLoading = false;
   amount: number = 0;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.getData(this.table.search, this.table.currentPage, this.table.size);
@@ -75,17 +76,22 @@ export class CustomerComponent {
       const middleName = value[2];
       const amount = value[3];
 
-      this.http.post<any>(topUpByFirstLastMiddleName(token, amount, firstName, lastName, middleName), {}).subscribe((data) => {
-        convertDataFromRequestToTable(data, this.table)
-        this.isLoading = false;
-        this.ngOnInit();
-        Swal.fire({
-          title: "Manual Top-up",
-          text: "Top-up is Success",
-          icon: "success",
-          timer: 500,
-        });
-      });
+      await firstValueFrom(this.http.post<any>(topUpByFirstLastMiddleName(token, amount, firstName, lastName, middleName), {}))
+        .then(data => {
+          convertDataFromRequestToTable(data, this.table)
+          this.ngOnInit();
+          Swal.fire({
+            title: "Manual Top-up",
+            text: "Top-up is Success",
+            icon: "success",
+            timer: 500,
+          });
+        }).catch(error => {
+          alert(error.error.message)
+        }).finally(() => {
+          this.isLoading = false;
+        })
+
     }
   }
 }

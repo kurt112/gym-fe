@@ -18,7 +18,8 @@ export class StoreComponent {
     name: 'Default',
     updateAt: '',
     id: -1,
-    email: 'DefaultEmail@email.com'
+    email: 'DefaultEmail@email.com',
+    vatPercentage: -1
   };
 
   constructor(private http: HttpClient) {
@@ -29,6 +30,5 @@ export class StoreComponent {
     this.http.get<any>(`${environment.apiUrl}gym/1`).subscribe((data: Store) => {
       this.store = data;
     })
-
   }
 }

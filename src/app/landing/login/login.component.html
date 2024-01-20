@@ -1,13 +1,17 @@
 <div class="landing">
     <form class="login-form">
-        <h1 class="fw-semibold text-black">Welcome Back !</h1>
+        <img src="assets/logo/gymLogo.jpg" class="logoLogin" />
         <input type="email" [(ngModel)]="credential.username" autofocus class="box" name="email"
             placeholder="Enter email" />
         <input type="password" [(ngModel)]="credential.password" class="box" name="password"
-            placeholder="Enter password" />
+            placeholder="Enter password">
         <input type="submit" (click)="login()" value="Login" class="btn btn-success form-control" />
         <button value="Login" (click)="goBack()" class="btn btn-danger form-control mt-3">
             Back
         </button>
+        <hr />
+        <a href="wew" class="text-decoration-none">
+            Forgot password ?
+        </a>
     </form>
 </div>

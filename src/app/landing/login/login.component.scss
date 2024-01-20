@@ -1,7 +1,8 @@
 .landing {
     height: 100vh;
     width: 100vw;
-    background: url('../../../assets/logo/gymBackground.jpg') no-repeat center center/cover;
+    // background: url('../../../assets/logo/gymLogo.png.jpg') no-repeat center center/cover;
+    background-color: #37517e;
     display: flex;
 }
 
@@ -14,13 +15,25 @@
     margin: auto;
     align-content: center;
     /* From https://css.glass */
-    background: rgba(255, 255, 255, 0.28);
+    background: white;
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(3.3px);
     -webkit-backdrop-filter: blur(3.3px);
     border: 1px solid rgba(0, 0, 0, 0.98);
+    animation: fadein 1s;
+}
 
+@keyframes fadein {
+	0% {
+		opacity: 0;
+		transform: scale(0.6);
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
 }
 
 .login-form h1 {    
@@ -32,11 +45,9 @@
     padding: 12px;
     margin: 20px;
     width: 90%;
-    border: none;
-    outline: none;
     border-radius: 20px;
-    background-color: rgba(0, 0, 0, .7);
-    color: white;
+    background-color: white;
+    color: black;
     font-size: 1rem;
 }
 
@@ -58,8 +69,7 @@
 }
 
 ::placeholder {
-    color: white;
-    opacity: 0.7;
+    color: black;
 }
 
 .login-form .btn {
@@ -67,3 +77,15 @@
     border-radius: 20px;
 }
 
+.logoLogin {
+    width: 150px;
+    border-radius: 50%;
+    margin-top: 10px;
+}
+
+hr {
+    width: 100%;
+    color: grey;
+    margin: 13px;
+    height: 3px;
+  }
