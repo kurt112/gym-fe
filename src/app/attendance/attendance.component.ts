@@ -73,6 +73,14 @@ export class AttendanceComponent {
           icon: "success",
           timer: 500,
         });
+      }, (error) => {
+        
+        Swal.fire({
+          title: "Manual Attendance",
+          text: error.error.message,
+          icon: "error",
+          timer: 2000,
+        });
       });
     }
   }
